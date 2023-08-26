@@ -1,0 +1,19 @@
+@use "./abstracts/" as *;
+
+.topnav {
+  @include flex(center, space-between);
+  margin-bottom: $spacing;
+
+  .left-side {
+    font-weight: bold;
+    font-size: $fontSizeLarge;
+    color: $mainColor;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .right-side {
+    display: flex;
+    align-items: center;
+  }
+}

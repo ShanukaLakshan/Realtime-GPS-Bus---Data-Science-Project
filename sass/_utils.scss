@@ -1,0 +1,68 @@
+a {
+  text-decoration: none;
+  color: $primary-color;
+  margin: 10px 0;
+}
+
+.btn {
+  color: white;
+  padding: 10px 30px;
+  border-radius: 10px;
+  border: none;
+  width: 100%;
+  font-size: 1.2rem;
+  margin: 20px 0;
+  font-family: inherit;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-primary {
+  background-color: $primary-color;
+}
+.btn-primary:hover {
+  background-color: lighten($primary-color, 5%);
+}
+
+.btn-white {
+  background-color: $on-primary-color;
+  color: $primary-color;
+}
+.btn-white:hover {
+  background-color: lighten($primary-color, 50%);
+}
+.btn-danger {
+  background-color: white;
+  border: 1px solid $danger-color;
+}
+
+.alert {
+  position: absolute;
+  left: calc(50% - 109px);
+  top: 50px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background-color: white;
+  border-radius: 20px;
+  width: fit-content;
+  padding: 10px 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 1;
+  animation: topFade 0.2s linear;
+}
+
+@keyframes topFade {
+    from{
+        transform: translateY(-100px);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.weighted{
+    font-weight: 600;
+}

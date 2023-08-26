@@ -1,0 +1,41 @@
+@import "config";
+@import "dashboard";
+@import "userInfo";
+@import "topNav";
+@import "sideBar";
+@import "mainLayout";
+@import "common-pages";
+@import "forms";
+@import "utils";
+@import "homepage";
+@import "lawyer-dashboard";
+@import "student-dashboard";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  //   font-family: "Urbanist", sans-serif;
+  font-size: 1rem;
+  line-height: 1.6;
+  background-color: #fff;
+}
+::-ms-reveal {
+  display: none;
+}
+
+.primary {
+  color: $primary-color;
+}
+
+.danger {
+  color: $danger-color;
+}
+
+.secondary {
+  color: $secondary-color;
+}

@@ -1,0 +1,84 @@
+@use "sass:math";
+@use "./abstracts" as *;
+
+.sidebar {
+  flex-direction: column;
+  color: $txtColor;
+  width: $sideBarWidth;
+  background-color: $mainBg;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  transition: all 0.5s ease-in-out;
+  width: 12%;
+
+  &__logo {
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 10px 0;
+
+    span {
+      font-size: 32px;
+      color: $mainColor;
+      font-weight: 700;
+    }
+  }
+
+  &__menu {
+    @include flex(stretch, flex-start);
+    flex-direction: column;
+    margin-top: 20px;
+
+    &__item {
+      @include flex(center, flex-start);
+      position: relative;
+      margin-bottom: 10px;
+      padding-left: 10%;
+      transition: all 0.3s ease-in-out;
+      text-decoration: none;
+      font-size: 16px;
+      color: #5f6870;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &.active {
+        font-weight: 500;
+        color: $mainColor;
+        background-color: #1f578a;
+        padding: 6px 4px;
+        border-radius: 20px;
+        align-items: center;
+        justify-content: center;
+        margin-left: 10px;
+        font-size: 19px;
+        color: antiquewhite;
+        text-decoration: none;
+      }
+
+      &__icon {
+        --size: 40px;
+        width: var(--size);
+        height: var(--size);
+        margin-right: 24px;
+        @include flex(center, center);
+      }
+
+      &:last-child {
+        margin-top: auto;
+        cursor: pointer;
+      }
+    }
+  }
+}
+
+.sidebar-open .main__content {
+  height: 100vh;
+  overflow: hidden;
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+  transform: scale(0.8) translateX(50%);
+  transition: all 0.5s ease-in-out;
+}

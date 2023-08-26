@@ -1,0 +1,90 @@
+.common-page-main{
+    padding: 30px;
+    display: flex;
+    height: 100vh;
+    justify-content: space-evenly;
+}
+
+.common-page-thirdparty-login{
+    display: flex;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.common-page-form{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.common-page-image img{
+    height: 100%;
+    object-fit: cover;
+}
+
+.common-page-thirdparty-btn{
+    background-color:#fff;
+    border-radius: 50px;
+    display: flex;
+    align-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    img{
+        width:30px;
+        height:30px;
+        margin-right: 10px;
+    }
+    border: 1px solid $primary-color;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-family: inherit;
+    >div{
+        height: fit-content;
+        margin: auto;
+    }
+}
+
+.common-page-thirdparty-btn:hover{
+    color: #fff;
+    background-color: $primary-color;
+}
+
+.common-page-divider{
+    margin: 20px 0;
+    width: 100%;
+    position: relative;
+    color: $secondary-color;
+    >span{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 0 10px;
+        font-family: inherit;
+    }
+}
+
+.divider{
+    position: absolute;
+    background-color: $secondary-color;
+    
+}
+
+.center{
+    justify-content: center;
+}
+
+.common-page-otp{
+    display: flex;
+    gap: 20px;
+    .input{
+        width:70px;
+        height: 80px;
+        font-size: 2rem;
+    }
+    input{
+        text-align: center;
+    }
+}

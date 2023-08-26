@@ -1,0 +1,19 @@
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border-radius: 10px;
+    display: inline-block;
+    border: 1px solid #ccc;
+    color:$primary-color;
+    cursor: pointer;
+  }
+
+  input[type=text]:focus,input[type=password]:focus{
+    outline: none;
+    border: 1px solid $primary-color;   
+  }
+
+  small{
+    color: $secondary-color;
+  }
