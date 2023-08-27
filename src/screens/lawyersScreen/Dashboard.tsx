@@ -1,275 +1,139 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import {
-  PieChart,
-  Pie,
-  Legend,
-  Tooltip,
-  ResponsiveContainer,
-  Cell,
-  Text,
-  Line,
-  Area,
-  ComposedChart,
-  XAxis,
-  ReferenceLine,
-  ReferenceDot,
-} from "recharts";
+import React, { useState } from "react";
+// import CSVUploader from "./CSVReader";
+import TravelTimeBarChart from "./TravelTimeBarChart";
+import DwellTimeByWeekLineChart from "./DwellTimeByWeekLineChart";
+import DwellTimeByHourLineChart from "./DwellTimeByHourLineChart";
+import Trip from "./Trip";
+import CSVUploader from "./CSVUploader";
 
 const Dashboard = () => {
-  const data01 = [
-    { name: "Lawyers", value: 10 },
-    { name: "Agency", value: 20 },
-  ];
+  const [trips, setTrips] = useState<Trip[]>([]);
 
-  const data02 = [
-    { name: "Jan", value: 10 },
-    { name: "Feb", value: 20 },
-    { name: "Mar", value: 50 },
-    { name: "Apr", value: 40 },
-    { name: "May", value: 10 },
-    { name: "Jun", value: 20 },
-    { name: "Jul", value: 70 },
-  ];
-  const renderCustomizedLabel = ({
-    cx,
-    cy,
-    midAngle,
-    innerRadius,
-    outerRadius,
-    value,
-    index,
-    name,
-  }: any) => {
-    const RADIAN = Math.PI / 180;
-    // eslint-disable-next-line
-    const radius = 25 + innerRadius + (outerRadius - innerRadius);
-    const x = cx + radius * Math.cos(-midAngle * RADIAN);
-    // eslint-disable-next-line
-    const y = cy + radius * Math.sin(-midAngle * RADIAN);
-    return (
-      <text
-        x={x}
-        y={y}
-        fill="#8884d8"
-        textAnchor={x > cx ? "start" : "end"}
-        dominantBaseline="central"
-      >
-        {name} {value}
-      </text>
-    );
+  const handleCSV = (data: Array<Array<string>>) => {
+    const trips: Trip[] = data.slice(1).map((row) => ({
+      trip_id: row[0],
+      date: row[1],
+      start_time: row[2],
+      end_time: row[3],
+      start_terminal: row[4],
+      end_terminal: row[5],
+      travel_time: parseFloat(row[6]),
+      dwell_time: parseFloat(row[7]),
+      ratio: parseFloat(row[8]),
+      day_of_week: parseInt(row[9]),
+      day_name: row[10],
+      hour_of_day: parseInt(row[11]),
+    }));
+
+    setTrips(trips);
   };
 
-  const CustomizedDot = ({ cx, cy, stroke, payload, value }: any) => {
-    if (payload.name == "Mar") {
-      return (
-        <svg x={cx - 50} y={cy - 50} width="100" height="100">
-          <circle
-            cx="50"
-            cy="50"
-            r="8"
-            stroke="#fff"
-            stroke-width="3"
-            fill="#1F578A"
-          />
-        </svg>
-      );
-    } else {
-      return <Fragment></Fragment>;
+  const dayOfWeekData = trips.reduce((acc, trip) => {
+    const day = trip.day_of_week;
+    if (!acc[day]) {
+      acc[day] = { day_of_week: day, total_travel_time: 0, count: 0 };
     }
-  };
+    acc[day].total_travel_time += trip.travel_time;
+    acc[day].count += 1;
+    return acc;
+  }, {} as Record<number, { day_of_week: number; total_travel_time: number; count: number }>);
+
+  const averageTravelTimePerDayOfWeek = Object.values(dayOfWeekData).map(
+    (item) => ({
+      day_of_week: item.day_of_week,
+      average_travel_time:
+        Math.round((item.total_travel_time / item.count) * 100) / 100,
+    })
+  );
+
+  const groupedDataDayOfWeek = trips.reduce((acc, trip) => {
+    const { day_of_week, start_terminal, dwell_time } = trip;
+    if (!acc[day_of_week]) {
+      acc[day_of_week] = {};
+    }
+    if (!acc[day_of_week][start_terminal]) {
+      acc[day_of_week][start_terminal] = {
+        day_of_week,
+        start_terminal,
+        total_dwell_time: 0,
+        count: 0,
+      };
+    }
+    acc[day_of_week][start_terminal].total_dwell_time += dwell_time;
+    acc[day_of_week][start_terminal].count += 1;
+    return acc;
+  }, {} as Record<number, Record<string, { day_of_week: number; start_terminal: string; total_dwell_time: number; count: number }>>);
+
+  const groupedDataDayOfHour = trips.reduce((acc, trip) => {
+    const { hour_of_day, start_terminal, dwell_time } = trip;
+    if (!acc[hour_of_day]) {
+      acc[hour_of_day] = {};
+    }
+    if (!acc[hour_of_day][start_terminal]) {
+      acc[hour_of_day][start_terminal] = {
+        hour_of_day,
+        start_terminal,
+        total_dwell_time: 0,
+        count: 0,
+      };
+    }
+    acc[hour_of_day][start_terminal].total_dwell_time += dwell_time;
+    acc[hour_of_day][start_terminal].count += 1;
+    return acc;
+  }, {} as Record<number, Record<string, { hour_of_day: number; start_terminal: string; total_dwell_time: number; count: number }>>);
+
+  const averageDwellTimeDataDayOfWeek = Object.keys(groupedDataDayOfWeek)
+    .map((day_of_week) =>
+      Object.values(groupedDataDayOfWeek[parseInt(day_of_week)]).map(
+        (item) => ({
+          day_of_week: item.day_of_week,
+          start_terminal: item.start_terminal,
+          average_dwell_time:
+            Math.round((item.total_dwell_time / item.count) * 100) / 100,
+        })
+      )
+    )
+    .flat();
+
+  const averageDwellTimeDataDayOfHour = Object.keys(groupedDataDayOfHour)
+    .map((hour_of_day) =>
+      Object.values(groupedDataDayOfHour[parseInt(hour_of_day)]).map(
+        (item) => ({
+          hour_of_day: item.hour_of_day,
+          start_terminal: item.start_terminal,
+          average_dwell_time:
+            Math.round((item.total_dwell_time / item.count) * 100) / 100,
+        })
+      )
+    )
+    .flat();
+
+  const terminalsWeek = Array.from(
+    new Set(averageDwellTimeDataDayOfWeek.map((item) => item.start_terminal))
+  );
+
+  const terminalsHour = Array.from(
+    new Set(averageDwellTimeDataDayOfHour.map((item) => item.start_terminal))
+  );
 
   return (
     <div className="lawyer-dashboard-main-container">
       <div className="lawyer-dashboard-card">
-        <div className="lawyer-dashboard-card-header">
-          <h3 className="primary"> Lawyers and Agency Management</h3>
-          <button
-            className="btn btn-primary width-auto"
-            style={{
-              margin: 0,
-              display: "flex",
-              gap: "30px",
-              padding: "10px 20px",
-            }}
-          >
-            <div className="icon-background">
-              <i className="fa-solid fa-plus " style={{ color: "#1f578a" }}></i>
-            </div>
-            New
-          </button>
-        </div>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Location</th>
-            <th>Email</th>
-            <th>Type</th>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Centro </td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-            <td>Mexico</td>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Centro </td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-            <td>Mexico</td>
-          </tr>
-        </table>
-        <Link to="/lawyers" style={{ display: "block", textAlign: "center" }}>
-          {" "}
-          See More
-        </Link>
+        <h2>Lawers Dashboard</h2>
+        <CSVUploader onFileLoaded={handleCSV} />
+        <TravelTimeBarChart data={averageTravelTimePerDayOfWeek} />
       </div>
       <div className="lawyer-dashboard-card">
-        <div
-          className="lawyer-dashboard-card-header"
-          style={{ marginBottom: "5px" }}
-        >
-          <h3 className="secondary">Statistics</h3>
-          <h3 className="secondary">Total</h3>
-        </div>
-        <div className="lawyer-dashboard-card-header">
-          <h3 className="primary">Lawyers and Agency</h3>
-          <h3 className="primary">30</h3>
-        </div>
-        <div className="lawyer-dashboard-card-graph">
-          <ResponsiveContainer width="100%" height="100%">
-            <PieChart width={800} height={800}>
-              <Pie
-                data={data01}
-                cx="50%"
-                cy="50%"
-                outerRadius={80}
-                label={renderCustomizedLabel}
-                dataKey="value"
-              >
-                <Cell fill="#E5EAFC" />
-                <Cell fill="#1F578A" />
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
+        <DwellTimeByWeekLineChart
+          data={averageDwellTimeDataDayOfWeek}
+          terminals={terminalsWeek}
+        />
       </div>
       <div className="lawyer-dashboard-card">
-        <div className="lawyer-dashboard-card-header">
-          <h3 className="primary"> Staff Management</h3>
-          <button
-            className="btn btn-primary width-auto"
-            style={{
-              margin: 0,
-              display: "flex",
-              gap: "30px",
-              padding: "10px 20px",
-            }}
-          >
-            <div className="icon-background">
-              <i className="fa-solid fa-plus " style={{ color: "#1f578a" }}></i>
-            </div>
-            New Staff
-          </button>
-        </div>
-        <table>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Type</th>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Centro </td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-          </tr>
-          <tr>
-            <td>Alfreds Futterkiste</td>
-            <td>Maria Anders</td>
-            <td>Germany</td>
-          </tr>
-          <tr>
-            <td>Centro </td>
-            <td>Francisco Chang</td>
-            <td>Mexico</td>
-          </tr>
-        </table>
-        <Link to="/lawyers" style={{ display: "block", textAlign: "center" }}>
-          {" "}
-          See More
-        </Link>
-      </div>
-      <div className="lawyer-dashboard-card">
-        <div
-          className="lawyer-dashboard-card-header"
-          style={{ marginBottom: "5px" }}
-        >
-          <h3 className="secondary">Statistics</h3>
-        </div>
-        <div className="lawyer-dashboard-card-header">
-          <h3 className="primary">System Reach</h3>
-        </div>
-        <div className="lawyer-dashboard-card-graph">
-          <ResponsiveContainer width="100%" height="100%">
-            <ComposedChart width={300} height={100} data={data02}>
-              <XAxis
-                dataKey="name"
-                height={60}
-                type="category"
-                axisLine={false}
-                tickLine={false}
-              />
-              <defs>
-                <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                  <stop offset="0%" stopColor="#1F578A69" />
-                  <stop offset="33%" stopColor="#1F578A6B" />
-                  <stop offset="100%" stopColor="#E5EAFC4F" />
-                </linearGradient>
-              </defs>
-              <Line
-                type="monotone"
-                dataKey="value"
-                stroke="#1F578A"
-                dot={CustomizedDot}
-                strokeWidth={4}
-              />
-              <Tooltip />
-              <Area
-                type="monotone"
-                dataKey="value"
-                stroke="false"
-                fill="url(#colorUv)"
-              />
-              <ReferenceLine x="Mar" stroke="#1F578A" />
-              <ReferenceDot
-                x="Mar"
-                y={50}
-                r={10}
-                fill="#1F578A"
-                stroke="white"
-                strokeWidth={4}
-              />
-            </ComposedChart>
-          </ResponsiveContainer>
-        </div>
+        <DwellTimeByHourLineChart
+          data={averageDwellTimeDataDayOfHour}
+          terminals={terminalsHour}
+        />
       </div>
     </div>
   );

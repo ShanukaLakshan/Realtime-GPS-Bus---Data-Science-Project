@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { Icons } from "../../utils";
-
 interface SidebarNavItem {
   link: string;
   section: string;
@@ -106,7 +105,6 @@ const Sidebar: React.FC = () => {
             <div className="sidebar__menu__item__txt">{nav.text}</div>
           </Link>
         ))}
-        <div className="sidebar__menu__item"></div>
       </div>
     </div>
   );

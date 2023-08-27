@@ -1,0 +1,17 @@
+stop_id,route_id,direction,address,latitude,longitude
+BT01,654,Kandy-Digana,Kandy,7.292462226,80.6349778
+101,654,Kandy-Digana,Wales Park,7.291186017,80.63766185
+102,654,Kandy-Digana,Mahamaya,7.28784,80.64584
+103,654,Kandy-Digana,Lewella junction,7.29443,80.65003
+104,654,Kandy-Digana,Talwatta,7.286701,80.6603357
+105,654,Kandy-Digana,Tennekumbura Bridge,7.281866,80.66603
+106,654,Kandy-Digana,Kalapura Junction Busstop,7.27983,80.67621
+107,654,Kandy-Digana,Nattarampotha Junction Bus Stop,7.279117,80.67945
+108,654,Kandy-Digana,Kundasale New town,7.2809,80.68416
+109,654,Kandy-Digana,Warapitiya,7.28149,80.68635
+110,654,Kandy-Digana,Pallekele (Provincial Council),7.281322369,80.69676
+111,654,Kandy-Digana,Pachchakaatuwa,7.28473,80.70539
+112,654,Kandy-Digana,Balagolla,7.287349019,80.71400511
+113,654,Kandy-Digana,BOI,7.28411,80.7221
+114,654,Kandy-Digana,Kengalla,7.29152,80.72133
+BT02,654,Kandy-Digana,Digana,7.29896,80.73472

@@ -1,253 +1,138 @@
-import { Fragment } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import CSVReader from "react-csv-reader";
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import "leaflet/dist/leaflet.css";
 
-const Dashboard = () => {
-  const StudentDashboardCardGraph = () => {
-    return (
-      <div className="student-dashboard-card-graph">
-        <hr />
-        <div className="student-dashboard-card-graph-content-top">
-          <div className="student-dashboard-card-graph-content-top-left">
-            <img
-              src="https://www.w3schools.com/howto/img_avatar.png"
-              alt="Avatar"
-            />
-          </div>
-          <div className="student-dashboard-card-graph-content-top-right">
-            <h3>Sample Topic by Sample User Name</h3>
-          </div>
-        </div>
+interface BusStop {
+  stop_id: string;
+  route_id: string;
+  direction: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+}
 
-        <div className="student-dashboard-card-graph-content-bottom">
-          <div className="student-dashboard-card-paragraph">
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris.
-            </p>
-          </div>
-          <span>Yesterday at 5:42 PM</span>
-        </div>
-      </div>
-    );
+const Dashboard: React.FC = () => {
+
+  const [busStops, setBusStops] = useState<BusStop[]>([]);
+  const [selectedStop, setSelectedStop] = useState<BusStop | null>(null);
+  const [mapCenter, setMapCenter] = useState<[number, number] | undefined>([
+    0, 0,
+  ]); // Set an initial center
+
+  const handleCSV = (data: Array<Array<string>>) => {
+    const stops: BusStop[] = data.slice(1).map((row) => ({
+      stop_id: row[0],
+      route_id: row[1],
+      direction: row[2],
+      address: row[3],
+      latitude: parseFloat(row[4]),
+      longitude: parseFloat(row[5]),
+    }));
+
+    setBusStops(stops);
   };
+
+  useEffect(() => {
+    if (busStops.length > 0) {
+      // Calculate mean latitude and longitude
+      const meanLatitude =
+        busStops.reduce((sum, stop) => sum + stop.latitude, 0) /
+        busStops.length;
+      const meanLongitude =
+        busStops.reduce((sum, stop) => sum + stop.longitude, 0) /
+        busStops.length;
+      setMapCenter([meanLatitude, meanLongitude]);
+    }
+  }, [busStops]);
 
   return (
     <div className="student-dashboard-main-container">
-      <div
-        className="appointments"
-        style={{
-          display: "flex",
-          flexDirection: "row",
-        }}
-      >
-        <div
-          style={{
-            display: "flex",
-            flexBasis: "60%",
-            margin: "10px",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            padding: "20px",
-            borderRadius: "20px",
-            backgroundColor: "#FFF",
-            boxShadow: "3px 3px 5px rgba(0,0,0,0.1)",
-          }}
+      <div className="lawyer-dashboard-card appointments">
+        <MapContainer
+          style={{ width: "100%", height: "100vh" }}
+          center={mapCenter}
+          zoom={13}
         >
-          <div className="student-dashboard-card-header">
-            <h3 className="primary">Up comming Appointments</h3>
-          </div>
-          <span>Yesterday at 5:42 PM</span>
-        </div>
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {busStops.map((stop) => (
+            <Marker
+              key={stop.stop_id}
+              position={[stop.latitude, stop.longitude]}
+              eventHandlers={{
+                click: () => setSelectedStop(stop),
+              }}
+            >
+              <Popup>{stop.address}</Popup>
+            </Marker>
+          ))}
+        </MapContainer>
 
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            flexBasis: "40%",
-            margin: "10px",
-            alignItems: "flex-end",
-            padding: "20px",
-            borderRadius: "20px",
-            backgroundColor: "#FFF",
-            boxShadow: "3px 3px 5px rgba(0,0,0,0.1)",
-          }}
+        {/* <MapContainer
+          center={[51.505, -0.09]}
+          zoom={13}
+          scrollWheelZoom={false}
         >
-          <div className="student-dashboard-card-header">
-            <h3 className="primary">Point Score</h3>
-          </div>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={[51.505, -0.09]}>
+            <Popup>
+              A pretty CSS3 popup. <br /> Easily customizable.
+            </Popup>
+          </Marker>
+        </MapContainer> */}
+        
+        <div className="selected-stop-details">
+          {selectedStop && (
+            <>
+              <h4>Selected Bus Stop</h4>
+              <p>Stop ID: {selectedStop.stop_id}</p>
+              <p>Route ID: {selectedStop.route_id}</p>
+              <p>Direction: {selectedStop.direction}</p>
+              <p>Address: {selectedStop.address}</p>
+              <p>Latitude: {selectedStop.latitude}</p>
+              <p>Longitude: {selectedStop.longitude}</p>
+            </>
+          )}
         </div>
       </div>
 
       <div className="student-dashboard-card updates">
-        <div className="student-dashboard-card-header">
-          <h3 className="primary">Updates</h3>
-        </div>
-        <div className="student-dashboard-card-graph">
-          <StudentDashboardCardGraph />
-          <StudentDashboardCardGraph />
-          <StudentDashboardCardGraph />
-          <StudentDashboardCardGraph />
-        </div>
+        {/* Rest of your updates card content */}
       </div>
 
       <div className="student-dashboard-card lawyers">
-        <div className="student-dashboard-card-header">
-          <h3
-            className="primary"
-            style={{
-              fontSize: "24px",
-              margin: "0",
-              padding: "0",
-            }}
-          >
-            Lawyers
-          </h3>
-        </div>
-        <hr
-          style={{
-            width: "100%",
-            height: "5px",
-            backgroundColor: "#C8C8C8",
-          }}
+        <CSVReader
+          onFileLoaded={handleCSV}
+          inputId="ObiWan"
+          inputStyle={{ color: "red" }}
         />
-        <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-            alignItems: "center",
-            width: "50%",
-            height: "50px",
-          }}
-        >
-          <button
-            style={{
-              backgroundColor: "#FFF",
-              color: "#000",
-              padding: "10px",
-              width: "200px",
-              height: "40px",
-              fontSize: "18px",
-              cursor: "pointer",
-              border: "none",
-            }}
-          >
-            Consulted Lawyers
-            <hr
-              style={{
-                width: "100%",
-                height: "2px",
-                backgroundColor: "#C8C8C8",
-                margin: "10px 0 ",
-              }}
-            />
-          </button>
-          <button
-            style={{
-              backgroundColor: "#FFF",
-              color: "#000",
-              padding: "10px",
-              width: "200px",
-              height: "40px",
-              fontSize: "18px",
-              cursor: "pointer",
-              border: "none",
-            }}
-          >
-            All Lawyers
-            <hr
-              style={{
-                width: "100%",
-                height: "2px",
-                backgroundColor: "#C8C8C8",
-                margin: "10px 0 ",
-              }}
-            />
-          </button>
-        </div>
         <table>
           <thead>
-            <tr
-              style={{
-                flexDirection: "row",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-                height: "50px",
-              }}
-            >
-              <th>Image</th>
-              <th>Name</th>
-              <th>Requested Document</th>
+            <tr>
+              <th>Stop ID</th>
+              <th>Route ID</th>
+              <th>Direction</th>
+              <th>Bus Halt</th>
+              <th>Latitude</th>
+              <th>Longitude</th>
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td>
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Sample Lawyer Name</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Sample Lawyer Name</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Sample Lawyer Name</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Sample Lawyer Name</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <img
-                  src="https://www.w3schools.com/howto/img_avatar.png"
-                  alt="Avatar"
-                />
-              </td>
-              <td>Sample Lawyer Name</td>
-              <td>
-                <button>View</button>
-              </td>
-            </tr>
+            {busStops.map((stop) => (
+              <tr key={stop.stop_id}>
+                <td>{stop.stop_id}</td>
+                <td>{stop.route_id}</td>
+                <td>{stop.direction}</td>
+                <td>{stop.address}</td>
+                <td>{stop.latitude}</td>
+                <td>{stop.longitude}</td>
+              </tr>
+            ))}
           </tbody>
         </table>
-        <Link to="/dashboard" style={{ display: "block", textAlign: "center" }}>
-          See More
-        </Link>
       </div>
     </div>
   );
