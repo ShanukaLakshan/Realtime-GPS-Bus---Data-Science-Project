@@ -1,12 +1,11 @@
 import React, { Fragment } from "react";
-import NavBar from "./components/NavBar";
 import { Images } from "../utils";
+import { Link } from "react-router-dom";
 
 const LandingPage = () => {
   return (
     <Fragment>
       <div className="landing-page-main">
-        <NavBar />
         <svg
           id="triangle"
           viewBox="0 0 1054 1117"
@@ -25,16 +24,13 @@ const LandingPage = () => {
             <h2>Sample Topic</h2>
             <p>Lorem ipsum dolor sit amet consectetur adipiscing</p>
             <button className="btn btn-primary contact-us-btn">
-              <div className="landing-page-hero-button-content">
-                <div>Contact us</div>
-                <div>
-                  <i className="fa-solid fa-chevron-right"></i>
-                </div>
-              </div>
+              <Link to="/dashboard">
+                <p>Dashboard</p>
+              </Link>
             </button>
           </div>
           <div className="landing-page-hero-image">
-            <img src={Images.LandingPage_aussie} alt="image of Australia" />
+            <img src={Images.New} alt="image of Australia" />
           </div>
         </div>
       </div>

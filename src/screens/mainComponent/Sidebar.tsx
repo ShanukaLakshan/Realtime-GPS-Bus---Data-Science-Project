@@ -13,50 +13,34 @@ const sidebarNav: SidebarNavItem[] = [
     link: "/dashboard",
     section: "Dashboard",
     icon: <img src={Icons.Settings} alt="Dashboard" />,
-    text: "Home",
+    text: "Type 1",
   },
   {
     link: "/dashboard/analytics",
     section: "analytics",
     icon: <img src={Icons.Analytics} alt="Analytics" />,
-    text: "Analytics",
+    text: "Type 2",
   },
   {
     link: "/dashboard/lawyers",
     section: "lawyers",
     icon: <img src={Icons.Lawyer} alt="Lawyer" />,
-    text: "Lawyers",
+    text: "Type 3",
   },
   {
     link: "/dashboard/students",
     section: "students",
     icon: <img src={Icons.Students} alt="Students" />,
-    text: "Students",
+    text: "Type 4",
   },
   {
     link: "/dashboard/staff",
     section: "staff",
     icon: <img src={Icons.Staff} alt="Staff" />,
-    text: "Staff",
+    text: "Type 5",
   },
-  {
-    link: "/dashboard/updates",
-    section: "updates",
-    icon: <img src={Icons.Updates} alt="Updates" />,
-    text: "Updates",
-  },
-  {
-    link: "/dashboard/settings",
-    section: "settings",
-    icon: <img src={Icons.Settings} alt="Settings" />,
-    text: "Settings",
-  },
-  {
-    link: "/",
-    section: "signOut",
-    icon: <img src={Icons.SignOut} alt="SignOut" />,
-    text: "SignOut",
-  },
+  
+ 
 ];
 
 const Sidebar: React.FC = () => {

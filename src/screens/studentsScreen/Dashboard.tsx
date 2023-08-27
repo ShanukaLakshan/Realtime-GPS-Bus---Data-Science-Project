@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import CSVReader from "react-csv-reader";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
+import { LocationData } from "./LocationData";
+import L from "leaflet"; // Import required components from leaflet
 
 interface BusStop {
   stop_id: string;
@@ -12,47 +12,50 @@ interface BusStop {
   longitude: number;
 }
 
-const Dashboard: React.FC = () => {
+const LAT = 7.2809;
+const LNG = 80.68416;
 
+// Create the red dot icon
+const redIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-red.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+// Step 1: Create the blue dot icon
+const blueIcon = new L.Icon({
+  iconUrl:
+    "https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-blue.png",
+  shadowUrl:
+    "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
+  iconSize: [25, 41],
+  iconAnchor: [12, 41],
+  popupAnchor: [1, -34],
+  shadowSize: [41, 41],
+});
+
+const Dashboard: React.FC = () => {
   const [busStops, setBusStops] = useState<BusStop[]>([]);
   const [selectedStop, setSelectedStop] = useState<BusStop | null>(null);
-  const [mapCenter, setMapCenter] = useState<[number, number] | undefined>([
-    0, 0,
-  ]); // Set an initial center
-
-  const handleCSV = (data: Array<Array<string>>) => {
-    const stops: BusStop[] = data.slice(1).map((row) => ({
-      stop_id: row[0],
-      route_id: row[1],
-      direction: row[2],
-      address: row[3],
-      latitude: parseFloat(row[4]),
-      longitude: parseFloat(row[5]),
-    }));
-
-    setBusStops(stops);
-  };
 
   useEffect(() => {
-    if (busStops.length > 0) {
-      // Calculate mean latitude and longitude
-      const meanLatitude =
-        busStops.reduce((sum, stop) => sum + stop.latitude, 0) /
-        busStops.length;
-      const meanLongitude =
-        busStops.reduce((sum, stop) => sum + stop.longitude, 0) /
-        busStops.length;
-      setMapCenter([meanLatitude, meanLongitude]);
-    }
-  }, [busStops]);
+    setBusStops(LocationData);
+  }, []);
 
   return (
     <div className="student-dashboard-main-container">
+      <h1>Bus Stops STD D</h1>
       <div className="lawyer-dashboard-card appointments">
         <MapContainer
           style={{ width: "100%", height: "100vh" }}
-          center={mapCenter}
-          zoom={13}
+          center={[LAT, LNG]}
+          zoom={14}
+          scrollWheelZoom={true}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
           {busStops.map((stop) => (
@@ -62,28 +65,18 @@ const Dashboard: React.FC = () => {
               eventHandlers={{
                 click: () => setSelectedStop(stop),
               }}
+              // Step 2: Conditional check for icon color
+              icon={
+                selectedStop && selectedStop.stop_id === stop.stop_id
+                  ? blueIcon
+                  : redIcon
+              }
             >
               <Popup>{stop.address}</Popup>
             </Marker>
           ))}
         </MapContainer>
 
-        {/* <MapContainer
-          center={[51.505, -0.09]}
-          zoom={13}
-          scrollWheelZoom={false}
-        >
-          <TileLayer
-            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-          />
-          <Marker position={[51.505, -0.09]}>
-            <Popup>
-              A pretty CSS3 popup. <br /> Easily customizable.
-            </Popup>
-          </Marker>
-        </MapContainer> */}
-        
         <div className="selected-stop-details">
           {selectedStop && (
             <>
@@ -99,16 +92,7 @@ const Dashboard: React.FC = () => {
         </div>
       </div>
 
-      <div className="student-dashboard-card updates">
-        {/* Rest of your updates card content */}
-      </div>
-
       <div className="student-dashboard-card lawyers">
-        <CSVReader
-          onFileLoaded={handleCSV}
-          inputId="ObiWan"
-          inputStyle={{ color: "red" }}
-        />
         <table>
           <thead>
             <tr>
@@ -126,7 +110,14 @@ const Dashboard: React.FC = () => {
                 <td>{stop.stop_id}</td>
                 <td>{stop.route_id}</td>
                 <td>{stop.direction}</td>
-                <td>{stop.address}</td>
+                <td>
+                  <span
+                    onClick={() => setSelectedStop(stop)}
+                    style={{ cursor: "pointer", textDecoration: "underline" }}
+                  >
+                    {stop.address}
+                  </span>
+                </td>
                 <td>{stop.latitude}</td>
                 <td>{stop.longitude}</td>
               </tr>

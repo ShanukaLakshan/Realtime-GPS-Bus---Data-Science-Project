@@ -1,28 +1,4 @@
-.landing-page-nav {
-  display: flex;
-  justify-content: space-between;
-  position: fixed;
-  padding: 0 30px;
-  align-items: center;
-  z-index: 1;
-  width: 100%;
-  &-logo {
-    padding: 30px;
-    a {
-      font-size: 32px;
-      font-weight: 900;
-    }
-  }
-  &-links {
-    a {
-      padding: 20px;
-      font-size: 20px;
-    }
-  }
-  &-btn {
-    margin-left: 20px;
-  }
-}
+
 
 .landing-page {
   &-main {
@@ -66,6 +42,15 @@
       }
       .contact-us-btn {
         width: 35%;
+
+        P{
+          font-size: 24px;
+          font-weight: 500;
+          color: white;
+          margin: 0;
+        }
+
+
       }
     }
     &-button-content {

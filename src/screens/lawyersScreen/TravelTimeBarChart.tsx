@@ -31,11 +31,21 @@ const TravelTimeBarChart: React.FC<TravelTimeBarChartProps> = ({ data }) => {
     return "#8884d8"; // Default color
   };
 
-  const CustomTooltip: React.FC<CustomTooltipProps> = ({ active, payload, label }) => {
+  const CustomTooltip: React.FC<CustomTooltipProps> = ({
+    active,
+    payload,
+    label,
+  }) => {
     if (active && payload && payload.length) {
       return (
-        <div className="custom-tooltip" style={{ background: '#f5f5f5', padding: '5px', border: '1px solid #ccc' }}>
-          {/* <p className="label">{`Day: ${label}`}</p> */}
+        <div
+          className="custom-tooltip"
+          style={{
+            background: "#f5f5f5",
+            padding: "5px",
+            border: "1px solid #ccc",
+          }}
+        >
           <p className="intro">{`Time: ${payload[0].value}`}</p>
         </div>
       );
@@ -45,8 +55,8 @@ const TravelTimeBarChart: React.FC<TravelTimeBarChartProps> = ({ data }) => {
 
   return (
     <BarChart
-      width={900}
-      height={400}
+      width={700}
+      height={300}
       data={filteredData}
       margin={{ top: 5, right: 30, left: 20, bottom: 20 }}
     >
@@ -64,9 +74,12 @@ const TravelTimeBarChart: React.FC<TravelTimeBarChartProps> = ({ data }) => {
         label={{
           value: "Average Travel Time",
           angle: -90,
-          position: "insideLeft",
+          position: "fixed",
+          transform: "translate(-50%, 0) rotate(-90deg)",
+          fontWeight: "bold",
         }}
       />
+
       <Tooltip content={<CustomTooltip />} />
       <Bar name="Time" dataKey="average_travel_time">
         {filteredData.map((entry: { average_travel_time: number }) => (

@@ -12,15 +12,16 @@ import Lawyer_Dashboard from "./screens/lawyersScreen/Dashboard";
 import Blank from "./screens/Blank";
 import LandingPage from "./screens/LandingPage";
 import Student_Dashboard from "./screens/studentsScreen/Dashboard";
+import BasicMap from "./screens/Leaflet/basic";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/dashboard" element={<MainLayout />}>
-          <Route index element={<Lawyer_Dashboard />} />
-          <Route path="analytics" element={<Student_Dashboard />} />
-          <Route path="lawyers" element={<Lawyers />} />
+          <Route index element={<Student_Dashboard />} />
+          <Route path="analytics" element={<Lawyer_Dashboard />} />
+          <Route path="lawyers" element={<BasicMap />} />
           <Route path="students" element={<Students />} />
           <Route path="staff" element={<Staff />} />
           <Route path="updates" element={<Update />} />

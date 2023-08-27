@@ -10,7 +10,7 @@ const NavBar = () => {
         </Link>
       </div>
       <div className="landing-page-nav-links">
-        <Link to="/dashboard">Check Dashboard</Link>
+        <Link to="/dashboard">Dashboard</Link>
         <Link to="/services">Services</Link>
         <Link to="/about">About us</Link>
       </div>

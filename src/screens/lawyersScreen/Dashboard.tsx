@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-// import CSVUploader from "./CSVReader";
 import TravelTimeBarChart from "./TravelTimeBarChart";
 import DwellTimeByWeekLineChart from "./DwellTimeByWeekLineChart";
 import DwellTimeByHourLineChart from "./DwellTimeByHourLineChart";
@@ -134,6 +133,11 @@ const Dashboard = () => {
           data={averageDwellTimeDataDayOfHour}
           terminals={terminalsHour}
         />
+      </div>{" "}
+      <div className="lawyer-dashboard-card">
+        <h2>Lawers Dashboard</h2>
+        <CSVUploader onFileLoaded={handleCSV} />
+        <TravelTimeBarChart data={averageTravelTimePerDayOfWeek} />
       </div>
     </div>
   );

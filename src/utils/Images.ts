@@ -8,6 +8,7 @@ import AppleIcon from '../assets/images/apple.png';
 import LandingPage_Subtract from '../assets/images/LandigPage_Subtract.svg';
 import LandingPage_Town from '../assets/images/LandingPage_Town.svg';
 import LandingPage_aussie from '../assets/images/LandingPage_aussie.svg';
+import New from '../assets/images/20945950.jpg';
 
 export default {
   Dashboard_Middle,
@@ -19,5 +20,6 @@ export default {
   LandingPage_Subtract,
   LandingPage_Town,
   LandingPage_aussie,
-  User
+  User,
+  New
 };
