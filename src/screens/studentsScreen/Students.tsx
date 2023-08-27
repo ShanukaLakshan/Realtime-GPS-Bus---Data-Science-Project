@@ -47,34 +47,7 @@ const busIcon = new L.Icon({
 });
 
 const Students = () => {
-  const [busStops, setBusStops] = useState<BusStop[]>([]);
   const [currentStop, setCurrentStop] = useState<BusStop | null>(null);
-
-  // useEffect(() => {
-  //   setBusStops(LocationData);
-
-  //   const interval = setInterval(() => {
-  //     setCurrentStop((prev) => {
-  //       if (prev === null) {
-  //         return busStops[0];
-  //       }
-
-  //       const currentIndex = busStops.findIndex(
-  //         (busStop) => busStop.stop_id === prev.stop_id
-  //       );
-
-  //       const nextIndex = currentIndex + 1;
-
-  //       if (nextIndex === busStops.length) {
-  //         return null;
-  //       }
-
-  //       return busStops[nextIndex];
-  //     });
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, [busStops]);
 
   const [realTimeLocations, setRealTimeLocations] = useState<
     RealTimeLocation[]
@@ -120,17 +93,6 @@ const Students = () => {
       This is a Students page
       <CSVUploader onFileLoaded={handleCSV} />
       <div>
-        {/* {currentStop && (
-          <div>
-            <h2>Current Stop: {currentStop.stop_id}</h2>
-            <p>Route: {currentStop.route_id}</p>
-            <p>Direction: {currentStop.direction}</p>
-            <p>Address: {currentStop.address}</p>
-            <p>Latitude: {currentStop.latitude}</p>
-            <p>Longitude: {currentStop.longitude}</p>
-          </div>
-        )} */}
-
         <MapContainer
           center={[LAT, LNG]}
           zoom={14}
@@ -138,23 +100,7 @@ const Students = () => {
           style={{ width: "100%", height: "100vh" }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {/* {busStops.map((stop) => (
-            <Marker
-              key={stop.stop_id}
-              position={[stop.latitude, stop.longitude]}
-              eventHandlers={{
-                click: () => setCurrentStop(stop),
-              }}
-              icon={
-                currentStop && currentStop.stop_id === stop.stop_id
-                  ? busIcon
-                  : redIcon
-              }
-            >
-              <Popup>{stop.address}</Popup>
-            </Marker>
-          ))} */}
-          {/* Show bus stops statically */}
+
           {LocationData.map((stop) => (
             <Marker
               key={stop.stop_id}
