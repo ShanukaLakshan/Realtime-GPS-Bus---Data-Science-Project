@@ -14,7 +14,8 @@ interface DwellTimeByWeekLineChartProps {
   terminals: string[];
 }
 
-const colorScheme = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50"]; // Add more colors if needed
+// Fixed color scheme
+const colorScheme = ["#8884d8", "#82ca9d", "#ffc658", "#ff7f50"]; // You can add or modify colors here as needed
 
 const DwellTimeByWeekLineChart: React.FC<DwellTimeByWeekLineChartProps> = ({
   data,
@@ -37,24 +38,13 @@ const DwellTimeByWeekLineChart: React.FC<DwellTimeByWeekLineChartProps> = ({
         }}
         tick={{ fontSize: 12 }}
       />
-      {/* <YAxis
-        label={{
-          value: "Average Dwell Time",
-          angle: -90,
-          position: "insideLeft",
-          offset: 10,
-        }}
-        tick={{ fontSize: 12 }}
-      /> */}
+
       <YAxis
         label={{
           value: "Average Travel Time",
           angle: -90,
-          position: "relative",
-          transform: "translate(-50%, 0) rotate(-90deg)",
-          textAnchor: "middle", // Corrected property name
-          fontWeight: "bold",
-          margin: 20,
+          position: "insideLeft",
+          dy: 80, // Adjust this as needed to position the label correctly
         }}
       />
       <Tooltip contentStyle={{ fontSize: 14 }} />
@@ -74,6 +64,7 @@ const DwellTimeByWeekLineChart: React.FC<DwellTimeByWeekLineChartProps> = ({
               item.start_terminal === terminal
           )}
           name={terminal}
+          // Use the color from the fixed color scheme
           stroke={colorScheme[index % colorScheme.length]}
           strokeWidth={2}
           dot={{ r: 5 }}

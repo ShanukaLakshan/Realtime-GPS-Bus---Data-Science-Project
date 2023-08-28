@@ -4,6 +4,7 @@ import DwellTimeByWeekLineChart from "./DwellTimeByWeekLineChart";
 import DwellTimeByHourLineChart from "./DwellTimeByHourLineChart";
 import Trip from "./Trip";
 import CSVUploader from "./CSVUploader";
+import TravelToDwellRatioChart from "./TravelToDwellRatioChart";
 
 const Dashboard = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -22,6 +23,8 @@ const Dashboard = () => {
       day_of_week: parseInt(row[9]),
       day_name: row[10],
       hour_of_day: parseInt(row[11]),
+      weekend: row[12] === "1",
+      rush_hour: row[13] === "1",
     }));
 
     setTrips(trips);
@@ -115,11 +118,27 @@ const Dashboard = () => {
     new Set(averageDwellTimeDataDayOfHour.map((item) => item.start_terminal))
   );
 
+  const averageRatioByDay = trips.reduce((acc, trip) => {
+    const day = trip.day_of_week;
+    if (!acc[day]) {
+      acc[day] = { day_of_week: day, total_ratio: 0, count: 0 };
+    }
+    acc[day].total_ratio += trip.ratio;
+    acc[day].count += 1;
+    return acc;
+  }, {} as Record<number, { day_of_week: number; total_ratio: number; count: number }>);
+
+  const averageRatioData = Object.values(averageRatioByDay).map((item) => ({
+    day_of_week: item.day_of_week,
+    ratio: Math.round((item.total_ratio / item.count) * 100) / 100,
+  }));
+
   return (
     <div className="lawyer-dashboard-main-container">
+      <h2>Performance Metrics Dashboard</h2>
+
+      <CSVUploader onFileLoaded={handleCSV} />
       <div className="lawyer-dashboard-card">
-        <h2>Lawers Dashboard</h2>
-        <CSVUploader onFileLoaded={handleCSV} />
         <TravelTimeBarChart data={averageTravelTimePerDayOfWeek} />
       </div>
       <div className="lawyer-dashboard-card">
@@ -133,11 +152,9 @@ const Dashboard = () => {
           data={averageDwellTimeDataDayOfHour}
           terminals={terminalsHour}
         />
-      </div>{" "}
+      </div>
       <div className="lawyer-dashboard-card">
-        <h2>Lawers Dashboard</h2>
-        <CSVUploader onFileLoaded={handleCSV} />
-        <TravelTimeBarChart data={averageTravelTimePerDayOfWeek} />
+        {/* <TravelToDwellRatioChart data={averageRatioData} /> */}
       </div>
     </div>
   );

@@ -19,26 +19,20 @@ const sidebarNav: SidebarNavItem[] = [
     link: "/dashboard/analytics",
     section: "analytics",
     icon: <img src={Icons.Analytics} alt="Analytics" />,
-    text: "Metrics",
-  },
-  {
-    link: "/dashboard/lawyers",
-    section: "lawyers",
-    icon: <img src={Icons.Lawyer} alt="Lawyer" />,
-    text: "Type 3",
+    text: "Performance",
   },
   {
     link: "/dashboard/students",
     section: "students",
     icon: <img src={Icons.Students} alt="Students" />,
-    text: "Online View",
+    text: "Realtime Tracking",
   },
-  {
-    link: "/dashboard/staff",
-    section: "staff",
-    icon: <img src={Icons.Staff} alt="Staff" />,
-    text: "Type 5",
-  },
+  // {
+  //   link: "/dashboard/staff",
+  //   section: "staff",
+  //   icon: <img src={Icons.Staff} alt="Staff" />,
+  //   text: "Type 5",
+  // },
 ];
 
 const Sidebar: React.FC = () => {

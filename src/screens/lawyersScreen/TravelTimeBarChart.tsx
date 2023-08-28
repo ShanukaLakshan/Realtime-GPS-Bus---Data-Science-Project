@@ -70,13 +70,13 @@ const TravelTimeBarChart: React.FC<TravelTimeBarChartProps> = ({ data }) => {
         }}
         style={{ fontSize: 12, fontWeight: "bold" }}
       />
+
       <YAxis
         label={{
           value: "Average Travel Time",
           angle: -90,
-          position: "fixed",
-          transform: "translate(-50%, 0) rotate(-90deg)",
-          fontWeight: "bold",
+          position: "insideLeft",
+          dy: 80, // Adjust this as needed to position the label correctly
         }}
       />
 

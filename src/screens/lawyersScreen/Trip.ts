@@ -1,4 +1,3 @@
-// Trip.ts
 interface Trip {
   trip_id: string;
   date: string;
@@ -12,6 +11,8 @@ interface Trip {
   day_of_week: number;
   day_name: string;
   hour_of_day: number;
+  weekend: boolean;
+  rush_hour: boolean;
 }
 
 export default Trip;

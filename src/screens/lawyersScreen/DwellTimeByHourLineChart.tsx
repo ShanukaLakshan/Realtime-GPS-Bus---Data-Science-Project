@@ -29,19 +29,23 @@ const DwellTimeByHourLineChart: React.FC<DwellTimeByHourLineChartProps> = ({
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="hour_of_day"
+          domain={["dataMin", "dataMax"]} // This line ensures that the X-axis starts at the minimum value present in the data and ends at the maximum value.
           label={{
             value: "Hour of Day",
             position: "insideBottom",
             offset: -10,
           }}
         />
+
         <YAxis
           label={{
             value: "Average Dwell Time",
             angle: -90,
             position: "insideLeft",
+            dy: 80, // Adjust this as needed to position the label correctly
           }}
         />
+
         <Tooltip />
         <Legend
           verticalAlign="top"
@@ -59,7 +63,7 @@ const DwellTimeByHourLineChart: React.FC<DwellTimeByHourLineChartProps> = ({
                 item.start_terminal === terminal
             )}
             name={terminal}
-            stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`}
+            stroke={index === 0 ? "#7091F5" : "#ED7B7B"} // Set the color based on the index
             strokeWidth={2}
             dot={{ r: 5 }}
           />

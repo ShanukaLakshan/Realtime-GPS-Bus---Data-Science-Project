@@ -1,7 +1,13 @@
-import { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { useEffect, useState } from "react";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  Popup,
+  Polyline,
+} from "react-leaflet";
 import { LocationData } from "./LocationData";
-import L, { LatLngTuple } from "leaflet"; // Import required components from leaflet
+import L, { LatLngTuple } from "leaflet";
 import CSVUploader from "../lawyersScreen/CSVUploader";
 
 const LAT = 7.2809;
@@ -17,6 +23,7 @@ interface BusStop {
 }
 
 interface RealTimeLocation {
+  data_index: string;
   id: string;
   deviceid: string;
   devicetime: string;
@@ -48,7 +55,6 @@ const busIcon = new L.Icon({
 
 const Students = () => {
   const [currentStop, setCurrentStop] = useState<BusStop | null>(null);
-
   const [realTimeLocations, setRealTimeLocations] = useState<
     RealTimeLocation[]
   >([]);
@@ -57,12 +63,13 @@ const Students = () => {
 
   const handleCSV = (data: Array<Array<string>>) => {
     const realTimeLocations: RealTimeLocation[] = data.slice(1).map((row) => ({
-      id: row[0],
-      deviceid: row[1],
-      devicetime: row[2],
-      latitude: parseFloat(row[3]),
-      longitude: parseFloat(row[4]),
-      speed: parseFloat(row[5]),
+      data_index: row[0],
+      id: row[1],
+      deviceid: row[2],
+      devicetime: row[3],
+      latitude: parseFloat(row[4]),
+      longitude: parseFloat(row[5]),
+      speed: parseFloat(row[6]),
     }));
 
     setRealTimeLocations(realTimeLocations);
@@ -83,15 +90,18 @@ const Students = () => {
       } else {
         clearInterval(interval);
       }
-    }, 100);
+    }, 2000);
 
     return () => clearInterval(interval);
   }, [realTimeLocations, index]);
 
   return (
     <div>
-      This is a Students page
-      <CSVUploader onFileLoaded={handleCSV} />
+      <div className="lawyer-dashboard-card">
+        <h4>Realtime Bus Tracking</h4>
+        <CSVUploader onFileLoaded={handleCSV} />
+      </div>
+
       <div>
         <MapContainer
           center={[LAT, LNG]}
@@ -130,6 +140,7 @@ const Students = () => {
               </Popup>
             </Marker>
           )}
+          <Polyline positions={polyline.slice(0, index + 1)} color="blue" />
         </MapContainer>
       </div>
     </div>

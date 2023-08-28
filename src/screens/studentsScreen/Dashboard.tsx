@@ -49,7 +49,47 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="student-dashboard-main-container">
-      <h1>Bus Stops STD D</h1>
+      <div className="student-dashboard-card">
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-between",
+            alignItems: "center",
+          }}
+        >
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "space-evenly",
+              alignItems: "center",
+            }}
+          >
+            <h2>Bus Halts</h2>
+            <h2
+              style={{
+                backgroundColor: "#f5f5f5",
+                marginLeft: "10px",
+              }}
+            >
+              {busStops.length}
+            </h2>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+            }}
+          >
+            <p>Date : 2022/08/28</p>
+            <p>Time : 08:00 AM</p>
+            <p>Direction : Kandy to Digana</p>
+          </div>
+        </div>
+      </div>
+
       <div className="lawyer-dashboard-card appointments">
         <MapContainer
           style={{ width: "100%", height: "100vh" }}
@@ -65,7 +105,6 @@ const Dashboard: React.FC = () => {
               eventHandlers={{
                 click: () => setSelectedStop(stop),
               }}
-              // Step 2: Conditional check for icon color
               icon={
                 selectedStop && selectedStop.stop_id === stop.stop_id
                   ? blueIcon
