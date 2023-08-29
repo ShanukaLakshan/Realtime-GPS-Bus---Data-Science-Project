@@ -127,7 +127,7 @@ const Students = () => {
               <Popup>{stop.address}</Popup>
             </Marker>
           ))}
-          {realTimeLocations.length > 0 && (
+          {/* {realTimeLocations.length > 0 && (
             <Marker
               position={[
                 realTimeLocations[index].latitude,
@@ -139,7 +139,23 @@ const Students = () => {
                 A pretty CSS3 popup. <br /> Easily customizable.
               </Popup>
             </Marker>
-          )}
+          )} */}
+          {realTimeLocations.length > 0 &&
+            !isNaN(realTimeLocations[index].latitude) &&
+            !isNaN(realTimeLocations[index].longitude) && (
+              <Marker
+                position={[
+                  realTimeLocations[index].latitude,
+                  realTimeLocations[index].longitude,
+                ]}
+                icon={busIcon}
+              >
+                <Popup>
+                  A pretty CSS3 popup. <br /> Easily customizable.
+                </Popup>
+              </Marker>
+            )}
+
           <Polyline positions={polyline.slice(0, index + 1)} color="blue" />
         </MapContainer>
       </div>

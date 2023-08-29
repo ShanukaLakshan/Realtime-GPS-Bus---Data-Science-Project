@@ -1,15 +1,3 @@
-<!-- Backend API -->
-
-https://tecoora-dev.azurewebsites.net/swagger/index.html
-
-<!-- Figma Design -->
-
-https://www.figma.com/file/trRJRG6B5PUqMO1pxukcWv/PR-Path-Web?type=design&node-id=0-1&mode=design&t=JHZQCYuqFjq7Idmi-0
-
-<!-- Grant Chart -->
-
-https://app.teamgantt.com/projects/gantt?ids=3638001
-
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
