@@ -33,6 +33,12 @@ const sidebarNav: SidebarNavItem[] = [
   //   icon: <img src={Icons.Staff} alt="Staff" />,
   //   text: "Type 5",
   // },
+  {
+    link: "/dashboard/updates",
+    section: "Update",
+    icon: <img src={Icons.Analytics} alt="Analytics" />,
+    text: "New Performance Metrics",
+  },
 ];
 
 const Sidebar: React.FC = () => {
