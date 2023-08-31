@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import Trip from "./Trip";
 import CSVUploader from "./CSVUploader";
-
-import GraphComponent from "./GraphComponent";
-import AvgDwellTimeGraph from "./AvgDwellTimeGraph";
-import CardinalAreaChartComponent from "./DwellTimeByDirectionGraph";
-import AverageSITRByHourGraph from "./AverageSITRByHourGraph";
 import TripChart from "./TripChart";
 import TripChart2 from "./TripChart2";
 import TripChart3 from "./TripChart3";
@@ -44,23 +39,19 @@ const Update = () => {
 
       <CSVUploader onFileLoaded={handleCSV} />
       <div className="lawyer-dashboard-card">
-        {/* <GraphComponent data={trips} /> */}
         <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
         <TripChart trips={trips} />
       </div>
       <div className="lawyer-dashboard-card">
-        {/* <AvgDwellTimeGraph data={trips} /> */}
         <h3>Dwell Time by Hour of the Day (Weekdays vs. Weekends) :</h3>
         <TripChart2 trips={trips} type="dwell_time" />
       </div>
       <div className="lawyer-dashboard-card">
-        {/* <CardinalAreaChartComponent data={trips} /> */}
-        <h3>Hour of the Day vs Dwell Time (By Direction)</h3>
+        <h3>Travel Time by Hour of the Day (Start Terminals)</h3>
         <TripChart3 trips={trips} />
       </div>
       <div className="lawyer-dashboard-card">
-        {/* <AverageSITRByHourGraph data={trips} /> */}
-        <h3>Average SITR by Hour of the Day (Weekdays vs. Weekends)</h3>
+        <h3>Average SITR by Hour of the Day (Direction)</h3>
         <TripChart4 trips={trips} />
       </div>
     </div>

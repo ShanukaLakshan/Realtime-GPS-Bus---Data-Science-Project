@@ -34,8 +34,6 @@ const TripChart2: React.FC<TripChartProps> = ({ trips, type }) => {
     }
   });
 
-  //   round to two decimal places
-  //   const average = (arr: number[]) => arr.reduce((a, b) => a + b, 0) / arr.length;
   const average = (arr: number[]) =>
     Math.round((arr.reduce((a, b) => a + b, 0) / arr.length) * 100) / 100;
 
@@ -59,6 +57,10 @@ const TripChart2: React.FC<TripChartProps> = ({ trips, type }) => {
     weekday: weekdayAvgTimes[index] || 0,
   }));
 
+  const SortedX_Axis = chartData.sort(
+    (a, b) => parseFloat(a.label) - parseFloat(b.label)
+  );
+
   return (
     <LineChart
       width={800}
@@ -76,8 +78,8 @@ const TripChart2: React.FC<TripChartProps> = ({ trips, type }) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="weekend" stroke="blue" />
-      <Line type="monotone" dataKey="weekday" stroke="green" />
+      <Line type="monotone" dataKey="weekend" stroke="#EC53B0" />
+      <Line type="monotone" dataKey="weekday" stroke="#793FDF" />
     </LineChart>
   );
 };

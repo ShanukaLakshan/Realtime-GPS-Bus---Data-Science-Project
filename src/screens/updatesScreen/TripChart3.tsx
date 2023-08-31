@@ -7,9 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
-  Brush,
 } from "recharts";
-
 import Trip from "./Trip";
 
 interface Props {
@@ -17,22 +15,45 @@ interface Props {
 }
 
 const TripChart3: React.FC<Props> = ({ trips }) => {
-  const filteredTrips = trips.filter(
-    (trip) =>
-      trip.Direction === "Kandy-Digana" || trip.Direction === "Digana-Kandy"
-  );
+  const dataByHour: { [key: string]: { [key: string]: number[] } } = {};
 
-  const data = filteredTrips.map((trip) => ({
-    hour_of_day: parseFloat(trip.hour_of_day),
-    travel_time: parseFloat(trip.travel_time),
-    weekend: trip.weekend,
-  }));
+  trips.forEach((trip) => {
+    const hour = trip.hour_of_day;
+    const time = parseFloat(trip.travel_time);
+    const direction = trip.Direction;
+
+    if (!dataByHour[hour]) {
+      dataByHour[hour] = {};
+    }
+
+    if (!dataByHour[hour][direction]) {
+      dataByHour[hour][direction] = [];
+    }
+
+    dataByHour[hour][direction].push(time);
+  });
+
+  const average = (arr: number[]) =>
+    Math.round((arr.reduce((a, b) => a + b, 0) / arr.length) * 100) / 100;
+
+  const chartData = Object.keys(dataByHour)
+    .sort((a, b) => parseFloat(a) - parseFloat(b))
+    .map((hour) => {
+      const directions = Object.keys(dataByHour[hour]);
+      const entry: { [key: string]: number | string } = { hour };
+
+      directions.forEach((direction) => {
+        entry[direction] = average(dataByHour[hour][direction]);
+      });
+
+      return entry;
+    });
 
   return (
     <LineChart
       width={800}
       height={400}
-      data={data}
+      data={chartData}
       margin={{
         top: 5,
         right: 30,
@@ -41,26 +62,12 @@ const TripChart3: React.FC<Props> = ({ trips }) => {
       }}
     >
       <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="hour_of_day" />
-      <YAxis dataKey="travel_time" />
+      <XAxis dataKey="hour" />
+      <YAxis />
       <Tooltip />
       <Legend />
-      <Line
-        type="monotone"
-        data={data.filter((d) => !d.weekend)}
-        dataKey="travel_time"
-        stroke="#82ca9d" // Green for weekdays
-        isAnimationActive={false}
-      />
-      <Line
-        type="monotone"
-        data={data.filter((d) => d.weekend)}
-        dataKey="travel_time"
-        stroke="#8884d8" // Blue for weekends
-        activeDot={{ r: 8 }}
-        isAnimationActive={false}
-      />
-      <Brush dataKey="hour_of_day" height={30} stroke="#8884d8" />
+      <Line type="monotone" dataKey="Kandy-Digana" stroke="#1A5D1A" />
+      <Line type="monotone" dataKey="Digana-Kandy" stroke="#FF52A2" />
     </LineChart>
   );
 };

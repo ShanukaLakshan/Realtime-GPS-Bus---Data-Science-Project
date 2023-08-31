@@ -34,11 +34,14 @@ const TripChart: React.FC<TripChartProps> = ({ trips }) => {
   });
 
   const average = (arr: number[]) =>
-    // round to two decimal places
     Math.round((arr.reduce((a, b) => a + b, 0) / arr.length) * 100) / 100;
 
-  const weekendLabels = Object.keys(weekendData).sort();
-  const weekdayLabels = Object.keys(weekdayData).sort();
+  const weekendLabels = Object.keys(weekendData).sort(
+    (a, b) => parseFloat(a) - parseFloat(b)
+  );
+  const weekdayLabels = Object.keys(weekdayData).sort(
+    (a, b) => parseFloat(a) - parseFloat(b)
+  );
 
   const weekendAvgTimes = weekendLabels.map((hour) =>
     average(weekendData[hour])
@@ -49,12 +52,12 @@ const TripChart: React.FC<TripChartProps> = ({ trips }) => {
 
   const allLabelsArray = Array.from(
     new Set([...weekendLabels, ...weekdayLabels])
-  ).sort();
+  ).sort((a, b) => parseFloat(a) - parseFloat(b));
 
-  const chartData = allLabelsArray.map((label, index) => ({
+  const chartData = allLabelsArray.map((label) => ({
     label,
-    weekend: weekendAvgTimes[index] || 0,
-    weekday: weekdayAvgTimes[index] || 0,
+    weekend: weekendAvgTimes[weekendLabels.indexOf(label)] || 0,
+    weekday: weekdayAvgTimes[weekdayLabels.indexOf(label)] || 0,
   }));
 
   return (
