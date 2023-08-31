@@ -47,7 +47,7 @@ const Update = () => {
         <TripChart2 trips={trips} type="dwell_time" />
       </div>
       <div className="lawyer-dashboard-card">
-        <h3>Travel Time by Hour of the Day (Start Terminals)</h3>
+        <h3>Travel Time by Hour of the Day (Directions)</h3>
         <TripChart3 trips={trips} />
       </div>
       <div className="lawyer-dashboard-card">
