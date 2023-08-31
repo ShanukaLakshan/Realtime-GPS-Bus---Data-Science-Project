@@ -82,7 +82,7 @@ const UserInfo = () => {
               alignItems: "flex-start",
             }}
           >
-            <p>Student</p>
+            <p>Admin</p>
           </div>
         </div>
       </div>

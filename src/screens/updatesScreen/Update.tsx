@@ -5,6 +5,7 @@ import TripChart from "./TripChart";
 import TripChart2 from "./TripChart2";
 import TripChart3 from "./TripChart3";
 import TripChart4 from "./TripChart4";
+import TripChart5 from "./TripChart5";
 
 const Update = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -41,6 +42,10 @@ const Update = () => {
       <div className="lawyer-dashboard-card">
         <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
         <TripChart trips={trips} />
+      </div>
+      <div className="lawyer-dashboard-card">
+        <h3>Excess Travel Time by Day of the Week</h3>
+        <TripChart5 trips={trips} />
       </div>
       <div className="lawyer-dashboard-card">
         <h3>Dwell Time by Hour of the Day (Weekdays vs. Weekends) :</h3>
