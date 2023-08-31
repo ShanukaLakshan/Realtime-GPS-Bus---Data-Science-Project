@@ -5,13 +5,11 @@ import {
   Marker,
   Popup,
   Polyline,
+  Circle,
 } from "react-leaflet";
 import { LocationData } from "./LocationData";
 import L, { LatLngTuple } from "leaflet";
 import CSVUploader from "../lawyersScreen/CSVUploader";
-
-const LAT = 7.2809;
-const LNG = 80.68416;
 
 interface BusStop {
   stop_id: string;
@@ -85,7 +83,6 @@ const Students = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (index < realTimeLocations.length) {
-        console.log(realTimeLocations[index]);
         setIndex((prevIndex) => prevIndex + 1);
       } else {
         clearInterval(interval);
@@ -94,6 +91,26 @@ const Students = () => {
 
     return () => clearInterval(interval);
   }, [realTimeLocations, index]);
+
+  const calculateDistance = (
+    lat1: number,
+    lon1: number,
+    lat2: number,
+    lon2: number
+  ) => {
+    const R = 6371e3;
+    const φ1 = (lat1 * Math.PI) / 180;
+    const φ2 = (lat2 * Math.PI) / 180;
+    const Δφ = ((lat2 - lat1) * Math.PI) / 180;
+    const Δλ = ((lon2 - lon1) * Math.PI) / 180;
+
+    const a =
+      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
+      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+
+    return R * c;
+  };
 
   return (
     <div>
@@ -104,7 +121,7 @@ const Students = () => {
 
       <div>
         <MapContainer
-          center={[LAT, LNG]}
+          center={[7.2809, 80.68416]}
           zoom={14}
           scrollWheelZoom={true}
           style={{ width: "100%", height: "100vh" }}
@@ -112,34 +129,43 @@ const Students = () => {
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
           {LocationData.map((stop) => (
-            <Marker
-              key={stop.stop_id}
-              position={[stop.latitude, stop.longitude]}
-              eventHandlers={{
-                click: () => setCurrentStop(stop),
-              }}
-              icon={
-                currentStop && currentStop.stop_id === stop.stop_id
-                  ? busIcon
-                  : redIcon
-              }
-            >
-              <Popup>{stop.address}</Popup>
-            </Marker>
+            <>
+              <Marker
+                key={stop.stop_id}
+                position={[stop.latitude, stop.longitude]}
+                eventHandlers={{
+                  click: () => setCurrentStop(stop),
+                }}
+                icon={
+                  currentStop && currentStop.stop_id === stop.stop_id
+                    ? busIcon
+                    : redIcon
+                }
+              >
+                <Popup>{stop.address}</Popup>
+              </Marker>
+              {realTimeLocations.length > 0 &&
+                !isNaN(realTimeLocations[index].latitude) &&
+                !isNaN(realTimeLocations[index].longitude) && (
+                  <Circle
+                    center={[stop.latitude, stop.longitude]}
+                    radius={
+                      calculateDistance(
+                        stop.latitude,
+                        stop.longitude,
+                        realTimeLocations[index].latitude,
+                        realTimeLocations[index].longitude
+                      ) <= 100
+                        ? 50
+                        : 0
+                    }
+                    color="blue"
+                    fillOpacity={0.2}
+                  />
+                )}
+            </>
           ))}
-          {/* {realTimeLocations.length > 0 && (
-            <Marker
-              position={[
-                realTimeLocations[index].latitude,
-                realTimeLocations[index].longitude,
-              ]}
-              icon={busIcon}
-            >
-              <Popup>
-                A pretty CSS3 popup. <br /> Easily customizable.
-              </Popup>
-            </Marker>
-          )} */}
+
           {realTimeLocations.length > 0 &&
             !isNaN(realTimeLocations[index].latitude) &&
             !isNaN(realTimeLocations[index].longitude) && (

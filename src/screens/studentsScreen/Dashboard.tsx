@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import { LocationData } from "./LocationData";
 import L from "leaflet"; // Import required components from leaflet
 
@@ -14,6 +14,7 @@ interface BusStop {
 
 const LAT = 7.2809;
 const LNG = 80.68416;
+const BUFFER_RADIUS = 50; // 50 m in meters
 
 // Create the red dot icon
 const redIcon = new L.Icon({
@@ -91,7 +92,7 @@ const Dashboard: React.FC = () => {
       </div>
 
       <div className="lawyer-dashboard-card appointments">
-        <MapContainer
+        {/* <MapContainer
           style={{ width: "100%", height: "100vh" }}
           center={[LAT, LNG]}
           zoom={14}
@@ -113,6 +114,39 @@ const Dashboard: React.FC = () => {
             >
               <Popup>{stop.address}</Popup>
             </Marker>
+          ))}
+        </MapContainer> */}
+        <MapContainer
+          style={{ width: "100%", height: "100vh" }}
+          center={[LAT, LNG]}
+          zoom={14}
+          scrollWheelZoom={true}
+        >
+          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+          {busStops.map((stop) => (
+            <>
+              <Marker
+                key={stop.stop_id}
+                position={[stop.latitude, stop.longitude]}
+                eventHandlers={{
+                  click: () => setSelectedStop(stop),
+                }}
+                icon={
+                  selectedStop && selectedStop.stop_id === stop.stop_id
+                    ? blueIcon
+                    : redIcon
+                }
+              >
+                <Popup>{stop.address}</Popup>
+              </Marker>
+              {/* Add this to draw a circle around each bus stop */}
+              <Circle
+                center={[stop.latitude, stop.longitude]}
+                radius={BUFFER_RADIUS}
+                color="blue"
+                fillOpacity={0.2}
+              />
+            </>
           ))}
         </MapContainer>
 
