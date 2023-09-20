@@ -119,7 +119,7 @@ const Dashboard: React.FC = () => {
         <MapContainer
           style={{ width: "100%", height: "100vh" }}
           center={[LAT, LNG]}
-          zoom={14}
+          zoom={14.5}
           scrollWheelZoom={true}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
