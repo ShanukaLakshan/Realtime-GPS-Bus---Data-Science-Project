@@ -2,7 +2,7 @@
 
 .topnav {
   @include flex(center, space-between);
-  margin-bottom: $spacing;
+  margin-bottom: 10px;
 
   .left-side {
     font-weight: bold;

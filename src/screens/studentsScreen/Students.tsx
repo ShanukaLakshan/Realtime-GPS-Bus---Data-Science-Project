@@ -10,6 +10,7 @@ import {
 import { LocationData } from "./LocationData";
 import L, { LatLngTuple } from "leaflet";
 import CSVUploader from "../lawyersScreen/CSVUploader";
+import Speedometer from "./Speedometer";
 
 interface BusStop {
   stop_id: string;
@@ -70,7 +71,9 @@ const Students = () => {
   const [polyline, setPolyline] = useState<LatLngTuple[]>([]);
   const [index, setIndex] = useState(0);
 
-  const [passedStops, setPassedStops] = useState<string[]>([]); // New state variable to keep track of passed stops
+  const [totalTravelTime, setTotalTravelTime] = useState(0);
+
+  const [passedStops, setPassedStops] = useState<string[]>([]);
 
   const handleCSV = (data: Array<Array<string>>) => {
     const realTimeLocations: RealTimeLocation[] = data.slice(1).map((row) => ({
@@ -151,6 +154,27 @@ const Students = () => {
     return R * c;
   };
 
+  const getTravelTime = (devicetime: string) => {
+    const time = devicetime.split(" ")[1];
+    const hours = parseInt(time.split(":")[0]);
+    const minutes = parseInt(time.split(":")[1]);
+    const seconds = parseInt(time.split(":")[2]);
+
+    const totalSeconds = hours * 60 * 60 + minutes * 60 + seconds;
+
+    return totalSeconds;
+  };
+
+  useEffect(() => {
+    if (realTimeLocations.length > 0) {
+      const travelTime =
+        getTravelTime(realTimeLocations[index].devicetime) -
+        getTravelTime(realTimeLocations[0].devicetime);
+
+      setTotalTravelTime(travelTime);
+    }
+  }, [realTimeLocations, index]);
+
   return (
     <div>
       <div className="lawyer-dashboard-card">
@@ -161,9 +185,9 @@ const Students = () => {
       <div>
         <MapContainer
           center={[7.2809, 80.68416]}
-          zoom={14.5}
+          zoom={14}
           scrollWheelZoom={true}
-          style={{ width: "100%", height: "100vh" }}
+          style={{ width: "80%", height: "50vh" }}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
 
@@ -223,6 +247,35 @@ const Students = () => {
 
           <Polyline positions={polyline.slice(0, index + 1)} color="blue" />
         </MapContainer>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          width: "80%",
+          marginTop: "20px",
+        }}
+      >
+        <div>
+          {realTimeLocations.length > 0 && (
+            <Speedometer speed={realTimeLocations[index].speed} maxSpeed={60} />
+          )}
+        </div>
+        <div>
+          <p>SITR</p>
+        </div>
+        <div>
+          <p>Total travel time</p>
+          <h4>
+            {totalTravelTime > 0 && (
+              <>
+                {Math.floor(totalTravelTime / 3600)}h{" "}
+                {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
+                {Math.floor((totalTravelTime % 3600) % 60)}s
+              </>
+            )}
+          </h4>
+        </div>
       </div>
     </div>
   );

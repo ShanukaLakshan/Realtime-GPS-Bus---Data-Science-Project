@@ -49,8 +49,15 @@ const Dashboard: React.FC = () => {
   }, []);
 
   return (
-    <div className="student-dashboard-main-container">
-      <div className="student-dashboard-card">
+    <div
+      style={{
+        display: "grid",
+        gridTemplateRows: "auto auto auto",
+        gap: "20px",
+        margin: "20px",
+      }}
+    >
+      {/* <div className="student-dashboard-card">
         <div
           style={{
             display: "flex",
@@ -89,37 +96,13 @@ const Dashboard: React.FC = () => {
             <p>Direction : Kandy to Digana</p>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <div className="lawyer-dashboard-card appointments">
-        {/* <MapContainer
-          style={{ width: "100%", height: "100vh" }}
+        <MapContainer
+          style={{ width: "80%", height: "50vh" }}
           center={[LAT, LNG]}
           zoom={14}
-          scrollWheelZoom={true}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-          {busStops.map((stop) => (
-            <Marker
-              key={stop.stop_id}
-              position={[stop.latitude, stop.longitude]}
-              eventHandlers={{
-                click: () => setSelectedStop(stop),
-              }}
-              icon={
-                selectedStop && selectedStop.stop_id === stop.stop_id
-                  ? blueIcon
-                  : redIcon
-              }
-            >
-              <Popup>{stop.address}</Popup>
-            </Marker>
-          ))}
-        </MapContainer> */}
-        <MapContainer
-          style={{ width: "100%", height: "100vh" }}
-          center={[LAT, LNG]}
-          zoom={14.5}
           scrollWheelZoom={true}
         >
           <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
