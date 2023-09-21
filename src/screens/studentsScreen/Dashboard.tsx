@@ -52,12 +52,13 @@ const Dashboard: React.FC = () => {
     <div
       style={{
         display: "grid",
-        gridTemplateRows: "auto auto auto",
+        gridTemplateRows: "1fr 1fr 1fr",
+        gridTemplateColumns: "1fr 1fr",
         gap: "20px",
         margin: "20px",
       }}
     >
-      {/* <div className="student-dashboard-card">
+      <div className="student-dashboard-card">
         <div
           style={{
             display: "flex",
@@ -96,7 +97,7 @@ const Dashboard: React.FC = () => {
             <p>Direction : Kandy to Digana</p>
           </div>
         </div>
-      </div> */}
+      </div>
 
       <div className="lawyer-dashboard-card appointments">
         <MapContainer

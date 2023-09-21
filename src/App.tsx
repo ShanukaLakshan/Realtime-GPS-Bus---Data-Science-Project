@@ -2,8 +2,6 @@ import "./css/style.min.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainLayout from "./screens/mainComponent/MainLayout";
-import Analytics from "./screens/analyticsScreen/Analytics";
-import Lawyers from "./screens/lawyersScreen/Lawyers";
 import Students from "./screens/studentsScreen/Students";
 import Staff from "./screens/staffScreen/Staff";
 import Update from "./screens/updatesScreen/Update";
