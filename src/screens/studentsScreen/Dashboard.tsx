@@ -181,7 +181,11 @@ const Dashboard: React.FC = () => {
 
               <Calendar
                 tileClassName={({ date, view }) => checkDates(date, view)}
-                onChange={setDate}
+                onChange={(value) => {
+                  if (value instanceof Date) {
+                    setDate(value);
+                  }
+                }}
                 value={date}
               />
 

@@ -4,8 +4,10 @@ import TimePicker from "react-time-picker";
 function TimePickerComponent() {
   const [time, setTime] = useState("10:00");
 
-  const handleTimeChange = (newTime: React.SetStateAction<string>) => {
-    setTime(newTime);
+  const handleTimeChange = (newTime: string | null) => {
+    if (newTime) {
+      setTime(newTime);
+    }
   };
 
   return (
