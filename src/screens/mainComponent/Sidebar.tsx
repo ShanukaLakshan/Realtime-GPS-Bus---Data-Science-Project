@@ -12,12 +12,18 @@ const sidebarNav: SidebarNavItem[] = [
   {
     link: "/dashboard",
     section: "Dashboard",
-    icon: <img src={Icons.Settings} alt="Dashboard" />,
+    icon: (
+      <img
+        src={Icons.MapIcon}
+        style={{ width: "30px", height: "30px" }}
+        alt="Dashboard"
+      />
+    ),
     text: "Bus Halts",
   },
   {
     link: "/dashboard/updates",
-    section: "analytics",
+    section: "updates",
     icon: <img src={Icons.Analytics} alt="Analytics" />,
     text: "Performance",
   },
@@ -25,20 +31,8 @@ const sidebarNav: SidebarNavItem[] = [
     link: "/dashboard/students",
     section: "students",
     icon: <img src={Icons.Students} alt="Students" />,
-    text: "Realtime Tracking",
+    text: "Tracking",
   },
-  // {
-  //   link: "/dashboard/staff",
-  //   section: "staff",
-  //   icon: <img src={Icons.Staff} alt="Staff" />,
-  //   text: "Type 5",
-  // },
-  // {
-  //   link: "/dashboard/updates",
-  //   section: "Update",
-  //   icon: <img src={Icons.Analytics} alt="Analytics" />,
-  //   text: "New Performance Metrics",
-  // },
 ];
 
 const Sidebar: React.FC = () => {

@@ -4,13 +4,14 @@
 .sidebar {
   flex-direction: column;
   color: $txtColor;
-  width: $sideBarWidth;
+  width: 200px;
   background-color: $mainBg;
   position: fixed;
   top: 0;
-  z-index: 100;
+  height: 100%;
+  padding: 10px;
+  z-index: 101;
   transition: all 0.5s ease-in-out;
-  width: 12%;
 
   &__logo {
     align-items: center;
@@ -19,50 +20,63 @@
     padding: 10px 0;
 
     span {
-      font-size: 32px;
+      font-size: 24px;
       color: $mainColor;
       font-weight: 700;
     }
   }
 
   &__menu {
-    @include flex(stretch, flex-start);
+    @include flex(start, center);
     flex-direction: column;
-    margin-top: 20px;
+    padding-left: 5px;
 
     &__item {
       @include flex(center, flex-start);
-      position: relative;
-      margin-bottom: 10px;
-      padding-left: 10%;
-      transition: all 0.3s ease-in-out;
       text-decoration: none;
-      font-size: 16px;
       color: #5f6870;
+      padding: 10px 20px;
 
       &:hover {
         cursor: pointer;
+      }
+      transition: all 0.3s ease-in-out;
+
+      &__txt {
+        z-index: 102;
       }
 
       &.active {
         font-weight: 500;
         color: $mainColor;
-        background-color: #1f578a;
-        padding: 6px 4px;
-        border-radius: 20px;
+        // background-color: #1f578a;
         align-items: center;
         justify-content: center;
-        margin-left: 10px;
-        font-size: 19px;
         color: antiquewhite;
         text-decoration: none;
+        position: relative;
+        z-index: 102;
+      }
+
+      &.active::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: $mainColor;
+        border-radius: 30px;
+        z-index: 101;
+        animation: zoomin 0.3s ease-in-out;
+        box-shadow: 0 5px 10px 0px rgba(0, 0, 0, 0.2);
       }
 
       &__icon {
         --size: 40px;
         width: var(--size);
         height: var(--size);
-        margin-right: 24px;
+        margin-right: 10px;
+        z-index: 102;
         @include flex(center, center);
       }
 
@@ -81,4 +95,15 @@
   border-bottom-left-radius: 30px;
   transform: scale(0.8) translateX(50%);
   transition: all 0.5s ease-in-out;
+}
+
+@keyframes zoomin {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
 }

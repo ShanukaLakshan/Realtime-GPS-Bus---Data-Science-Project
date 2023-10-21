@@ -4,9 +4,6 @@ import { Images } from "../../utils";
 const UserInfo = () => {
   return (
     <div className="user-info">
-      <div className="user-info__img">
-        <img src={Icons.Notifications} alt="user" />
-      </div>
       <div
         style={{
           display: "flex",
@@ -26,8 +23,8 @@ const UserInfo = () => {
         >
           <img
             style={{
-              width: "60px",
-              height: "60px",
+              borderRadius: "100%",
+              width: "40px",
             }}
             src={Images.User}
             alt="user"
@@ -60,7 +57,7 @@ const UserInfo = () => {
                 fontWeight: "bold",
               }}
             >
-              <span>Shanu</span>
+              <span>John Doe</span>
             </div>
             <div
               style={{

@@ -8,6 +8,7 @@ import Settings from "../assets/icons/Settings.svg";
 import SignOut from "../assets/icons/Sign_Out.svg";
 import Notifications from "../assets/icons/Notifications.svg";
 import DropDown from "../assets/icons/DropDown.svg";
+import MapIcon from "../assets/icons/Map.png";
 
 export default {
   PieChart,
@@ -20,4 +21,5 @@ export default {
   SignOut,
   Notifications,
   DropDown,
+  MapIcon,
 };
