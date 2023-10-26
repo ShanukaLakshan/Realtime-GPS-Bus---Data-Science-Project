@@ -30,7 +30,7 @@ const LandingPage = () => {
             </button>
           </div>
           <div className="landing-page-hero-image">
-            <img src={Images.New} alt="image of Australia" />
+            <img src={Images.Main} alt="image" />
           </div>
         </div>
       </div>

@@ -7,7 +7,6 @@ import Staff from "./screens/staffScreen/Staff";
 import Update from "./screens/updatesScreen/Update";
 import Settings from "./screens/settingsScreen/Settings";
 import Lawyer_Dashboard from "./screens/lawyersScreen/Dashboard";
-import Blank from "./screens/Blank";
 import LandingPage from "./screens/LandingPage";
 import Student_Dashboard from "./screens/studentsScreen/Dashboard";
 import BasicMap from "./screens/Leaflet/basic";
@@ -24,7 +23,6 @@ function App() {
           <Route path="staff" element={<Staff />} />
           <Route path="updates" element={<Update />} />
           <Route path="settings" element={<Settings />} />
-          <Route path="signOut" element={<Blank />} />
         </Route>
         <Route path="/" element={<LandingPage />} />
       </Routes>

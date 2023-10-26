@@ -9,6 +9,8 @@ import LandingPage_Subtract from '../assets/images/LandigPage_Subtract.svg';
 import LandingPage_Town from '../assets/images/LandingPage_Town.svg';
 import LandingPage_aussie from '../assets/images/LandingPage_aussie.svg';
 import New from '../assets/images/20945950.jpg';
+import Main from '../assets/images/pngwing.png';
+import Logo from '../assets/images/logo.png';
 
 export default {
   Dashboard_Middle,
@@ -21,5 +23,7 @@ export default {
   LandingPage_Town,
   LandingPage_aussie,
   User,
-  New
+  New,
+  Main,
+  Logo
 };

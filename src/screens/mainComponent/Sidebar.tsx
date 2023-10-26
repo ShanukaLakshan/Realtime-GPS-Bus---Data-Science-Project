@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Icons } from "../../utils";
+import { Icons, Images } from "../../utils";
 interface SidebarNavItem {
   link: string;
   section: string;
@@ -64,7 +64,11 @@ const Sidebar: React.FC = () => {
     <div className="sidebar">
       <Link to="/">
         <div className="sidebar__logo">
-          <span>Logo</span>
+          <img
+            src={Images.Logo}
+            alt="Logo"
+            style={{ width: "130px", height: "80px" }}
+          />
         </div>
       </Link>
       <div className="sidebar__menu">
