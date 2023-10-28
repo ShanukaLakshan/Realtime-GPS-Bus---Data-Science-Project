@@ -1,4 +1,4 @@
-excess_travel_time,dwell_time,cluster_label
+SITR,dwell_time,cluster_label
 0.11,5.61,0
 0.12,6.16,0
 0.12,7.85,1
