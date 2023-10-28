@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import { LocationData } from "./LocationData";
 import L from "leaflet"; // Import required components from leaflet
-import Calendar from "react-calendar";
-import "react-calendar/dist/Calendar.css";
-import TimePickerComponent from "./TimePickerComponent";
+// import Calendar from "react-calendar";
+// import "react-calendar/dist/Calendar.css";
+// import TimePickerComponent from "./TimePickerComponent";
 interface BusStop {
   stop_id: string;
   route_id: string;
@@ -179,7 +179,7 @@ const Dashboard: React.FC = () => {
                 }
               </p>
 
-              <Calendar
+              {/* <Calendar
                 tileClassName={({ date, view }) => checkDates(date, view)}
                 onChange={(value) => {
                   if (value instanceof Date) {
@@ -187,7 +187,7 @@ const Dashboard: React.FC = () => {
                   }
                 }}
                 value={date}
-              />
+              /> */}
 
               {/* <TimePickerComponent /> */}
 
