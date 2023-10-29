@@ -279,7 +279,21 @@ app.get("/get-bus-data/:deviceid", async (req, res) => {
   }
 });
 
-// get all device ids in bus_data 
+app.get("/get-all-device-ids", async (req, res) => {
+  const query = "SELECT DISTINCT deviceid FROM bus_data";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query);
+    connection.release();
+
+    const deviceIds = rows.map((row) => row.deviceid);
+    res.status(200).json(deviceIds);
+  } catch (err) {
+    console.error("Error fetching device IDs:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // Start the Express server
 app.listen(PORT, () => {

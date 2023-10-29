@@ -13,6 +13,7 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "@types/react-plotly.js": "^2.6.0",
+    "axios": "^1.6.0",
     "bootstrap-icons": "^1.10.5",
     "d3-shape": "^3.2.0",
     "leaflet": "^1.9.4",

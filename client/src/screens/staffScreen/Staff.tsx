@@ -15,26 +15,46 @@ import {
   blueIcon,
   busIcon,
 } from "../studentsScreen/index";
+import axios from "axios";
 
 const Staff = () => {
   const [nextBusStop, setNextBusStop] = useState<string>("Not Started");
   const [realTimeLocations, setRealTimeLocations] = useState<
     RealTimeLocationNew[]
   >([]);
-  const [polyline, setPolyline] = useState<number[][]>([]);
+  const [polyline, setPolyline] = useState<LatLngTuple[]>([]);
   const [index, setIndex] = useState(0);
   const [totalTravelTime, setTotalTravelTime] = useState(0);
   const [passedStops, setPassedStops] = useState<string[]>([]);
   const [passedBusStopNames, setPassedBusStopNames] = useState<string[]>([]);
 
+  const [busIds, setBusIds] = useState([]);
+  const [selectedBusId, setSelectedBusId] = useState("");
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/get-all-device-ids")
+      .then((response) => {
+        setBusIds(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching bus IDs:", error);
+      });
+  }, []);
+
+  const handleBusIdChange = (event) => {
+    setSelectedBusId(event.target.value);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/get-bus-data/1358");
-        if (!response.ok) {
+        const response = await axios.get(
+          `http://localhost:5000/get-bus-data/${selectedBusId}`
+        );
+        if (response.status !== 200) {
           throw new Error("Network response was not ok");
         }
-        const data = await response.json();
+        const data = response.data;
 
         const realTimeLocations: RealTimeLocationNew[] = data.map(
           (row: any) => ({
@@ -65,7 +85,7 @@ const Staff = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [selectedBusId]);
 
   useEffect(() => {
     if (index < realTimeLocations.length) {
@@ -94,7 +114,7 @@ const Staff = () => {
   }, [realTimeLocations, index]);
 
   useEffect(() => {
-    const polyline: number[][] = realTimeLocations
+    const polyline: LatLngTuple[] = realTimeLocations
       .slice(0, index + 1)
       .map((location) => [location.latitude, location.longitude]);
     setPolyline(polyline);
@@ -223,6 +243,24 @@ const Staff = () => {
             <Polyline positions={polyline} color="blue" />
           </MapContainer>
         </div>
+      </div>
+
+      <div>
+        <h1>Select Bus ID</h1>
+        <label htmlFor="busIdSelect">Choose a Bus ID:</label>
+        <select
+          id="busIdSelect"
+          value={selectedBusId}
+          onChange={handleBusIdChange}
+        >
+          <option value="">Select a Bus ID</option>
+          {busIds.map((busId) => (
+            <option key={busId} value={busId}>
+              {busId}
+            </option>
+          ))}
+        </select>
+        <p>Selected Bus ID: {selectedBusId}</p>
       </div>
     </div>
   );
