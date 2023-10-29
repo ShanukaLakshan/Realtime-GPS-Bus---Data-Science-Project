@@ -630,9 +630,7 @@ const Students = () => {
 
   return (
     <div>
-      <div className="lawyer-dashboard-card">
-        <h4>Realtime Bus Tracking</h4>
-      </div>
+      <h1>Realtime Bus Tracking</h1>
 
       <div
         style={{
