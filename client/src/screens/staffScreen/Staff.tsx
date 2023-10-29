@@ -29,10 +29,8 @@ const Staff = () => {
   const [passedStops, setPassedStops] = useState<string[]>([]);
   const [passedBusStopNames, setPassedBusStopNames] = useState<string[]>([]);
 
-  const [busIds, setBusIds] = useState([]);
+  const [busIds, setBusIds] = useState<string[]>([]);
   const [selectedBusId, setSelectedBusId] = useState("");
-
-  const [currentStop, setCurrentStop] = useState<any>(null);
 
   const currentDateTime = new Date();
 
@@ -50,7 +48,7 @@ const Staff = () => {
       });
   }, []);
 
-  const handleBusIdChange = (event) => {
+  const handleBusIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedBusId(event.target.value);
   };
 
@@ -151,9 +149,18 @@ const Staff = () => {
           }
         });
       });
+
+      if (
+        realTimeLocations.length > 0 &&
+        realTimeLocations[0].start_terminal === "BT02"
+      ) {
+        // Reverse the passedBusStopNames if the start terminal is BT02
+        passedBusStopNames.reverse();
+      }
+
       setPassedBusStopNames(passedBusStopNames);
     }
-  }, [passedStops]);
+  }, [passedStops, realTimeLocations]);
 
   return (
     <div>
@@ -325,8 +332,8 @@ const Staff = () => {
           <div
             style={{
               display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
+              flexDirection: "row",
+              alignItems: "space-evenly",
               marginTop: "20px",
             }}
           >
@@ -353,19 +360,20 @@ const Staff = () => {
 
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Start Terminal</p>
+
             <h4 style={valueStyle}>
               {realTimeLocations.length > 0 &&
-                realTimeLocations[0].start_terminal}
+              realTimeLocations[0].start_terminal === "BT01"
+                ? "Kandy to Digana"
+                : "Digana to Kandy"}
             </h4>
           </div>
-
 
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Current travel time</p>
             <h4 style={valueStyle}>
               {totalTravelTime > 0 && (
                 <>
-                  {/* {Math.floor(totalTravelTime / 3600)}h{" "} */}
                   {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
                   {Math.floor((totalTravelTime % 3600) % 60)}s
                 </>
@@ -374,6 +382,11 @@ const Staff = () => {
           </div>
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Bus Speed</p>
+            {/* <h4 style={valueStyle}>
+              {realTimeLocations.length > 0 &&
+                Math.round(realTimeLocations[index].speed)}{" "}
+              km/h
+            </h4> */}
           </div>
 
           <div style={infoContainerStyle}>
@@ -405,22 +418,31 @@ const Staff = () => {
         </div>
       </div>
 
-      <div>
-        <h1>Select Bus ID</h1>
-        <label htmlFor="busIdSelect">Choose a Bus ID:</label>
-        <select
-          id="busIdSelect"
-          value={selectedBusId}
-          onChange={handleBusIdChange}
-        >
-          <option value="">Select a Bus ID</option>
-          {busIds.map((busId) => (
-            <option key={busId} value={busId}>
-              {busId}
-            </option>
-          ))}
-        </select>
-        <p>Selected Bus ID: {selectedBusId}</p>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: "20px",
+        }}
+      >
+        <div style={{ marginRight: "20px" }}>
+          <h3>Select Bus ID</h3>
+          <label htmlFor="busIdSelect">Choose a Bus ID:</label>
+          <select
+            id="busIdSelect"
+            value={selectedBusId}
+            onChange={handleBusIdChange}
+          >
+            <option value="">Select a Bus ID</option>
+            {busIds.map((busId) => (
+              <option key={busId} value={busId}>
+                {busId}
+              </option>
+            ))}
+          </select>
+          <p>Selected Bus ID: {selectedBusId}</p>
+        </div>
       </div>
     </div>
   );
