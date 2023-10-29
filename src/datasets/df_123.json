@@ -1,0 +1,1650 @@
+[
+  {
+    "id": 563843268,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:04",
+    "latitude": 7.2931483,
+    "longitude": 80.6367633,
+    "speed": 15.1188
+  },
+  {
+    "id": 563843266,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:17",
+    "latitude": 7.2931316,
+    "longitude": 80.63741,
+    "speed": 0
+  },
+  {
+    "id": 563843542,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:28",
+    "latitude": 7.2931133,
+    "longitude": 80.6375199,
+    "speed": 4.31966
+  },
+  {
+    "id": 563843814,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:35",
+    "latitude": 7.293035,
+    "longitude": 80.6376966,
+    "speed": 0
+  },
+  {
+    "id": 563843813,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:37",
+    "latitude": 7.2929883,
+    "longitude": 80.63772,
+    "speed": 2.69978
+  },
+  {
+    "id": 563845004,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:01:52",
+    "latitude": 7.2923,
+    "longitude": 80.6376716,
+    "speed": 10.2592
+  },
+  {
+    "id": 563845003,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:02:07",
+    "latitude": 7.2913933,
+    "longitude": 80.637495,
+    "speed": 9.71923
+  },
+  {
+    "id": 563845002,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:02:20",
+    "latitude": 7.2912116,
+    "longitude": 80.6377,
+    "speed": 0
+  },
+  {
+    "id": 563845508,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:02:38",
+    "latitude": 7.2911216,
+    "longitude": 80.6378333,
+    "speed": 2.69978
+  },
+  {
+    "id": 563849301,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:02:53",
+    "latitude": 7.290775,
+    "longitude": 80.6383083,
+    "speed": 6.47948
+  },
+  {
+    "id": 563849300,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:03:08",
+    "latitude": 7.2904416,
+    "longitude": 80.638835,
+    "speed": 10.2592
+  },
+  {
+    "id": 563849299,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:03:23",
+    "latitude": 7.2903783,
+    "longitude": 80.6395233,
+    "speed": 7.01944
+  },
+  {
+    "id": 563849298,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:03:38",
+    "latitude": 7.290585,
+    "longitude": 80.6404033,
+    "speed": 13.4989
+  },
+  {
+    "id": 563849070,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:03:53",
+    "latitude": 7.290775,
+    "longitude": 80.641115,
+    "speed": 10.2592
+  },
+  {
+    "id": 563849069,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:04:08",
+    "latitude": 7.2905916,
+    "longitude": 80.6417866,
+    "speed": 8.09935
+  },
+  {
+    "id": 563849068,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:04:23",
+    "latitude": 7.2901216,
+    "longitude": 80.6422483,
+    "speed": 8.63931
+  },
+  {
+    "id": 563849067,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:04:38",
+    "latitude": 7.2899516,
+    "longitude": 80.6430366,
+    "speed": 11.3391
+  },
+  {
+    "id": 563849065,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:04:53",
+    "latitude": 7.2895133,
+    "longitude": 80.6435633,
+    "speed": 7.5594
+  },
+  {
+    "id": 563849064,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:04:59",
+    "latitude": 7.2893866,
+    "longitude": 80.6437,
+    "speed": 0
+  },
+  {
+    "id": 563849297,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:05:07",
+    "latitude": 7.2893116,
+    "longitude": 80.6437716,
+    "speed": 3.23974
+  },
+  {
+    "id": 563855340,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:05:22",
+    "latitude": 7.2889183,
+    "longitude": 80.6440516,
+    "speed": 6.47948
+  },
+  {
+    "id": 563855339,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:05:37",
+    "latitude": 7.2890733,
+    "longitude": 80.6444816,
+    "speed": 10.2592
+  },
+  {
+    "id": 563855338,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:05:52",
+    "latitude": 7.2887,
+    "longitude": 80.6448583,
+    "speed": 9.17927
+  },
+  {
+    "id": 563855337,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:06:07",
+    "latitude": 7.2883316,
+    "longitude": 80.64532,
+    "speed": 8.09935
+  },
+  {
+    "id": 563854972,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:06:18",
+    "latitude": 7.28792,
+    "longitude": 80.64543,
+    "speed": 9.71923
+  },
+  {
+    "id": 563854971,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:06:32",
+    "latitude": 7.2873633,
+    "longitude": 80.64536,
+    "speed": 10.2592
+  },
+  {
+    "id": 563854970,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:06:47",
+    "latitude": 7.287855,
+    "longitude": 80.6460733,
+    "speed": 10.2592
+  },
+  {
+    "id": 563854969,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:07:02",
+    "latitude": 7.287085,
+    "longitude": 80.6470483,
+    "speed": 18.8985
+  },
+  {
+    "id": 563854968,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:07:17",
+    "latitude": 7.2870683,
+    "longitude": 80.64784,
+    "speed": 8.09935
+  },
+  {
+    "id": 563854821,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:07:32",
+    "latitude": 7.2878816,
+    "longitude": 80.6472883,
+    "speed": 13.4989
+  },
+  {
+    "id": 563854820,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:07:47",
+    "latitude": 7.2887233,
+    "longitude": 80.646525,
+    "speed": 15.1188
+  },
+  {
+    "id": 563854819,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:02",
+    "latitude": 7.2895716,
+    "longitude": 80.6461566,
+    "speed": 10.2592
+  },
+  {
+    "id": 563854818,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:17",
+    "latitude": 7.2895783,
+    "longitude": 80.6456566,
+    "speed": 11.3391
+  },
+  {
+    "id": 563854817,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:32",
+    "latitude": 7.28994,
+    "longitude": 80.64513,
+    "speed": 2.69978
+  },
+  {
+    "id": 563854816,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:32",
+    "latitude": 7.28994,
+    "longitude": 80.64513,
+    "speed": 0
+  },
+  {
+    "id": 563854967,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:37",
+    "latitude": 7.2899966,
+    "longitude": 80.64508,
+    "speed": 2.69978
+  },
+  {
+    "id": 563855336,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:48",
+    "latitude": 7.2901183,
+    "longitude": 80.6449216,
+    "speed": 0
+  },
+  {
+    "id": 563855335,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:08:50",
+    "latitude": 7.2901416,
+    "longitude": 80.6448649,
+    "speed": 3.7797
+  },
+  {
+    "id": 563857248,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:05",
+    "latitude": 7.2903483,
+    "longitude": 80.6442683,
+    "speed": 10.7991
+  },
+  {
+    "id": 563857247,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:20",
+    "latitude": 7.290905,
+    "longitude": 80.6435916,
+    "speed": 10.2592
+  },
+  {
+    "id": 563857246,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:35",
+    "latitude": 7.2913516,
+    "longitude": 80.6432116,
+    "speed": 7.01944
+  },
+  {
+    "id": 563857245,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:50",
+    "latitude": 7.29198,
+    "longitude": 80.6434099,
+    "speed": 4.85961
+  },
+  {
+    "id": 563857244,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:52",
+    "latitude": 7.2919733,
+    "longitude": 80.643435,
+    "speed": 0
+  },
+  {
+    "id": 563857369,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:09:55",
+    "latitude": 7.291935,
+    "longitude": 80.6434849,
+    "speed": 4.31966
+  },
+  {
+    "id": 563860601,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:10:10",
+    "latitude": 7.2914083,
+    "longitude": 80.6441833,
+    "speed": 15.6588
+  },
+  {
+    "id": 563860600,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:10:25",
+    "latitude": 7.29051,
+    "longitude": 80.6454,
+    "speed": 17.8186
+  },
+  {
+    "id": 563860455,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:10:40",
+    "latitude": 7.2907366,
+    "longitude": 80.6465466,
+    "speed": 4.31966
+  },
+  {
+    "id": 563860454,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:10:55",
+    "latitude": 7.2909516,
+    "longitude": 80.6468966,
+    "speed": 10.2592
+  },
+  {
+    "id": 563860453,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:11:10",
+    "latitude": 7.2912433,
+    "longitude": 80.6475783,
+    "speed": 9.71923
+  },
+  {
+    "id": 563860452,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:11:25",
+    "latitude": 7.2916466,
+    "longitude": 80.6480183,
+    "speed": 9.17927
+  },
+  {
+    "id": 563860451,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:11:40",
+    "latitude": 7.292545,
+    "longitude": 80.6487466,
+    "speed": 17.8186
+  },
+  {
+    "id": 563860450,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:11:49",
+    "latitude": 7.2928999,
+    "longitude": 80.6489666,
+    "speed": 0
+  },
+  {
+    "id": 563860599,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:11:55",
+    "latitude": 7.29294,
+    "longitude": 80.649015,
+    "speed": 5.93953
+  },
+  {
+    "id": 563862300,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:10",
+    "latitude": 7.2936783,
+    "longitude": 80.6495333,
+    "speed": 14.0389
+  },
+  {
+    "id": 563862299,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:25",
+    "latitude": 7.2948716,
+    "longitude": 80.6503033,
+    "speed": 15.6588
+  },
+  {
+    "id": 563862298,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:40",
+    "latitude": 7.2945,
+    "longitude": 80.6517833,
+    "speed": 23.2182
+  },
+  {
+    "id": 563862297,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:52",
+    "latitude": 7.2938766,
+    "longitude": 80.6526316,
+    "speed": 7.01944
+  },
+  {
+    "id": 563862296,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:54",
+    "latitude": 7.2938666,
+    "longitude": 80.6526166,
+    "speed": 0
+  },
+  {
+    "id": 563862329,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:12:57",
+    "latitude": 7.293835,
+    "longitude": 80.6526216,
+    "speed": 3.7797
+  },
+  {
+    "id": 563864171,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:13:09",
+    "latitude": 7.293135,
+    "longitude": 80.6530366,
+    "speed": 19.9784
+  },
+  {
+    "id": 563864170,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:13:24",
+    "latitude": 7.29229,
+    "longitude": 80.6539633,
+    "speed": 12.959
+  },
+  {
+    "id": 563864169,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:13:39",
+    "latitude": 7.29156,
+    "longitude": 80.65459,
+    "speed": 18.3585
+  },
+  {
+    "id": 563864168,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:13:54",
+    "latitude": 7.2906583,
+    "longitude": 80.6554216,
+    "speed": 10.2592
+  },
+  {
+    "id": 563864167,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:13:58",
+    "latitude": 7.2906433,
+    "longitude": 80.6554716,
+    "speed": 0
+  },
+  {
+    "id": 563864316,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:02",
+    "latitude": 7.2906066,
+    "longitude": 80.6555166,
+    "speed": 3.23974
+  },
+  {
+    "id": 563865479,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:17",
+    "latitude": 7.2897133,
+    "longitude": 80.6561333,
+    "speed": 16.7387
+  },
+  {
+    "id": 563865478,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:32",
+    "latitude": 7.2889766,
+    "longitude": 80.6568633,
+    "speed": 11.3391
+  },
+  {
+    "id": 563865477,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:48",
+    "latitude": 7.2885933,
+    "longitude": 80.6571816,
+    "speed": 5.93953
+  },
+  {
+    "id": 563865476,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:49",
+    "latitude": 7.2885733,
+    "longitude": 80.657195,
+    "speed": 0
+  },
+  {
+    "id": 563865675,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:14:57",
+    "latitude": 7.28849,
+    "longitude": 80.6572233,
+    "speed": 3.23974
+  },
+  {
+    "id": 563866844,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:15:12",
+    "latitude": 7.2880583,
+    "longitude": 80.65759,
+    "speed": 10.7991
+  },
+  {
+    "id": 563866843,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:15:27",
+    "latitude": 7.2871083,
+    "longitude": 80.6584266,
+    "speed": 19.9784
+  },
+  {
+    "id": 563866842,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:15:36",
+    "latitude": 7.2869183,
+    "longitude": 80.6590583,
+    "speed": 0
+  },
+  {
+    "id": 563866987,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:15:43",
+    "latitude": 7.2869016,
+    "longitude": 80.6591066,
+    "speed": 5.39957
+  },
+  {
+    "id": 563883869,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:15:58",
+    "latitude": 7.2866199,
+    "longitude": 80.6601516,
+    "speed": 18.3585
+  },
+  {
+    "id": 563883868,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:16:13",
+    "latitude": 7.28607,
+    "longitude": 80.660915,
+    "speed": 12.959
+  },
+  {
+    "id": 563883867,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:16:28",
+    "latitude": 7.2856316,
+    "longitude": 80.66165,
+    "speed": 17.2786
+  },
+  {
+    "id": 563870320,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:16:43",
+    "latitude": 7.2848383,
+    "longitude": 80.663135,
+    "speed": 21.5983
+  },
+  {
+    "id": 563870319,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:16:48",
+    "latitude": 7.2847216,
+    "longitude": 80.6633283,
+    "speed": 5.39957
+  },
+  {
+    "id": 563870318,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:17:01",
+    "latitude": 7.2841366,
+    "longitude": 80.6639666,
+    "speed": 22.1382
+  },
+  {
+    "id": 563870317,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:17:16",
+    "latitude": 7.28315,
+    "longitude": 80.6653033,
+    "speed": 26.4579
+  },
+  {
+    "id": 563870316,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:17:31",
+    "latitude": 7.2819716,
+    "longitude": 80.6659916,
+    "speed": 11.8791
+  },
+  {
+    "id": 563870315,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:17:38",
+    "latitude": 7.2818483,
+    "longitude": 80.6661266,
+    "speed": 0
+  },
+  {
+    "id": 563883866,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:25:27",
+    "latitude": 7.28174,
+    "longitude": 80.6661466,
+    "speed": 3.7797
+  },
+  {
+    "id": 563886511,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:25:42",
+    "latitude": 7.281395,
+    "longitude": 80.6665933,
+    "speed": 9.17927
+  },
+  {
+    "id": 563886510,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:25:57",
+    "latitude": 7.2814433,
+    "longitude": 80.667675,
+    "speed": 15.1188
+  },
+  {
+    "id": 563886509,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:26:12",
+    "latitude": 7.2813683,
+    "longitude": 80.6687366,
+    "speed": 12.419
+  },
+  {
+    "id": 563886508,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:26:27",
+    "latitude": 7.2807399,
+    "longitude": 80.6692766,
+    "speed": 9.17927
+  },
+  {
+    "id": 563886507,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:26:42",
+    "latitude": 7.2809366,
+    "longitude": 80.6698933,
+    "speed": 10.2592
+  },
+  {
+    "id": 563886506,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:26:48",
+    "latitude": 7.2811416,
+    "longitude": 80.6700216,
+    "speed": 0
+  },
+  {
+    "id": 563886970,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:27:13",
+    "latitude": 7.2812033,
+    "longitude": 80.6701216,
+    "speed": 2.69978
+  },
+  {
+    "id": 563889252,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:27:28",
+    "latitude": 7.2814983,
+    "longitude": 80.670535,
+    "speed": 4.31966
+  },
+  {
+    "id": 563889251,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:27:43",
+    "latitude": 7.2815933,
+    "longitude": 80.671115,
+    "speed": 10.2592
+  },
+  {
+    "id": 563889250,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:27:58",
+    "latitude": 7.2815566,
+    "longitude": 80.6720033,
+    "speed": 14.0389
+  },
+  {
+    "id": 563889249,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:28:13",
+    "latitude": 7.2814416,
+    "longitude": 80.6730416,
+    "speed": 13.4989
+  },
+  {
+    "id": 563889248,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:28:28",
+    "latitude": 7.2808233,
+    "longitude": 80.6735,
+    "speed": 3.23974
+  },
+  {
+    "id": 563889247,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:28:28",
+    "latitude": 7.2808233,
+    "longitude": 80.6735,
+    "speed": 0
+  },
+  {
+    "id": 563889753,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:28:46",
+    "latitude": 7.2807133,
+    "longitude": 80.6735366,
+    "speed": 5.39957
+  },
+  {
+    "id": 563891523,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:29:01",
+    "latitude": 7.279935,
+    "longitude": 80.6740783,
+    "speed": 12.419
+  },
+  {
+    "id": 563891522,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:29:16",
+    "latitude": 7.2798883,
+    "longitude": 80.6748083,
+    "speed": 8.63931
+  },
+  {
+    "id": 563891521,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:29:31",
+    "latitude": 7.2798949,
+    "longitude": 80.6756683,
+    "speed": 13.4989
+  },
+  {
+    "id": 563891519,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:29:43",
+    "latitude": 7.2798833,
+    "longitude": 80.6762033,
+    "speed": 0
+  },
+  {
+    "id": 563892052,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:29:58",
+    "latitude": 7.2798783,
+    "longitude": 80.67621,
+    "speed": 3.23974
+  },
+  {
+    "id": 563892051,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:30:00",
+    "latitude": 7.2798783,
+    "longitude": 80.67621,
+    "speed": 0
+  },
+  {
+    "id": 563892377,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:30:11",
+    "latitude": 7.2798833,
+    "longitude": 80.6762616,
+    "speed": 2.69978
+  },
+  {
+    "id": 563894261,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:30:26",
+    "latitude": 7.279715,
+    "longitude": 80.6768249,
+    "speed": 9.17927
+  },
+  {
+    "id": 563894260,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:30:41",
+    "latitude": 7.2793883,
+    "longitude": 80.6775433,
+    "speed": 12.959
+  },
+  {
+    "id": 563894259,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:30:56",
+    "latitude": 7.2792,
+    "longitude": 80.67844,
+    "speed": 11.3391
+  },
+  {
+    "id": 563894258,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:31:11",
+    "latitude": 7.2791516,
+    "longitude": 80.6793233,
+    "speed": 0
+  },
+  {
+    "id": 563894531,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:31:22",
+    "latitude": 7.27912,
+    "longitude": 80.6793683,
+    "speed": 4.85961
+  },
+  {
+    "id": 563896479,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:31:32",
+    "latitude": 7.278955,
+    "longitude": 80.68002,
+    "speed": 21.0583
+  },
+  {
+    "id": 563896478,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:31:47",
+    "latitude": 7.27933,
+    "longitude": 80.68152,
+    "speed": 16.1987
+  },
+  {
+    "id": 563896477,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:02",
+    "latitude": 7.28022,
+    "longitude": 80.6821283,
+    "speed": 16.1987
+  },
+  {
+    "id": 563896476,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:17",
+    "latitude": 7.28042,
+    "longitude": 80.6835383,
+    "speed": 22.1382
+  },
+  {
+    "id": 563896475,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:25",
+    "latitude": 7.2807716,
+    "longitude": 80.6840316,
+    "speed": 2.69978
+  },
+  {
+    "id": 563896474,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:26",
+    "latitude": 7.2807716,
+    "longitude": 80.6840316,
+    "speed": 0
+  },
+  {
+    "id": 563896690,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:35",
+    "latitude": 7.2807916,
+    "longitude": 80.6840583,
+    "speed": 3.23974
+  },
+  {
+    "id": 563896903,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:44",
+    "latitude": 7.2809933,
+    "longitude": 80.6842999,
+    "speed": 0
+  },
+  {
+    "id": 563897001,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:32:48",
+    "latitude": 7.2810283,
+    "longitude": 80.6843516,
+    "speed": 3.23974
+  },
+  {
+    "id": 563898058,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:33:03",
+    "latitude": 7.2812883,
+    "longitude": 80.6849,
+    "speed": 10.7991
+  },
+  {
+    "id": 563898057,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:33:18",
+    "latitude": 7.281445,
+    "longitude": 80.68597,
+    "speed": 15.1188
+  },
+  {
+    "id": 563898056,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:33:22",
+    "latitude": 7.2814283,
+    "longitude": 80.6861316,
+    "speed": 0
+  },
+  {
+    "id": 563899020,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:33:50",
+    "latitude": 7.2814233,
+    "longitude": 80.6861866,
+    "speed": 4.31966
+  },
+  {
+    "id": 563899142,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:33:53",
+    "latitude": 7.281435,
+    "longitude": 80.6862333,
+    "speed": 0
+  },
+  {
+    "id": 563899222,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:34:00",
+    "latitude": 7.2814533,
+    "longitude": 80.6863283,
+    "speed": 3.23974
+  },
+  {
+    "id": 563901174,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:34:15",
+    "latitude": 7.2814866,
+    "longitude": 80.6868916,
+    "speed": 11.3391
+  },
+  {
+    "id": 563901173,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:34:30",
+    "latitude": 7.281625,
+    "longitude": 80.6880866,
+    "speed": 18.3585
+  },
+  {
+    "id": 563901172,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:34:45",
+    "latitude": 7.2818183,
+    "longitude": 80.6893783,
+    "speed": 14.0389
+  },
+  {
+    "id": 563901171,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:00",
+    "latitude": 7.2819466,
+    "longitude": 80.69066,
+    "speed": 18.8985
+  },
+  {
+    "id": 563901170,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:06",
+    "latitude": 7.2819433,
+    "longitude": 80.6909666,
+    "speed": 0
+  },
+  {
+    "id": 563901385,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:11",
+    "latitude": 7.2819433,
+    "longitude": 80.6909883,
+    "speed": 3.23974
+  },
+  {
+    "id": 563905212,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:26",
+    "latitude": 7.2817283,
+    "longitude": 80.6915766,
+    "speed": 15.1188
+  },
+  {
+    "id": 563904445,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:41",
+    "latitude": 7.2811983,
+    "longitude": 80.6929566,
+    "speed": 23.7581
+  },
+  {
+    "id": 563904444,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:35:56",
+    "latitude": 7.2804816,
+    "longitude": 80.6941233,
+    "speed": 15.1188
+  },
+  {
+    "id": 563904443,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:36:11",
+    "latitude": 7.2802566,
+    "longitude": 80.6948333,
+    "speed": 7.5594
+  },
+  {
+    "id": 563904442,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:36:26",
+    "latitude": 7.2803833,
+    "longitude": 80.6956133,
+    "speed": 14.5788
+  },
+  {
+    "id": 563904441,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:36:41",
+    "latitude": 7.2808516,
+    "longitude": 80.6962799,
+    "speed": 11.3391
+  },
+  {
+    "id": 563904440,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:36:50",
+    "latitude": 7.2811866,
+    "longitude": 80.6965466,
+    "speed": 0
+  },
+  {
+    "id": 563905211,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:37:14",
+    "latitude": 7.2812766,
+    "longitude": 80.6966866,
+    "speed": 3.23974
+  },
+  {
+    "id": 563906065,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:37:29",
+    "latitude": 7.28189,
+    "longitude": 80.6970716,
+    "speed": 14.5788
+  },
+  {
+    "id": 563906064,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:37:40",
+    "latitude": 7.2825233,
+    "longitude": 80.6974283,
+    "speed": 0
+  },
+  {
+    "id": 563906669,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:37:47",
+    "latitude": 7.2825566,
+    "longitude": 80.6974349,
+    "speed": 3.7797
+  },
+  {
+    "id": 563908364,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:38:02",
+    "latitude": 7.2829766,
+    "longitude": 80.6979483,
+    "speed": 12.959
+  },
+  {
+    "id": 563908363,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:38:17",
+    "latitude": 7.2833033,
+    "longitude": 80.6993583,
+    "speed": 23.7581
+  },
+  {
+    "id": 563908362,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:38:32",
+    "latitude": 7.283485,
+    "longitude": 80.7011266,
+    "speed": 22.6782
+  },
+  {
+    "id": 563908361,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:38:47",
+    "latitude": 7.284225,
+    "longitude": 80.7021433,
+    "speed": 5.93953
+  },
+  {
+    "id": 563908360,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:38:49",
+    "latitude": 7.28423,
+    "longitude": 80.7021516,
+    "speed": 0
+  },
+  {
+    "id": 563908846,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:39:08",
+    "latitude": 7.28423,
+    "longitude": 80.7021999,
+    "speed": 2.69978
+  },
+  {
+    "id": 563910159,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:39:23",
+    "latitude": 7.2845733,
+    "longitude": 80.7030133,
+    "speed": 17.8186
+  },
+  {
+    "id": 563910158,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:39:38",
+    "latitude": 7.2845349,
+    "longitude": 80.7045716,
+    "speed": 23.2182
+  },
+  {
+    "id": 563910157,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:39:48",
+    "latitude": 7.284705,
+    "longitude": 80.7054216,
+    "speed": 6.47948
+  },
+  {
+    "id": 563910156,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:39:49",
+    "latitude": 7.284705,
+    "longitude": 80.7054216,
+    "speed": 0
+  },
+  {
+    "id": 563910667,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:40:06",
+    "latitude": 7.2847116,
+    "longitude": 80.7054683,
+    "speed": 3.23974
+  },
+  {
+    "id": 563915196,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:40:16",
+    "latitude": 7.28487,
+    "longitude": 80.7060633,
+    "speed": 20.5184
+  },
+  {
+    "id": 563915195,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:40:31",
+    "latitude": 7.2847383,
+    "longitude": 80.70775,
+    "speed": 22.6782
+  },
+  {
+    "id": 563915194,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:40:46",
+    "latitude": 7.2864733,
+    "longitude": 80.7085533,
+    "speed": 21.5983
+  },
+  {
+    "id": 563915193,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:41:01",
+    "latitude": 7.2876783,
+    "longitude": 80.7091283,
+    "speed": 19.4385
+  },
+  {
+    "id": 563914909,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:41:16",
+    "latitude": 7.2882933,
+    "longitude": 80.7101083,
+    "speed": 18.3585
+  },
+  {
+    "id": 563914908,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:41:31",
+    "latitude": 7.288335,
+    "longitude": 80.7112433,
+    "speed": 17.2786
+  },
+  {
+    "id": 563914907,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:41:46",
+    "latitude": 7.2888433,
+    "longitude": 80.7123183,
+    "speed": 18.8985
+  },
+  {
+    "id": 563914906,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:01",
+    "latitude": 7.2888999,
+    "longitude": 80.7132016,
+    "speed": 12.959
+  },
+  {
+    "id": 563914905,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:16",
+    "latitude": 7.2876299,
+    "longitude": 80.7138399,
+    "speed": 15.1188
+  },
+  {
+    "id": 563914904,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:21",
+    "latitude": 7.2873966,
+    "longitude": 80.7139483,
+    "speed": 0
+  },
+  {
+    "id": 563915192,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:29",
+    "latitude": 7.2873766,
+    "longitude": 80.7139633,
+    "speed": 4.31966
+  },
+  {
+    "id": 563916357,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:44",
+    "latitude": 7.2866466,
+    "longitude": 80.71454,
+    "speed": 19.9784
+  },
+  {
+    "id": 563916356,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:42:59",
+    "latitude": 7.28544,
+    "longitude": 80.7159583,
+    "speed": 31.3175
+  },
+  {
+    "id": 563916355,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:08",
+    "latitude": 7.284785,
+    "longitude": 80.7168249,
+    "speed": 10.7991
+  },
+  {
+    "id": 563916354,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:09",
+    "latitude": 7.28478,
+    "longitude": 80.7168266,
+    "speed": 0
+  },
+  {
+    "id": 563916532,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:16",
+    "latitude": 7.2847816,
+    "longitude": 80.7168433,
+    "speed": 4.31966
+  },
+  {
+    "id": 563918299,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:28",
+    "latitude": 7.2842333,
+    "longitude": 80.71735,
+    "speed": 21.5983
+  },
+  {
+    "id": 563918298,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:43",
+    "latitude": 7.2836183,
+    "longitude": 80.7191266,
+    "speed": 27.5378
+  },
+  {
+    "id": 563918297,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:43:58",
+    "latitude": 7.28285,
+    "longitude": 80.7208716,
+    "speed": 32.3974
+  },
+  {
+    "id": 563918296,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:44:10",
+    "latitude": 7.28401,
+    "longitude": 80.7220733,
+    "speed": 14.0389
+  },
+  {
+    "id": 563918295,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:44:12",
+    "latitude": 7.2840833,
+    "longitude": 80.7221083,
+    "speed": 0
+  },
+  {
+    "id": 563918605,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:44:24",
+    "latitude": 7.2841349,
+    "longitude": 80.72213,
+    "speed": 4.85961
+  },
+  {
+    "id": 563922905,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:44:39",
+    "latitude": 7.284815,
+    "longitude": 80.7224216,
+    "speed": 15.6588
+  },
+  {
+    "id": 563922904,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:44:54",
+    "latitude": 7.2863033,
+    "longitude": 80.7223866,
+    "speed": 22.1382
+  },
+  {
+    "id": 563922903,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:45:09",
+    "latitude": 7.28793,
+    "longitude": 80.7226433,
+    "speed": 23.2182
+  },
+  {
+    "id": 563922770,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:45:24",
+    "latitude": 7.2888716,
+    "longitude": 80.7219399,
+    "speed": 16.7387
+  },
+  {
+    "id": 563922769,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:45:39",
+    "latitude": 7.2900733,
+    "longitude": 80.7214399,
+    "speed": 17.8186
+  },
+  {
+    "id": 563922768,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:45:54",
+    "latitude": 7.29125,
+    "longitude": 80.721245,
+    "speed": 10.7991
+  },
+  {
+    "id": 563922767,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:09",
+    "latitude": 7.2917516,
+    "longitude": 80.7214783,
+    "speed": 9.71923
+  },
+  {
+    "id": 563922766,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:24",
+    "latitude": 7.29258,
+    "longitude": 80.7218566,
+    "speed": 12.959
+  },
+  {
+    "id": 563922765,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:33",
+    "latitude": 7.2928833,
+    "longitude": 80.7221916,
+    "speed": 0
+  },
+  {
+    "id": 563922902,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:39",
+    "latitude": 7.292865,
+    "longitude": 80.7222666,
+    "speed": 5.39957
+  },
+  {
+    "id": 563922987,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:42",
+    "latitude": 7.2928533,
+    "longitude": 80.7223133,
+    "speed": 0
+  },
+  {
+    "id": 563923354,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:46:55",
+    "latitude": 7.2928316,
+    "longitude": 80.7223983,
+    "speed": 3.7797
+  },
+  {
+    "id": 563924723,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:10",
+    "latitude": 7.2923283,
+    "longitude": 80.7229899,
+    "speed": 15.1188
+  },
+  {
+    "id": 563924722,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:25",
+    "latitude": 7.292735,
+    "longitude": 80.7239083,
+    "speed": 17.8186
+  },
+  {
+    "id": 563924721,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:40",
+    "latitude": 7.2938483,
+    "longitude": 80.7240283,
+    "speed": 3.23974
+  },
+  {
+    "id": 563924720,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:41",
+    "latitude": 7.2938483,
+    "longitude": 80.7240283,
+    "speed": 0
+  },
+  {
+    "id": 563924719,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:42",
+    "latitude": 7.2938716,
+    "longitude": 80.7240383,
+    "speed": 2.69978
+  },
+  {
+    "id": 563928098,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:47:57",
+    "latitude": 7.2941883,
+    "longitude": 80.7246866,
+    "speed": 16.1987
+  },
+  {
+    "id": 563928097,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:48:12",
+    "latitude": 7.2941833,
+    "longitude": 80.7260916,
+    "speed": 18.3585
+  },
+  {
+    "id": 563927722,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:48:27",
+    "latitude": 7.2945366,
+    "longitude": 80.7276,
+    "speed": 23.7581
+  },
+  {
+    "id": 563927721,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:48:42",
+    "latitude": 7.2950966,
+    "longitude": 80.7290866,
+    "speed": 21.5983
+  },
+  {
+    "id": 563927720,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:48:47",
+    "latitude": 7.2952866,
+    "longitude": 80.7293366,
+    "speed": 5.39957
+  },
+  {
+    "id": 563927719,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:02",
+    "latitude": 7.29572,
+    "longitude": 80.7297916,
+    "speed": 16.1987
+  },
+  {
+    "id": 563927718,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:17",
+    "latitude": 7.2965433,
+    "longitude": 80.7304616,
+    "speed": 4.31966
+  },
+  {
+    "id": 563927717,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:18",
+    "latitude": 7.2965433,
+    "longitude": 80.7304616,
+    "speed": 0
+  },
+  {
+    "id": 563928096,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:29",
+    "latitude": 7.296585,
+    "longitude": 80.73048,
+    "speed": 2.69978
+  },
+  {
+    "id": 563929023,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:43",
+    "latitude": 7.2971866,
+    "longitude": 80.7309233,
+    "speed": 18.8985
+  },
+  {
+    "id": 563929022,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:49:58",
+    "latitude": 7.2974783,
+    "longitude": 80.732145,
+    "speed": 0
+  },
+  {
+    "id": 563929518,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:50:17",
+    "latitude": 7.2974649,
+    "longitude": 80.7321833,
+    "speed": 3.23974
+  },
+  {
+    "id": 563931397,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:50:32",
+    "latitude": 7.2976033,
+    "longitude": 80.732845,
+    "speed": 14.5788
+  },
+  {
+    "id": 563931396,
+    "deviceid": 123,
+    "devicetime": "2021-10-04 11:50:47",
+    "latitude": 7.2987233,
+    "longitude": 80.7333866,
+    "speed": 16.1987
+  }
+]

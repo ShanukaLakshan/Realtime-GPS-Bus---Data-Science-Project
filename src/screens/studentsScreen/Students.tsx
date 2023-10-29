@@ -9,7 +9,6 @@ import {
 } from "react-leaflet";
 import { LocationData } from "./LocationData";
 import L, { LatLngTuple } from "leaflet";
-import CSVUploader from "../lawyersScreen/CSVUploader";
 import Speedometer from "./Speedometer";
 
 interface BusStop {
@@ -70,24 +69,45 @@ const Students = () => {
   >([]);
   const [polyline, setPolyline] = useState<LatLngTuple[]>([]);
   const [index, setIndex] = useState(0);
-
   const [totalTravelTime, setTotalTravelTime] = useState(0);
-
   const [passedStops, setPassedStops] = useState<string[]>([]);
 
-  const handleCSV = (data: Array<Array<string>>) => {
-    const realTimeLocations: RealTimeLocation[] = data.slice(1).map((row) => ({
-      data_index: row[0],
-      id: row[1],
-      deviceid: row[2],
-      devicetime: row[3],
-      latitude: parseFloat(row[4]),
-      longitude: parseFloat(row[5]),
-      speed: parseFloat(row[6]),
-    }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/get-data-df123");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
 
-    setRealTimeLocations(realTimeLocations);
-  };
+        const realTimeLocations: RealTimeLocation[] = data.map((row: any) => ({
+          id: row.id,
+          deviceid: row.deviceid,
+          devicetime: row.devicetime,
+          latitude: row.latitude,
+          longitude: row.longitude,
+          speed: row.speed,
+        }));
+        setRealTimeLocations(realTimeLocations);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Sort realTimeLocations by devicetime
+  useEffect(() => {
+    setRealTimeLocations((prevLocations) =>
+      prevLocations.sort((a, b) => {
+        const dateA = new Date(a.devicetime);
+        const dateB = new Date(b.devicetime);
+
+        return dateA.getTime() - dateB.getTime();
+      })
+    );
+  }, [realTimeLocations]);
 
   useEffect(() => {
     if (
@@ -155,12 +175,9 @@ const Students = () => {
   };
 
   const getTravelTime = (devicetime: string) => {
-    const time = devicetime.split(" ")[1];
-    const hours = parseInt(time.split(":")[0]);
-    const minutes = parseInt(time.split(":")[1]);
-    const seconds = parseInt(time.split(":")[2]);
-
-    const totalSeconds = hours * 60 * 60 + minutes * 60 + seconds;
+    const date = new Date(devicetime);
+    const totalSeconds =
+      date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds();
 
     return totalSeconds;
   };
@@ -179,7 +196,6 @@ const Students = () => {
     <div>
       <div className="lawyer-dashboard-card">
         <h4>Realtime Bus Tracking</h4>
-        <CSVUploader onFileLoaded={handleCSV} />
       </div>
 
       <div>
@@ -199,11 +215,7 @@ const Students = () => {
                 eventHandlers={{
                   click: () => setCurrentStop(stop),
                 }}
-                icon={
-                  passedStops.includes(stop.stop_id)
-                    ? blueIcon // Blue icon if the bus has passed the stop
-                    : redIcon // Red icon otherwise
-                }
+                icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
               >
                 <Popup>{stop.address}</Popup>
               </Marker>

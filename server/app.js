@@ -112,6 +112,49 @@ app.post("/save-all-data", async (req, res) => {
   }
 });
 
+app.post("/insert-data-df123", async (req, res) => {
+  const dataArray = req.body;
+
+  if (!Array.isArray(dataArray)) {
+    res.status(400).json({ error: "Data should be an array" });
+    return;
+  }
+
+  const query =
+    "INSERT INTO df_123 (id, deviceid, devicetime, latitude, longitude, speed) VALUES (?, ?, ?, ?, ?, ?)";
+
+  try {
+    const connection = await pool.getConnection();
+    for (const data of dataArray) {
+      const values = [
+        data.id,
+        data.deviceid,
+        data.devicetime,
+        data.latitude,
+        data.longitude,
+        data.speed,
+      ];
+      await connection.execute(query, values);
+    }
+    connection.release();
+    res.status(201).json({ message: "Data inserted successfully" });
+  } catch (err) {
+    console.error("Error inserting data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/get-data-df123", async (req, res) => {
+  const query = "SELECT * FROM df_123";
+  try {
+    const [results] = await pool.execute(query);
+    res.status(200).json(results);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
@@ -135,4 +178,13 @@ app.listen(PORT, () => {
 //     hour_of_day INT,
 //     weekend INT,
 //     rush_hour INT
+// );
+
+// CREATE TABLE df_123 (
+//   id INTEGER PRIMARY KEY,
+//   deviceid INTEGER,
+//   devicetime VARCHAR(25),
+//   latitude REAL,
+//   longitude REAL,
+//   speed REAL
 // );
