@@ -442,16 +442,6 @@ import {
 } from "react-leaflet";
 import { LocationData } from "./LocationData";
 import L, { LatLngTuple } from "leaflet";
-import Speedometer from "./Speedometer";
-
-interface BusStop {
-  stop_id: string;
-  route_id: string;
-  direction: string;
-  address: string;
-  latitude: number;
-  longitude: number;
-}
 
 interface RealTimeLocation {
   data_index: string;
@@ -505,6 +495,11 @@ const Students = () => {
   const [totalTravelTime, setTotalTravelTime] = useState(0);
   const [passedStops, setPassedStops] = useState<string[]>([]);
   const [passedBusStopNames, setPassedBusStopNames] = useState<string[]>([]);
+
+  const currentDateTime = new Date();
+
+  const currentDate = currentDateTime.toDateString();
+  const currentTime = currentDateTime.toLocaleTimeString();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -712,6 +707,24 @@ const Students = () => {
             style={{
               display: "flex",
               flexDirection: "column",
+              alignItems: "flex-end",
+              marginTop: "20px",
+            }}
+          >
+            <h4
+              style={{
+                ...valueStyle,
+                color: "#000000",
+              }}
+            >
+              {currentDate} {currentTime}
+            </h4>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
               alignItems: "center",
               marginTop: "20px",
             }}
@@ -719,7 +732,7 @@ const Students = () => {
             <p
               style={{
                 backgroundColor: "#FFB7B7",
-                fontSize: "30px",
+                fontSize: "25px",
                 borderRadius: "5px",
                 padding: "5px 10px",
               }}
@@ -752,7 +765,7 @@ const Students = () => {
             <p
               style={{
                 backgroundColor: "#FFB7B7",
-                fontSize: "30px",
+                fontSize: "25px",
                 borderRadius: "5px",
                 padding: "5px 10px",
               }}
@@ -769,34 +782,6 @@ const Students = () => {
               {nextBusStop}
             </h4>
           </div>
-
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Stops Passed</p>
-            <h4 style={valueStyle}>{passedStops.length}</h4>
-          </div>
-
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Stops Remaining</p>
-            <h4 style={valueStyle}>
-              {LocationData.length - passedStops.length}
-            </h4>
-          </div>
-
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Bus Stops</p>
-            <h4 style={valueStyle}>{LocationData.length}</h4>
-          </div>
-
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Total Passengers</p>
-            <h4 style={valueStyle}>20</h4>
-          </div>
-
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Total Buses</p>
-            <h4 style={valueStyle}>5</h4>
-          </div>
-
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Current travel time</p>
             <h4 style={valueStyle}>
@@ -825,6 +810,33 @@ const Students = () => {
                 realTimeLocations[index].speed.toFixed(2)}{" "}
               km/h
             </h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Stops Passed</p>
+            <h4 style={valueStyle}>{passedStops.length}</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Stops Remaining</p>
+            <h4 style={valueStyle}>
+              {LocationData.length - passedStops.length}
+            </h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Bus Stops</p>
+            <h4 style={valueStyle}>{LocationData.length}</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Total Passengers</p>
+            <h4 style={valueStyle}>20</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Total Buses</p>
+            <h4 style={valueStyle}>5</h4>
           </div>
         </div>
       </div>
