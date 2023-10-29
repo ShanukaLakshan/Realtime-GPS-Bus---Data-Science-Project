@@ -16,6 +16,7 @@ import {
   blueIcon,
   busIcon,
 } from "../studentsScreen/index";
+import CalculateDistance from "./CalculateDistance";
 
 const Staff = () => {
   const [nextBusStop, setNextBusStop] = useState<string>("Not Started");
@@ -30,6 +31,8 @@ const Staff = () => {
 
   const [busIds, setBusIds] = useState([]);
   const [selectedBusId, setSelectedBusId] = useState("");
+
+  const [currentStop, setCurrentStop] = useState<any>(null);
 
   const currentDateTime = new Date();
 
@@ -50,6 +53,7 @@ const Staff = () => {
   const handleBusIdChange = (event) => {
     setSelectedBusId(event.target.value);
   };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -95,7 +99,7 @@ const Staff = () => {
   useEffect(() => {
     if (index < realTimeLocations.length) {
       LocationData.forEach((stop, stopIndex) => {
-        const distance = calculateDistance(
+        const distance = CalculateDistance(
           stop.latitude,
           stop.longitude,
           realTimeLocations[index].latitude,
@@ -151,26 +155,6 @@ const Staff = () => {
     }
   }, [passedStops]);
 
-  const calculateDistance = (
-    lat1: number,
-    lon1: number,
-    lat2: number,
-    lon2: number
-  ) => {
-    const R = 6371e3;
-    const φ1 = (lat1 * Math.PI) / 180;
-    const φ2 = (lat2 * Math.PI) / 180;
-    const Δφ = ((lat2 - lat1) * Math.PI) / 180;
-    const Δλ = ((lon2 - lon1) * Math.PI) / 180;
-
-    const a =
-      Math.sin(Δφ / 2) * Math.sin(Δφ / 2) +
-      Math.cos(φ1) * Math.cos(φ2) * Math.sin(Δλ / 2) * Math.sin(Δλ / 2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-
-    return R * c;
-  };
-
   return (
     <div>
       <h1>Realtime Bus New</h1>
@@ -201,12 +185,20 @@ const Staff = () => {
 
             {LocationData.map((stop) => (
               <div key={stop.stop_id}>
+                <Marker
+                  position={[stop.latitude, stop.longitude]}
+                  icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
+                  onClick={() => setCurrentStop(stop)}
+                >
+                  <Popup>{stop.address}</Popup>
+                </Marker>
+
                 {realTimeLocations.length > 0 &&
                   index < realTimeLocations.length && (
                     <Circle
                       center={[stop.latitude, stop.longitude]}
                       radius={
-                        calculateDistance(
+                        CalculateDistance(
                           stop.latitude,
                           stop.longitude,
                           realTimeLocations[index].latitude,
@@ -232,7 +224,16 @@ const Staff = () => {
                   icon={busIcon}
                 >
                   <Popup>
-                    A pretty CSS3 popup. <br /> Easily customizable.
+                    <div>
+                      <p>Bus ID: {realTimeLocations[index].device_id}</p>
+                      <p>
+                        Speed: {Math.round(realTimeLocations[index].speed)} km/h
+                      </p>
+                      <p>
+                        Time: {realTimeLocations[index].time}{" "}
+                        {realTimeLocations[index].date}
+                      </p>
+                    </div>
                   </Popup>
                 </Marker>
               )}
@@ -321,6 +322,44 @@ const Staff = () => {
               {nextBusStop}
             </h4>
           </div>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <p
+              style={{
+                backgroundColor: "#FFB7B7",
+                fontSize: "25px",
+                borderRadius: "5px",
+                padding: "5px 10px",
+              }}
+            >
+              Bus ID
+            </p>
+            <h4
+              style={{
+                ...valueStyle,
+                color: "#000000",
+                backgroundColor: "#A8DF8E",
+              }}
+            >
+              {selectedBusId}
+            </h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Start Terminal</p>
+            <h4 style={valueStyle}>
+              {realTimeLocations.length > 0 &&
+                realTimeLocations[0].start_terminal}
+            </h4>
+          </div>
+
+
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Current travel time</p>
             <h4 style={valueStyle}>
@@ -335,8 +374,6 @@ const Staff = () => {
           </div>
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Bus Speed</p>
-
-            
           </div>
 
           <div style={infoContainerStyle}>
@@ -363,7 +400,7 @@ const Staff = () => {
 
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Total Buses</p>
-            <h4 style={valueStyle}>5</h4>
+            <h4 style={valueStyle}>{busIds.length > 0 ? busIds.length : 0}</h4>
           </div>
         </div>
       </div>

@@ -266,7 +266,7 @@ app.get("/get-bus-data", async (req, res) => {
 
 app.get("/get-bus-data/:deviceid", async (req, res) => {
   const deviceid = req.params.deviceid;
-  const query = "SELECT * FROM bus_data WHERE deviceid = ?";
+  const query = "SELECT * FROM bus_data WHERE deviceid = ? ";
 
   try {
     const connection = await pool.getConnection();
