@@ -71,6 +71,7 @@ const Students = () => {
   const [index, setIndex] = useState(0);
   const [totalTravelTime, setTotalTravelTime] = useState(0);
   const [passedStops, setPassedStops] = useState<string[]>([]);
+  const [passedBusStopNames, setPassedBusStopNames] = useState<string[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -135,10 +136,25 @@ const Students = () => {
       } else {
         clearInterval(interval);
       }
-    }, 10000); // Changed interval time to 10 seconds (in milliseconds)
+    }, 500); // Changed interval time to 10 seconds (in milliseconds)
 
     return () => clearInterval(interval);
   }, [realTimeLocations, index]);
+
+  // save passed bus stop names
+  useEffect(() => {
+    if (passedStops.length > 0) {
+      const passedBusStopNames: string[] = [];
+      passedStops.forEach((stopId) => {
+        LocationData.forEach((stop) => {
+          if (stop.stop_id === stopId) {
+            passedBusStopNames.push(stop.address);
+          }
+        });
+      });
+      setPassedBusStopNames(passedBusStopNames);
+    }
+  }, [passedStops]);
 
   const calculateDistance = (
     lat1: number,
@@ -273,12 +289,14 @@ const Students = () => {
           {realTimeLocations.length > 0 && (
             <Speedometer speed={realTimeLocations[index].speed} maxSpeed={60} />
           )}
-          {currentStop && (
-            <div>
-              <p>Current Stop</p>
-              <h4>{currentStop.address}</h4>
-            </div>
-          )}
+          <div>
+            <p>Passed Bus Stop</p>
+            {passedBusStopNames.length > 0 ? (
+              <h4>{passedBusStopNames[passedBusStopNames.length - 1]}</h4>
+            ) : (
+              <h4>Not passed any bus stop yet</h4>
+            )}
+          </div>
 
           <div>
             <p>Number of Stops Passed</p>
