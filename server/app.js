@@ -339,7 +339,9 @@ app.listen(PORT, () => {
 //   longitude DECIMAL(11, 8)
 // );
 
+// DROP TABLE bus_data;
 // CREATE TABLE bus_data (
+//   id INT AUTO_INCREMENT PRIMARY KEY,
 //   deviceid INT,
 //   latitude DECIMAL(9, 7),
 //   longitude DECIMAL(9, 7),

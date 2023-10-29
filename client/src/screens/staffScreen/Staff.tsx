@@ -16,6 +16,7 @@ import {
   busIcon,
 } from "../studentsScreen/index";
 import axios from "axios";
+import FileUploadComponent from "./FileUploadComponent";
 
 const Staff = () => {
   const [nextBusStop, setNextBusStop] = useState<string>("Not Started");
@@ -262,6 +263,7 @@ const Staff = () => {
         </select>
         <p>Selected Bus ID: {selectedBusId}</p>
       </div>
+      {/* <FileUploadComponent /> */}
     </div>
   );
 };
