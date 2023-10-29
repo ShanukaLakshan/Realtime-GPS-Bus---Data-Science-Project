@@ -7,16 +7,15 @@ import {
   Polyline,
   Circle,
 } from "react-leaflet";
-import { LocationData } from "../studentsScreen/LocationData";
 import { LatLngTuple } from "leaflet";
+import axios from "axios";
+import { LocationData } from "../studentsScreen/LocationData";
 import {
   RealTimeLocationNew,
   redIcon,
   blueIcon,
   busIcon,
 } from "../studentsScreen/index";
-import axios from "axios";
-import FileUploadComponent from "./FileUploadComponent";
 
 const Staff = () => {
   const [nextBusStop, setNextBusStop] = useState<string>("Not Started");
@@ -31,6 +30,11 @@ const Staff = () => {
 
   const [busIds, setBusIds] = useState([]);
   const [selectedBusId, setSelectedBusId] = useState("");
+
+  const currentDateTime = new Date();
+
+  const currentDate = currentDateTime.toDateString();
+  const currentTime = currentDateTime.toLocaleTimeString();
 
   useEffect(() => {
     axios
@@ -197,14 +201,6 @@ const Staff = () => {
 
             {LocationData.map((stop) => (
               <div key={stop.stop_id}>
-                <Marker
-                  position={[stop.latitude, stop.longitude]}
-                  icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
-                  onClick={() => setCurrentStop(stop)}
-                >
-                  <Popup>{stop.address}</Popup>
-                </Marker>
-
                 {realTimeLocations.length > 0 &&
                   index < realTimeLocations.length && (
                     <Circle
@@ -244,6 +240,132 @@ const Staff = () => {
             <Polyline positions={polyline} color="blue" />
           </MapContainer>
         </div>
+
+        <div style={containerStyle}>
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "flex-end",
+              marginTop: "20px",
+            }}
+          >
+            <h4
+              style={{
+                ...valueStyle,
+                color: "#000000",
+              }}
+            >
+              {currentDate} {currentTime}
+            </h4>
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <p
+              style={{
+                backgroundColor: "#FFB7B7",
+                fontSize: "25px",
+                borderRadius: "5px",
+                padding: "5px 10px",
+              }}
+            >
+              Passed Bus Stop
+            </p>
+            {passedBusStopNames.length > 0 ? (
+              <h4
+                style={{
+                  ...valueStyle,
+                  color: "#000000",
+                  backgroundColor: "#A8DF8E",
+                }}
+              >
+                {passedBusStopNames[passedBusStopNames.length - 1]}
+              </h4>
+            ) : (
+              <h4 style={valueStyle}>Started</h4>
+            )}
+          </div>
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "20px",
+            }}
+          >
+            <p
+              style={{
+                backgroundColor: "#FFB7B7",
+                fontSize: "25px",
+                borderRadius: "5px",
+                padding: "5px 10px",
+              }}
+            >
+              Next Bus Stop
+            </p>
+            <h4
+              style={{
+                ...valueStyle,
+                color: "#000000",
+                backgroundColor: "#A8DF8E",
+              }}
+            >
+              {nextBusStop}
+            </h4>
+          </div>
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Current travel time</p>
+            <h4 style={valueStyle}>
+              {totalTravelTime > 0 && (
+                <>
+                  {/* {Math.floor(totalTravelTime / 3600)}h{" "} */}
+                  {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
+                  {Math.floor((totalTravelTime % 3600) % 60)}s
+                </>
+              )}
+            </h4>
+          </div>
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Bus Speed</p>
+
+            
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Stops Passed</p>
+            <h4 style={valueStyle}>{passedStops.length}</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Stops Remaining</p>
+            <h4 style={valueStyle}>
+              {LocationData.length - passedStops.length}
+            </h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Bus Stops</p>
+            <h4 style={valueStyle}>{LocationData.length}</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Total Passengers</p>
+            <h4 style={valueStyle}>20</h4>
+          </div>
+
+          <div style={infoContainerStyle}>
+            <p style={labelStyle}>Total Buses</p>
+            <h4 style={valueStyle}>5</h4>
+          </div>
+        </div>
       </div>
 
       <div>
@@ -263,9 +385,42 @@ const Staff = () => {
         </select>
         <p>Selected Bus ID: {selectedBusId}</p>
       </div>
-      {/* <FileUploadComponent /> */}
     </div>
   );
 };
 
 export default Staff;
+
+const containerStyle: React.CSSProperties = {
+  width: "20%",
+  backgroundColor: "#f5f5f5",
+  height: "100%",
+  borderRadius: "10px",
+  display: "flex",
+  justifyContent: "center",
+  flexDirection: "column",
+  padding: "20px",
+};
+
+const infoContainerStyle: React.CSSProperties = {
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "space-between",
+};
+
+const labelStyle: React.CSSProperties = {
+  fontWeight: "bold",
+  margin: "10px 0",
+  backgroundColor: "#FECDA6",
+  padding: "5px 10px",
+  borderRadius: "5px",
+};
+
+const valueStyle: React.CSSProperties = {
+  color: "#333",
+  margin: "10px 0",
+  backgroundColor: "#89CFF3",
+  padding: "5px 10px",
+  borderRadius: "5px",
+};
