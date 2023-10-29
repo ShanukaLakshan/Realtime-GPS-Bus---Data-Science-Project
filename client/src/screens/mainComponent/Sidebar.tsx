@@ -33,6 +33,12 @@ const sidebarNav: SidebarNavItem[] = [
     icon: <img src={Icons.Students} alt="Students" />,
     text: "Tracking",
   },
+  {
+    link: "/dashboard/staff",
+    section: "staff",
+    icon: <img src={Icons.Students} alt="Staff" />,
+    text: "Tracking New",
+  },
 ];
 
 const Sidebar: React.FC = () => {

@@ -205,6 +205,82 @@ app.get("/get-bus-terminals/:direction", async (req, res) => {
   }
 });
 
+app.post("/save-bus-data", async (req, res) => {
+  const dataArray = req.body;
+
+  if (!Array.isArray(dataArray)) {
+    res.status(400).json({ error: "Data should be an array" });
+    return;
+  }
+
+  const query =
+    "INSERT INTO bus_data (deviceid, latitude, longitude, speed, date, time, start_time, start_terminal, travel_time, dwell_time, SITR, hour_of_the_day, rush_hour, wind_speed, weather, weekday, weather_encoded) VALUES  (?, ? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,?)";
+
+  try {
+    const connection = await pool.getConnection();
+
+    for (const data of dataArray) {
+      const values = [
+        data.deviceid,
+        data.latitude,
+        data.longitude,
+        data.speed,
+        data.date,
+        data.time,
+        data.start_time,
+        data.start_terminal,
+        data.travel_time,
+        data.dwell_time,
+        data.SITR,
+        data.hour_of_the_day,
+        data.rush_hour,
+        data.wind_speed,
+        data.weather,
+        data.weekday,
+        data.weather_encoded,
+      ];
+      await connection.execute(query, values);
+    }
+
+    connection.release();
+    res.status(201).json({ message: "Data saved successfully" });
+  } catch (err) {
+    console.error("Error saving data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/get-bus-data", async (req, res) => {
+  const query = "SELECT * FROM bus_data";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query);
+    connection.release();
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/get-bus-data/:deviceid", async (req, res) => {
+  const deviceid = req.params.deviceid;
+  const query = "SELECT * FROM bus_data WHERE deviceid = ?";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query, [deviceid]);
+    connection.release();
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+// get all device ids in bus_data 
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
@@ -247,4 +323,24 @@ app.listen(PORT, () => {
 //   address VARCHAR(255),
 //   latitude DECIMAL(10, 8),
 //   longitude DECIMAL(11, 8)
+// );
+
+// CREATE TABLE bus_data (
+//   deviceid INT,
+//   latitude DECIMAL(9, 7),
+//   longitude DECIMAL(9, 7),
+//   speed DECIMAL(10, 4),
+//   date DATE,
+//   time TIME,
+//   start_time TIME,
+//   start_terminal VARCHAR(5),
+//   travel_time DECIMAL(5, 2),
+//   dwell_time DECIMAL(5, 2),
+//   SITR DECIMAL(5, 3),
+//   hour_of_the_day DECIMAL(5, 3),
+//   rush_hour DECIMAL(5, 3),
+//   wind_speed DECIMAL(10, 4),
+//   weather VARCHAR(50),
+//   weekday DECIMAL(3, 0),
+//   weather_encoded INT
 // );
