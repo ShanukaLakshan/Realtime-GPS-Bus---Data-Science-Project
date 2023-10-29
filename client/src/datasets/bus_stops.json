@@ -1,0 +1,242 @@
+[
+  {
+    "stop_id": "BT01",
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Kandy",
+    "latitude": 7.292462226,
+    "longitude": 80.6349778
+  },
+  {
+    "stop_id": 101,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Wales Park",
+    "latitude": 7.291186017,
+    "longitude": 80.63766185
+  },
+  {
+    "stop_id": 102,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Mahamaya",
+    "latitude": 7.28784,
+    "longitude": 80.64584
+  },
+  {
+    "stop_id": 103,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Lewella junction",
+    "latitude": 7.29443,
+    "longitude": 80.65003
+  },
+  {
+    "stop_id": 104,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Talwatta",
+    "latitude": 7.286701,
+    "longitude": 80.6603357
+  },
+  {
+    "stop_id": 105,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Tennekumbura Bridge",
+    "latitude": 7.281866,
+    "longitude": 80.66603
+  },
+  {
+    "stop_id": 106,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Kalapura Junction Busstop",
+    "latitude": 7.27983,
+    "longitude": 80.67621
+  },
+  {
+    "stop_id": 107,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Nattarampotha Junction Bus Stop",
+    "latitude": 7.279117,
+    "longitude": 80.67945
+  },
+  {
+    "stop_id": 108,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Kundasale New town",
+    "latitude": 7.2809,
+    "longitude": 80.68416
+  },
+  {
+    "stop_id": 109,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Warapitiya",
+    "latitude": 7.28149,
+    "longitude": 80.68635
+  },
+  {
+    "stop_id": 110,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Pallekele (Provincial Council)",
+    "latitude": 7.281322369,
+    "longitude": 80.69676
+  },
+  {
+    "stop_id": 111,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Pachchakaatuwa",
+    "latitude": 7.28473,
+    "longitude": 80.70539
+  },
+  {
+    "stop_id": 112,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Balagolla",
+    "latitude": 7.287349019,
+    "longitude": 80.71400511
+  },
+  {
+    "stop_id": 113,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "BOI",
+    "latitude": 7.28411,
+    "longitude": 80.7221
+  },
+  {
+    "stop_id": 114,
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Kengalla",
+    "latitude": 7.29152,
+    "longitude": 80.72133
+  },
+  {
+    "stop_id": "BT02",
+    "route_id": 654,
+    "direction": "Kandy-Digana",
+    "address": "Digana",
+    "latitude": 7.29896,
+    "longitude": 80.73472
+  },
+  {
+    "stop_id": "BT02",
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Digana",
+    "latitude": 7.29896,
+    "longitude": 80.73472
+  },
+  {
+    "stop_id": 201,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Kengalla",
+    "latitude": 7.291726007,
+    "longitude": 80.72143025
+  },
+  {
+    "stop_id": 202,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "BOI",
+    "latitude": 7.28411,
+    "longitude": 80.7221
+  },
+  {
+    "stop_id": 203,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Balagolla",
+    "latitude": 7.287349,
+    "longitude": 80.71401
+  },
+  {
+    "stop_id": 204,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Pachchakaatuwa",
+    "latitude": 7.28473,
+    "longitude": 80.70539
+  },
+  {
+    "stop_id": 205,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Pallekele (Clock Tower)",
+    "latitude": 7.28036,
+    "longitude": 80.69567
+  },
+  {
+    "stop_id": 206,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Warapitiya",
+    "latitude": 7.28148,
+    "longitude": 80.68672
+  },
+  {
+    "stop_id": 207,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Kundasale Police College",
+    "latitude": 7.28039,
+    "longitude": 80.68356
+  },
+  {
+    "stop_id": 208,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Nattarampotha",
+    "latitude": 7.279799826,
+    "longitude": 80.67659381
+  },
+  {
+    "stop_id": 209,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Tennekumbura",
+    "latitude": 7.28193,
+    "longitude": 80.66594
+  },
+  {
+    "stop_id": 210,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Buwelikada",
+    "latitude": 7.29312,
+    "longitude": 80.64922
+  },
+  {
+    "stop_id": 211,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Dharmaraja",
+    "latitude": 7.29067,
+    "longitude": 80.64651
+  },
+  {
+    "stop_id": 212,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Children park",
+    "latitude": 7.28681,
+    "longitude": 80.64761
+  },
+  {
+    "stop_id": 213,
+    "route_id": 654,
+    "direction": "Digana-Kandy",
+    "address": "Hilwood",
+    "latitude": 7.29021,
+    "longitude": 80.6398
+  }
+]

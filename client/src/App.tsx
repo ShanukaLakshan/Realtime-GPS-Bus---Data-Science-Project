@@ -10,6 +10,7 @@ import Lawyer_Dashboard from "./screens/lawyersScreen/Dashboard";
 import LandingPage from "./screens/LandingPage";
 import Student_Dashboard from "./screens/studentsScreen/Dashboard";
 import BasicMap from "./screens/Leaflet/basic";
+import React from "react";
 
 function App() {
   return (

@@ -158,6 +158,53 @@ app.get("/get-data-df123", async (req, res) => {
   }
 });
 
+app.post("/save-bus-terminals", async (req, res) => {
+  const dataArray = req.body;
+
+  if (!Array.isArray(dataArray)) {
+    res.status(400).json({ error: "Data should be an array" });
+    return;
+  }
+
+  const query =
+    "INSERT INTO bus_terminals (stop_id, route_id, direction, address, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)";
+
+  try {
+    const connection = await pool.getConnection();
+    for (const data of dataArray) {
+      const values = [
+        data.stop_id,
+        data.route_id,
+        data.direction,
+        data.address,
+        data.latitude,
+        data.longitude,
+      ];
+      await connection.execute(query, values);
+    }
+    connection.release();
+    res.status(201).json({ message: "Data saved successfully" });
+  } catch (err) {
+    console.error("Error saving data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/get-bus-terminals/:direction", async (req, res) => {
+  const direction = req.params.direction;
+  const query = "SELECT * FROM bus_terminals WHERE direction = ?";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query, [direction]);
+    connection.release();
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
@@ -190,4 +237,14 @@ app.listen(PORT, () => {
 //   latitude REAL,
 //   longitude REAL,
 //   speed REAL
+// );
+
+// CREATE TABLE bus_terminals (
+//    id INT AUTO_INCREMENT PRIMARY KEY,
+//   stop_id VARCHAR(10),
+//   route_id INT,
+//   direction VARCHAR(50),
+//   address VARCHAR(255),
+//   latitude DECIMAL(10, 8),
+//   longitude DECIMAL(11, 8)
 // );
