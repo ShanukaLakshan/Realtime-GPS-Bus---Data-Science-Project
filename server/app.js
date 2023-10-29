@@ -145,10 +145,13 @@ app.post("/insert-data-df123", async (req, res) => {
 });
 
 app.get("/get-data-df123", async (req, res) => {
-  const query = "SELECT * FROM df_123";
+  const query = "SELECT * FROM df_123 ORDER BY devicetime ASC";
+
   try {
-    const [results] = await pool.execute(query);
-    res.status(200).json(results);
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query);
+    connection.release();
+    res.status(200).json(rows);
   } catch (err) {
     console.error("Error fetching data:", err);
     res.status(500).json({ error: "Internal Server Error" });

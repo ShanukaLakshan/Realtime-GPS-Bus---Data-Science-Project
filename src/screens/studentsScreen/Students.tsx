@@ -57,8 +57,8 @@ const busIcon = new L.Icon({
   shadowUrl:
     "https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/images/marker-shadow.png",
   iconSize: [35, 35],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
+  iconAnchor: [12, 35],
+  popupAnchor: [1, -30],
   shadowSize: [41, 41],
 });
 
@@ -97,24 +97,8 @@ const Students = () => {
     fetchData();
   }, []);
 
-  // Sort realTimeLocations by devicetime
   useEffect(() => {
-    setRealTimeLocations((prevLocations) =>
-      prevLocations.sort((a, b) => {
-        const dateA = new Date(a.devicetime);
-        const dateB = new Date(b.devicetime);
-
-        return dateA.getTime() - dateB.getTime();
-      })
-    );
-  }, [realTimeLocations]);
-
-  useEffect(() => {
-    if (
-      realTimeLocations.length > 0 &&
-      !isNaN(realTimeLocations[index].latitude) &&
-      !isNaN(realTimeLocations[index].longitude)
-    ) {
+    if (index < realTimeLocations.length) {
       LocationData.forEach((stop) => {
         const distance = calculateDistance(
           stop.latitude,
@@ -136,20 +120,22 @@ const Students = () => {
   }, [realTimeLocations, index]);
 
   useEffect(() => {
-    const polyline: LatLngTuple[] = realTimeLocations.map(
-      (location) => [location.latitude, location.longitude] as LatLngTuple
-    );
+    const polyline: LatLngTuple[] = realTimeLocations
+      .slice(0, index + 1)
+      .map(
+        (location) => [location.latitude, location.longitude] as LatLngTuple
+      );
     setPolyline(polyline);
-  }, [realTimeLocations]);
+  }, [realTimeLocations, index]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      if (index < realTimeLocations.length) {
+      if (index < realTimeLocations.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
       } else {
         clearInterval(interval);
       }
-    }, 1000);
+    }, 10000); // Changed interval time to 10 seconds (in milliseconds)
 
     return () => clearInterval(interval);
   }, [realTimeLocations, index]);
@@ -177,8 +163,7 @@ const Students = () => {
   const getTravelTime = (devicetime: string) => {
     const date = new Date(devicetime);
     const totalSeconds =
-      date.getHours() * 60 * 60 + date.getMinutes() * 60 + date.getSeconds();
-
+      date.getHours() * 3600 + date.getMinutes() * 60 + date.getSeconds();
     return totalSeconds;
   };
 
@@ -187,7 +172,6 @@ const Students = () => {
       const travelTime =
         getTravelTime(realTimeLocations[index].devicetime) -
         getTravelTime(realTimeLocations[0].devicetime);
-
       setTotalTravelTime(travelTime);
     }
   }, [realTimeLocations, index]);
@@ -198,95 +182,136 @@ const Students = () => {
         <h4>Realtime Bus Tracking</h4>
       </div>
 
-      <div>
-        <MapContainer
-          center={[7.2809, 80.68416]}
-          zoom={14}
-          scrollWheelZoom={true}
-          style={{ width: "80%", height: "50vh" }}
-        >
-          <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-
-          {LocationData.map((stop) => (
-            <>
-              <Marker
-                key={stop.stop_id}
-                position={[stop.latitude, stop.longitude]}
-                eventHandlers={{
-                  click: () => setCurrentStop(stop),
-                }}
-                icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
-              >
-                <Popup>{stop.address}</Popup>
-              </Marker>
-              {realTimeLocations.length > 0 &&
-                !isNaN(realTimeLocations[index].latitude) &&
-                !isNaN(realTimeLocations[index].longitude) && (
-                  <Circle
-                    center={[stop.latitude, stop.longitude]}
-                    radius={
-                      calculateDistance(
-                        stop.latitude,
-                        stop.longitude,
-                        realTimeLocations[index].latitude,
-                        realTimeLocations[index].longitude
-                      ) <= 100
-                        ? 50
-                        : 0
-                    }
-                    color="blue"
-                    fillOpacity={0.2}
-                  />
-                )}
-            </>
-          ))}
-
-          {realTimeLocations.length > 0 &&
-            !isNaN(realTimeLocations[index].latitude) &&
-            !isNaN(realTimeLocations[index].longitude) && (
-              <Marker
-                position={[
-                  realTimeLocations[index].latitude,
-                  realTimeLocations[index].longitude,
-                ]}
-                icon={busIcon}
-              >
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
-            )}
-
-          <Polyline positions={polyline.slice(0, index + 1)} color="blue" />
-        </MapContainer>
-      </div>
       <div
         style={{
           display: "flex",
           justifyContent: "space-evenly",
-          width: "80%",
+          width: "100%",
           marginTop: "20px",
+          height: "50vh",
+          flexDirection: "row",
         }}
       >
-        <div>
+        <div
+          style={{
+            width: "80%",
+            height: "100%",
+            borderRadius: "10px",
+          }}
+        >
+          <MapContainer
+            center={[7.2809, 80.68416]}
+            zoom={14}
+            scrollWheelZoom={true}
+            style={{ width: "100%", height: "100%" }}
+          >
+            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+
+            {LocationData.map((stop) => (
+              <div key={stop.stop_id}>
+                <Marker
+                  position={[stop.latitude, stop.longitude]}
+                  eventHandlers={{
+                    click: () => setCurrentStop(stop),
+                  }}
+                  icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
+                >
+                  <Popup>{stop.address}</Popup>
+                </Marker>
+                {realTimeLocations.length > 0 &&
+                  index < realTimeLocations.length && (
+                    <Circle
+                      center={[stop.latitude, stop.longitude]}
+                      radius={
+                        calculateDistance(
+                          stop.latitude,
+                          stop.longitude,
+                          realTimeLocations[index].latitude,
+                          realTimeLocations[index].longitude
+                        ) <= 100
+                          ? 50
+                          : 0
+                      }
+                      color="blue"
+                      fillOpacity={0.2}
+                    />
+                  )}
+              </div>
+            ))}
+
+            {realTimeLocations.length > 0 &&
+              index < realTimeLocations.length && (
+                <Marker
+                  position={[
+                    realTimeLocations[index].latitude,
+                    realTimeLocations[index].longitude,
+                  ]}
+                  icon={busIcon}
+                >
+                  <Popup>
+                    A pretty CSS3 popup. <br /> Easily customizable.
+                  </Popup>
+                </Marker>
+              )}
+
+            <Polyline positions={polyline} color="blue" />
+          </MapContainer>
+        </div>
+
+        <div
+          style={{
+            width: "20%",
+            backgroundColor: "#f5f5f5",
+            height: "100%",
+            borderRadius: "10px",
+            display: "flex",
+            justifyContent: "center",
+            flexDirection: "column",
+          }}
+        >
+          <p>Bus Speed</p>
           {realTimeLocations.length > 0 && (
             <Speedometer speed={realTimeLocations[index].speed} maxSpeed={60} />
           )}
-        </div>
-        <div>
-          <p>SITR</p>
-        </div>
-        <div>
-          <p>Total travel time</p>
-          <h4>
-            {totalTravelTime > 0 && (
-              <>
-                {Math.floor(totalTravelTime / 3600)}h{" "}
-                {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
-                {Math.floor((totalTravelTime % 3600) % 60)}s
-              </>
-            )}
-          </h4>
+          {currentStop && (
+            <div>
+              <p>Current Stop</p>
+              <h4>{currentStop.address}</h4>
+            </div>
+          )}
+
+          <div>
+            <p>Number of Stops Passed</p>
+            <h4>{passedStops.length}</h4>
+          </div>
+          <div>
+            <p>Number of Stops Remaining</p>
+            <h4>{LocationData.length - passedStops.length}</h4>
+          </div>
+          <div>
+            <p>Number of Stops</p>
+            <h4>{LocationData.length}</h4>
+          </div>
+          <div>
+            <p>Number of Passengers</p>
+            <h4>20</h4>
+          </div>
+          <div>
+            <p>Number of Buses</p>
+            <h4>5</h4>
+          </div>
+          <div>
+            <p>Total travel time</p>
+            <h4>
+              {totalTravelTime > 0 && (
+                <>
+                  {Math.floor(totalTravelTime / 3600)}h{" "}
+                  {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
+                  {Math.floor((totalTravelTime % 3600) % 60)}s
+                </>
+              )}
+            </h4>
+          </div>
         </div>
       </div>
     </div>
