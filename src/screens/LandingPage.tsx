@@ -21,11 +21,11 @@ const LandingPage = () => {
         />
         <div className="landing-page-hero">
           <div className="landing-page-hero-text">
-            <h2>Sample Topic</h2>
-            <p>Lorem ipsum dolor sit amet consectetur adipiscing</p>
+            <h2>Route Optimize</h2>
+            <p>Real-time Performance Monitoring of Buses Using GPS Data</p>
             <button className="btn btn-primary contact-us-btn">
               <Link to="/dashboard">
-                <p>Dashboard</p>
+                <p>Goto Dashboard</p>
               </Link>
             </button>
           </div>

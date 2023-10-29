@@ -67,7 +67,7 @@ const Sidebar: React.FC = () => {
           <img
             src={Images.Logo}
             alt="Logo"
-            style={{ width: "130px", height: "80px" }}
+            style={{ width: "120px", height: "70px" }}
           />
         </div>
       </Link>

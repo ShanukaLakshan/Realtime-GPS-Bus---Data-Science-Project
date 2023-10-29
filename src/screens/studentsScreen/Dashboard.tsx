@@ -211,7 +211,6 @@ const Dashboard: React.FC = () => {
           <thead>
             <tr>
               <th>Stop ID</th>
-              <th>Route ID</th>
               <th>Direction</th>
               <th>Bus Halt</th>
               <th>Latitude</th>
@@ -222,7 +221,6 @@ const Dashboard: React.FC = () => {
             {busStops.map((stop) => (
               <tr key={stop.stop_id}>
                 <td>{stop.stop_id}</td>
-                <td>{stop.route_id}</td>
                 <td>{stop.direction}</td>
                 <td>
                   <span

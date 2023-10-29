@@ -9,7 +9,7 @@
   position: fixed;
   top: 0;
   height: 100%;
-  padding: 10px;
+  padding: 5px;
   z-index: 101;
   transition: all 0.5s ease-in-out;
 
@@ -18,12 +18,6 @@
     justify-content: center;
     display: flex;
     padding: 10px 0;
-
-    span {
-      font-size: 24px;
-      color: $mainColor;
-      font-weight: 700;
-    }
   }
 
   &__menu {
@@ -49,7 +43,6 @@
       &.active {
         font-weight: 500;
         color: $mainColor;
-        // background-color: #1f578a;
         align-items: center;
         justify-content: center;
         color: antiquewhite;
@@ -91,8 +84,8 @@
 .sidebar-open .main__content {
   height: 100vh;
   overflow: hidden;
-  border-top-left-radius: 30px;
-  border-bottom-left-radius: 30px;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
   transform: scale(0.8) translateX(50%);
   transition: all 0.5s ease-in-out;
 }

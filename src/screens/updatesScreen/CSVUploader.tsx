@@ -20,7 +20,16 @@ const CSVUploader: React.FC<CSVUploaderProps> = ({ onFileLoaded }) => {
 
   return (
     <div>
-      <input type="file" onChange={handleFileChange} />
+      {/* Always read this csv file /mnt/AAF02A9CF02A6EAF/Sem5/Aca/Data Science and Engineering Project/Realtime-GPS-Bus---Data-Science-Project/src/datasets/trip_data_1_new.csv */}
+
+      {/* <input type="file" onChange={handleFileChange} /> */}
+
+      <input
+        type="file"
+        onChange={handleFileChange}
+        accept=".csv"
+        style={{ width: "100%" }}
+      />
     </div>
   );
 };

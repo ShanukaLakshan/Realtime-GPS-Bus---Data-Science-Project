@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Trip from "./Trip";
-import CSVUploader from "./CSVUploader";
 import TripChart from "./TripChart";
 import TripChart2 from "./TripChart2";
 import TripChart3 from "./TripChart3";
@@ -10,35 +9,41 @@ import TripChart5 from "./TripChart5";
 const Update = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
 
-  const handleCSV = (data: Array<Array<string>>) => {
-    const trips: Trip[] = data.slice(1).map((row) => ({
-      trip_id: row[0],
-      date: row[1],
-      start_time: row[2],
-      end_time: row[3],
-      start_terminal: row[4],
-      end_terminal: row[5],
-      travel_time: row[6],
-      dwell_time: row[7],
-      SITR: row[8],
-      day_of_week: row[9],
-      day_name: row[10],
-      hour_of_day: row[11],
-      weekend: row[12] === "1",
-      rush_hour: row[13] === "1",
-      excess_travel_time: row[14],
-      Direction: row[15],
-      outlier: row[16],
-    }));
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("http://localhost:5000/get-data");
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
 
-    setTrips(trips);
-  };
+        const trips: Trip[] = data.map((row: any) => ({
+          trip_id: row.trip_id,
+          date: row.date,
+          start_time: row.start_time,
+          end_time: row.end_time,
+          start_terminal: row.start_terminal,
+          end_terminal: row.end_terminal,
+          travel_time: row.travel_time,
+          dwell_time: row.dwell_time,
+          ratio: row.ratio,
+          day_of_week: row.day_of_week,
+          day_name: row.day_name,
+          hour_of_day: row.hour_of_day,
+          weekend: row.weekend,
+          rush_hour: row.rush_hour,
+        }));
+        setTrips(trips);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="lawyer-dashboard-main-container">
-      <h2>New Performance Metrics Dashboard</h2>
-
-      <CSVUploader onFileLoaded={handleCSV} />
       <div className="lawyer-dashboard-card">
         <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
         <TripChart trips={trips} />
