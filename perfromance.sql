@@ -2,8 +2,8 @@ CREATE TABLE performance(
    trip_id            INTEGER  NOT NULL PRIMARY KEY 
   ,device_id          INTEGER  NOT NULL
   ,date               DATE  NOT NULL
-  ,start_time         DATETIME  NOT NULL
-  ,end_time           DATETIME  NOT NULL
+  ,start_time         TIME  NOT NULL
+  ,end_time           TIME  NOT NULL
   ,start_terminal     VARCHAR(6) NOT NULL
   ,end_terminal       VARCHAR(6) NOT NULL
   ,travel_time        NUMERIC(18,2) NOT NULL
