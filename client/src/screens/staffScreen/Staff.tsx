@@ -234,16 +234,13 @@ const Staff = () => {
                 }}
                 style={{
                   width: "auto",
-                  padding: "10px 10px",
+                  padding: "5px 10px",
                   border: "1px solid #ccc",
                   borderRadius: "5px",
                   backgroundColor:
                     selectedBusId === stop.toString() ? "#A8DF8E" : "#fff",
                   boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-                  
-                  margin: "10px" ,
-
-
+                  margin: "10px",
                 }}
                 key={stop}
               >
@@ -266,7 +263,7 @@ const Staff = () => {
                 }}
                 style={{
                   width: "auto",
-                  padding: "10px 10px",
+                  padding: "5px 10px",
                   border: "1px solid #ccc",
                   borderRadius: "5px",
                   backgroundColor:
@@ -282,29 +279,6 @@ const Staff = () => {
             ))}
           </div>
         )}
-
-        {/* 
-        <select
-          id="busIdSelect"
-          value={selectedBusId}
-          onChange={handleBusIdChange}
-          style={{
-            width: "auto",
-            padding: "10px",
-            border: "1px solid #ccc",
-            borderRadius: "5px",
-            backgroundColor: "#fff",
-            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
-            marginRight: "10px",
-          }}
-        >
-          <option value="">Select a Bus ID</option>
-          {busIds.map((busId) => (
-            <option key={busId} value={busId}>
-              {busId}
-            </option>
-          ))}
-        </select> */}
       </div>
       <div
         style={{
@@ -477,11 +451,11 @@ const Staff = () => {
           </div>
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Bus Speed</p>
-            {/* <h4 style={valueStyle}>
+            <h4 style={valueStyle}>
               {realTimeLocations.length > 0 &&
                 Math.round(realTimeLocations[index].speed)}{" "}
               km/h
-            </h4> */}
+            </h4>
           </div>
 
           <div style={infoContainerStyle}>
