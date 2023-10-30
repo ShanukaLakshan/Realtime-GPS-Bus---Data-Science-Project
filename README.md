@@ -1,3 +1,56 @@
+# Project Setup
+
+This guide will walk you through the steps to set up and run our project. Please follow the instructions carefully.
+
+## Prerequisites
+
+- [MySQL](https://www.mysql.com/) installed.
+- [Node.js](https://nodejs.org/) and [npm](https://www.npmjs.com/) installed.
+
+## Setting up the Database
+
+1. Install MySQL.
+2. Open a terminal and navigate to the directory containing the `gps.sql` file.
+3. Import the `gps.sql` file into your database. You can do this using the following command:
+
+   ```bash
+   mysql -u your_username -p your_database_name < gps.sql
+   Replace your_username and your_database_name with your MySQL username and database name. You will be prompted to enter your MySQL password.
+   ```
+
+Setting up the Server
+Download our project.
+
+Open a terminal and navigate to the "server" directory.
+
+Install the server dependencies by running:
+
+```
+npm install
+```
+After all dependencies are installed, start the server with:
+
+```
+npm start
+```
+Setting up the Client
+Open a new terminal.
+
+Navigate to the "client" directory.
+
+Install the client dependencies by running:
+
+```
+npm install
+```
+After all dependencies are installed, start the client with:
+
+```
+npm start
+```
+Starting the Project
+Once you have successfully set up the server and client, the project will start automatically. You can access it in your web browser at http://localhost:your_port, where your_port is the port specified in your server's configuration.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
