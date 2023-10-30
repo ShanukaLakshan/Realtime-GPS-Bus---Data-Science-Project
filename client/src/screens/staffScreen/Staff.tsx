@@ -1,41 +1,68 @@
 import React, { useEffect, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Polyline,
-  Circle,
-} from "react-leaflet";
-import { LatLngTuple } from "leaflet";
+import { MapContainer, TileLayer, Marker, Popup, Circle } from "react-leaflet";
 import axios from "axios";
 import { LocationData } from "../studentsScreen/LocationData";
-import {
-  RealTimeLocationNew,
-  redIcon,
-  blueIcon,
-  busIcon,
-} from "../studentsScreen/index";
+import { RealTimeLocationNew, redIcon, busIcon } from "../studentsScreen/index";
 import CalculateDistance from "./CalculateDistance";
+
+interface BusStop {
+  stop_id: string;
+  route_id: string;
+  direction: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+}
 
 const Staff = () => {
   const [nextBusStop, setNextBusStop] = useState<string>("Not Started");
   const [realTimeLocations, setRealTimeLocations] = useState<
     RealTimeLocationNew[]
   >([]);
-  const [polyline, setPolyline] = useState<LatLngTuple[]>([]);
   const [index, setIndex] = useState(0);
   const [totalTravelTime, setTotalTravelTime] = useState(0);
   const [passedStops, setPassedStops] = useState<string[]>([]);
   const [passedBusStopNames, setPassedBusStopNames] = useState<string[]>([]);
 
+  const Kandy_Digana = [117, 1166, 505, 262];
+  const Digana_Kandy = [
+    1358, 513, 121, 116, 1377, 250, 279, 274, 1143, 123, 264, 275,
+  ];
+
   const [busIds, setBusIds] = useState<string[]>([]);
-  const [selectedBusId, setSelectedBusId] = useState("");
+  const [selectedBusId, setSelectedBusId] = useState("117");
 
   const currentDateTime = new Date();
 
   const currentDate = currentDateTime.toDateString();
   const currentTime = currentDateTime.toLocaleTimeString();
+
+  const [direction, setDirection] = useState("Kandy-Digana");
+
+  const [BT01Stops, setBT01Stops] = useState<BusStop[]>([]);
+  const [BT02Stops, setBT02Stops] = useState<BusStop[]>([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          `http://localhost:5000/get-bus-terminals/${direction}`
+        );
+        const data = await response.json();
+        if (response.status !== 200) {
+          throw new Error("Network response was not ok");
+        }
+        if (direction === "Kandy-Digana") {
+          setBT01Stops(data);
+        } else {
+          setBT02Stops(data);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, [direction]);
 
   useEffect(() => {
     axios
@@ -121,13 +148,6 @@ const Staff = () => {
   }, [realTimeLocations, index]);
 
   useEffect(() => {
-    const polyline: LatLngTuple[] = realTimeLocations
-      .slice(0, index + 1)
-      .map((location) => [location.latitude, location.longitude]);
-    setPolyline(polyline);
-  }, [realTimeLocations, index]);
-
-  useEffect(() => {
     const interval = setInterval(() => {
       if (index < realTimeLocations.length - 1) {
         setIndex((prevIndex) => prevIndex + 1);
@@ -143,20 +163,12 @@ const Staff = () => {
     if (passedStops.length > 0) {
       const passedBusStopNames: string[] = [];
       passedStops.forEach((stopId) => {
-        LocationData.forEach((stop) => {
+        BT01Stops.forEach((stop) => {
           if (stop.stop_id === stopId) {
             passedBusStopNames.push(stop.address);
           }
         });
       });
-
-      if (
-        realTimeLocations.length > 0 &&
-        realTimeLocations[0].start_terminal === "BT02"
-      ) {
-        // Reverse the passedBusStopNames if the start terminal is BT02
-        passedBusStopNames.reverse();
-      }
 
       setPassedBusStopNames(passedBusStopNames);
     }
@@ -164,7 +176,136 @@ const Staff = () => {
 
   return (
     <div>
-      <h1>Realtime Bus New</h1>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "row",
+          alignItems: "center",
+          marginTop: "20px",
+          justifyContent: "flex-start",
+          width: "100%",
+        }}
+      >
+        <div>
+          <h4
+            style={{
+              ...valueStyle,
+              color: "#000000",
+              width: "250px",
+              textAlign: "center",
+              marginRight: "10px",
+            }}
+          >
+            {currentDate} {currentTime}
+          </h4>
+        </div>
+
+        <select
+          id="directionSelect"
+          value={direction}
+          onChange={(event) => setDirection(event.target.value)}
+          style={{
+            width: "auto",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            backgroundColor: "#fff",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            marginLeft: "10px",
+            marginRight: "10px",
+          }}
+        >
+          <option value="Kandy-Digana">Kandy to Digana</option>
+          <option value="Digana-Kandy">Digana to Kandy</option>
+        </select>
+
+        {direction === "Kandy-Digana" ? (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            {Kandy_Digana.map((stop) => (
+              <div
+                onClick={() => {
+                  setSelectedBusId(stop.toString());
+                }}
+                style={{
+                  width: "auto",
+                  padding: "10px 10px",
+                  border: "1px solid #ccc",
+                  borderRadius: "5px",
+                  backgroundColor:
+                    selectedBusId === stop.toString() ? "#A8DF8E" : "#fff",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  
+                  margin: "10px" ,
+
+
+                }}
+                key={stop}
+              >
+                {stop}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            {Digana_Kandy.map((stop) => (
+              <div
+                onClick={() => {
+                  setSelectedBusId(stop.toString());
+                }}
+                style={{
+                  width: "auto",
+                  padding: "10px 10px",
+                  border: "1px solid #ccc",
+                  borderRadius: "5px",
+                  backgroundColor:
+                    selectedBusId === stop.toString() ? "#A8DF8E" : "#fff",
+                  boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  marginLeft: "10px",
+                  marginRight: "10px",
+                }}
+                key={stop}
+              >
+                {stop}
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* 
+        <select
+          id="busIdSelect"
+          value={selectedBusId}
+          onChange={handleBusIdChange}
+          style={{
+            width: "auto",
+            padding: "10px",
+            border: "1px solid #ccc",
+            borderRadius: "5px",
+            backgroundColor: "#fff",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+            marginRight: "10px",
+          }}
+        >
+          <option value="">Select a Bus ID</option>
+          {busIds.map((busId) => (
+            <option key={busId} value={busId}>
+              {busId}
+            </option>
+          ))}
+        </select> */}
+      </div>
       <div
         style={{
           display: "flex",
@@ -194,8 +335,7 @@ const Staff = () => {
               <div key={stop.stop_id}>
                 <Marker
                   position={[stop.latitude, stop.longitude]}
-                  icon={passedStops.includes(stop.stop_id) ? blueIcon : redIcon}
-                  onClick={() => setCurrentStop(stop)}
+                  icon={redIcon}
                 >
                   <Popup>{stop.address}</Popup>
                 </Marker>
@@ -210,7 +350,7 @@ const Staff = () => {
                           stop.longitude,
                           realTimeLocations[index].latitude,
                           realTimeLocations[index].longitude
-                        ) <= 100
+                        ) <= 300
                           ? 50
                           : 0
                       }
@@ -237,37 +377,19 @@ const Staff = () => {
                         Speed: {Math.round(realTimeLocations[index].speed)} km/h
                       </p>
                       <p>
-                        Time: {realTimeLocations[index].time}{" "}
-                        {realTimeLocations[index].date}
+                        Start Terminal:{" "}
+                        {realTimeLocations[index].start_terminal === "BT01"
+                          ? "Kandy"
+                          : "Digana"}
                       </p>
                     </div>
                   </Popup>
                 </Marker>
               )}
-
-            <Polyline positions={polyline} color="blue" />
           </MapContainer>
         </div>
 
         <div style={containerStyle}>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "flex-end",
-              marginTop: "20px",
-            }}
-          >
-            <h4
-              style={{
-                ...valueStyle,
-                color: "#000000",
-              }}
-            >
-              {currentDate} {currentTime}
-            </h4>
-          </div>
-
           <div
             style={{
               display: "flex",
@@ -286,6 +408,7 @@ const Staff = () => {
             >
               Passed Bus Stop
             </p>
+
             {passedBusStopNames.length > 0 ? (
               <h4
                 style={{
@@ -327,34 +450,6 @@ const Staff = () => {
               }}
             >
               {nextBusStop}
-            </h4>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "row",
-              alignItems: "space-evenly",
-              marginTop: "20px",
-            }}
-          >
-            <p
-              style={{
-                backgroundColor: "#FFB7B7",
-                fontSize: "25px",
-                borderRadius: "5px",
-                padding: "5px 10px",
-              }}
-            >
-              Bus ID
-            </p>
-            <h4
-              style={{
-                ...valueStyle,
-                color: "#000000",
-                backgroundColor: "#A8DF8E",
-              }}
-            >
-              {selectedBusId}
             </h4>
           </div>
 
@@ -415,33 +510,6 @@ const Staff = () => {
             <p style={labelStyle}>Total Buses</p>
             <h4 style={valueStyle}>{busIds.length > 0 ? busIds.length : 0}</h4>
           </div>
-        </div>
-      </div>
-
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          alignItems: "center",
-          marginTop: "20px",
-        }}
-      >
-        <div style={{ marginRight: "20px" }}>
-          <h3>Select Bus ID</h3>
-          <label htmlFor="busIdSelect">Choose a Bus ID:</label>
-          <select
-            id="busIdSelect"
-            value={selectedBusId}
-            onChange={handleBusIdChange}
-          >
-            <option value="">Select a Bus ID</option>
-            {busIds.map((busId) => (
-              <option key={busId} value={busId}>
-                {busId}
-              </option>
-            ))}
-          </select>
-          <p>Selected Bus ID: {selectedBusId}</p>
         </div>
       </div>
     </div>
