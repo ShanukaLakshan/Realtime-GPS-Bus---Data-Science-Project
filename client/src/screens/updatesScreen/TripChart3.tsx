@@ -21,8 +21,7 @@ const TripChart3: React.FC<Props> = ({ trips }) => {
     const hour = trip.hour_of_day;
     const time = parseFloat(trip.travel_time);
     const direction = "Kandy-Digana";
-    console.log(trip);
-
+ 
     if (!dataByHour[hour]) {
       dataByHour[hour] = {};
     }
