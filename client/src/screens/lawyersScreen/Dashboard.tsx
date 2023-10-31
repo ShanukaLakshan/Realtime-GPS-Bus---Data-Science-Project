@@ -74,6 +74,8 @@ const Dashboard = () => {
 
   return (
     <>
+      <h1>Total Travel Time with Dwell Time by Bus ID</h1>
+
       <div
         style={{
           display: "grid",
