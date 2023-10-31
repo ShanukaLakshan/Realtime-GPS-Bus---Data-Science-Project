@@ -5,6 +5,7 @@ import TripChart2 from "./TripChart2";
 import TripChart3 from "./TripChart3";
 import TripChart4 from "./TripChart4";
 import TripChart5 from "./TripChart5";
+import PieChart from "./PieChart";
 
 const Update = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
@@ -20,6 +21,7 @@ const Update = () => {
 
         const trips: Trip[] = data.map((row: any) => ({
           trip_id: row.trip_id,
+          device_id:row.device_id,
           date: row.date,
           start_time: row.start_time,
           end_time: row.end_time,
@@ -27,12 +29,14 @@ const Update = () => {
           end_terminal: row.end_terminal,
           travel_time: row.travel_time,
           dwell_time: row.dwell_time,
-          ratio: row.ratio,
+          SITR: row.SITR,
           day_of_week: row.day_of_week,
           day_name: row.day_name,
           hour_of_day: row.hour_of_day,
           weekend: row.weekend,
           rush_hour: row.rush_hour,
+          behavior: row.behaviour
+
         }));
         setTrips(trips);
       } catch (error) {
@@ -41,9 +45,14 @@ const Update = () => {
     };
     fetchData();
   }, []);
+  const trips1 = trips;
 
   return (
     <div className="lawyer-dashboard-main-container">
+      <div className="lawyer-dashboard-card">
+        <h3>Behaviour of Bus</h3>
+        <PieChart trips={trips1} />
+      </div>
       <div className="lawyer-dashboard-card">
         <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
         <TripChart trips={trips} />
