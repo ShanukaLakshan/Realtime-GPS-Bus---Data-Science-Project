@@ -33,5 +33,5 @@ export default {
   Growth1,
   Tracking,
   Travel,
-  Admin
+  Admin,
 };

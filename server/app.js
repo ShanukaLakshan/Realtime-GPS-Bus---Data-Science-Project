@@ -345,6 +345,18 @@ app.get("/get-pie-chart-data/:device_id", async (req, res) => {
   }
 });
 
+// Get all data from the database
+app.get("/get-performance-data", async (req, res) => {
+  const query = "SELECT * FROM performance";
+  try {
+    const [results] = await pool.execute(query);
+    res.status(200).json(results);
+  } catch (err) {
+    console.error("Error fetching data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);

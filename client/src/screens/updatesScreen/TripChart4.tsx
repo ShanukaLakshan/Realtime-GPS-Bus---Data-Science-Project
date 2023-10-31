@@ -1,81 +1,4 @@
-// import React from "react";
-// import {
-//   BarChart,
-//   Bar,
-//   XAxis,
-//   YAxis,
-//   CartesianGrid,
-//   Tooltip,
-//   Cell,
-// } from "recharts";
-// import Trip from "./Trip";
-
-// interface Props {
-//   trips: Trip[];
-// }
-
-// const TripChart4: React.FC<Props> = ({ trips }) => {
-//   const days = [
-//     "Monday",
-//     "Tuesday",
-//     "Wednesday",
-//     "Thursday",
-//     "Friday",
-//     "Saturday",
-//     "Sunday",
-//   ];
-
-//   const data = days.map((day) => {
-//     const dayData = trips
-//       .filter((trip) => trip.day_name === day)
-//       .map((trip) => parseFloat(trip.excess_travel_time));
-
-//     const sortedData = dayData.sort((a, b) => a - b);
-//     const q1 = sortedData[Math.floor(sortedData.length / 4)];
-//     const q3 = sortedData[Math.floor((3 * sortedData.length) / 4)];
-//     const median = sortedData[Math.floor(sortedData.length / 2)];
-
-//     return {
-//       name: day,
-//       q1,
-//       q3,
-//       median,
-//     };
-//   });
-
-//   return (
-//     <BarChart
-//       width={800}
-//       height={400}
-//       data={data}
-//       margin={{
-//         top: 20,
-//         right: 30,
-//         left: 20,
-//         bottom: 5,
-//       }}
-//     >
-//       <CartesianGrid strokeDasharray="3 3" />
-//       <XAxis dataKey="name" />
-//       <YAxis />
-//       <Tooltip />
-//       <Bar dataKey="q1" fill="#8884d8" />
-//       <Bar dataKey="q3" fill="#82ca9d" />
-//       <Bar dataKey="median" fill="#ffc658">
-//         {data.map((entry, index) => (
-//           <Cell
-//             key={`cell-${index}`}
-//             fill={entry.median > 0 ? "#ff7300" : "#413ea0"}
-//           />
-//         ))}
-//       </Bar>
-//     </BarChart>
-//   );
-// };
-
-// export default TripChart4;
-
-import React from "react";
+import React, { useState } from "react";
 import {
   LineChart,
   Line,
@@ -84,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Label,
 } from "recharts";
 import Trip from "./Trip";
 
@@ -92,12 +16,30 @@ interface Props {
 }
 
 const TripChart4: React.FC<Props> = ({ trips }) => {
+  const [selectedDirection, setSelectedDirection] =
+    useState<string>("Kandy-Digana");
+
+  if (!trips || trips.length === 0) {
+    // Handle the case where there is no data
+    return <div>No data available</div>;
+  }
+
   const dataByHour: { [key: string]: { [key: string]: number[] } } = {};
 
   trips.forEach((trip) => {
-    const hour = trip.hour_of_day;
+    // Check for missing or null values in trip properties
+    if (
+      trip.hour_of_day === undefined ||
+      trip.SITR === undefined ||
+      trip.start_terminal === undefined ||
+      trip.end_terminal === undefined
+    ) {
+      return;
+    }
+
+    const hour = parseFloat(trip.hour_of_day); // Parse as a number
     const sitr = parseFloat(trip.SITR);
-    const direction = trip.Direction;
+    const direction = trip.start_terminal + "-" + trip.end_terminal; // Combine start and end terminals as direction
 
     if (!dataByHour[hour]) {
       dataByHour[hour] = {};
@@ -117,7 +59,9 @@ const TripChart4: React.FC<Props> = ({ trips }) => {
     .sort((a, b) => parseFloat(a) - parseFloat(b))
     .map((hour) => {
       const directions = Object.keys(dataByHour[hour]);
-      const entry: { [key: string]: number | string } = { hour };
+      const entry: { [key: string]: number | string } = {
+        hour: parseFloat(hour),
+      }; // Ensure hour is parsed as a number
 
       directions.forEach((direction) => {
         entry[direction] = average(dataByHour[hour][direction]);
@@ -126,26 +70,63 @@ const TripChart4: React.FC<Props> = ({ trips }) => {
       return entry;
     });
 
+  // Filter the chart data based on the selected direction
+  const filteredChartData = chartData.map((data) => ({
+    ...data,
+    [selectedDirection]: data[selectedDirection],
+  }));
+
   return (
-    <LineChart
-      width={800}
-      height={400}
-      data={chartData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="hour" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="Kandy-Digana" stroke="#8884d8" />
-      <Line type="monotone" dataKey="Digana-Kandy" stroke="#82ca9d" />
-    </LineChart>
+    <>
+      <LineChart
+        width={800}
+        height={400}
+        data={filteredChartData}
+        margin={{
+          top: 5,
+          right: 30,
+          left: 20,
+          bottom: 5,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="hour">
+          <Label position="insideBottom" offset={-20} />
+        </XAxis>
+        <YAxis>
+          <Label
+            value="Average SITR"
+            position="insideLeft"
+            angle={-90}
+            offset={10}
+          />
+        </YAxis>
+        <Tooltip />
+        <Legend />
+        {Object.keys(filteredChartData[0])
+          .filter((key) => key !== "hour") // Exclude 'hour' from rendering as a dataKey
+          .map((key, index) => (
+            <Line
+              type="monotone"
+              dataKey={key}
+              key={index}
+              stroke={`#${Math.floor(Math.random() * 16777215).toString(16)}`} // Random color for each line
+            />
+          ))}
+      </LineChart>
+      <div className="select">
+        <select
+          onChange={(e) => {
+            setSelectedDirection(e.target.value);
+          }}
+          value={selectedDirection}
+        >
+          <option value="Kandy-Digana">Kandy-Digana</option>
+          <option value="Digana-Kandy">Digana-Kandy</option>
+        </select>
+      </div>
+      <div>Selected Direction: {selectedDirection}</div>
+    </>
   );
 };
 

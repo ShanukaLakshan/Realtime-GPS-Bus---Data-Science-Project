@@ -1,12 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import {
-  LineChart,
-  Line,
+  AreaChart,
+  Area,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
   Legend,
+  Label,
 } from "recharts";
 import Trip from "./Trip";
 
@@ -15,22 +16,35 @@ interface Props {
 }
 
 const TripChart3: React.FC<Props> = ({ trips }) => {
-  const dataByHour: { [key: string]: { [key: string]: number[] } } = {};
+  const [selectedDirection, setSelectedDirection] =
+    useState<string>("Kandy-Digana");
 
-  trips.forEach((trip) => {
-    const hour = trip.hour_of_day;
-    const time = parseFloat(trip.travel_time);
-    const direction = "Kandy-Digana";
- 
+  if (!trips || trips.length === 0) {
+    // Handle the case where there is no data
+    return <div>No data available</div>;
+  }
+
+  // Filter trips for the selected direction
+  const filteredTrips = trips.filter(
+    (trip) =>
+      trip.start_terminal + "-" + trip.end_terminal === selectedDirection
+  );
+
+  const dataByHour: { [key: string]: number[] } = {};
+
+  filteredTrips.forEach((trip) => {
+    if (trip.hour_of_day === undefined || trip.travel_time === undefined) {
+      return;
+    }
+
+    const hour = parseFloat(trip.hour_of_day); // Parse as a number
+    const travelTime = parseFloat(trip.travel_time);
+
     if (!dataByHour[hour]) {
-      dataByHour[hour] = {};
+      dataByHour[hour] = [];
     }
 
-    if (!dataByHour[hour][direction]) {
-      dataByHour[hour][direction] = [];
-    }
-
-    dataByHour[hour][direction].push(time);
+    dataByHour[hour].push(travelTime);
   });
 
   const average = (arr: number[]) =>
@@ -38,37 +52,59 @@ const TripChart3: React.FC<Props> = ({ trips }) => {
 
   const chartData = Object.keys(dataByHour)
     .sort((a, b) => parseFloat(a) - parseFloat(b))
-    .map((hour) => {
-      const directions = Object.keys(dataByHour[hour]);
-      const entry: { [key: string]: number | string } = { hour };
-
-      directions.forEach((direction) => {
-        entry[direction] = average(dataByHour[hour][direction]);
-      });
-
-      return entry;
-    });
+    .map((hour) => ({
+      hour: parseFloat(hour),
+      [selectedDirection]: average(dataByHour[hour]),
+    }));
 
   return (
-    <LineChart
-      width={800}
-      height={400}
-      data={chartData}
-      margin={{
-        top: 5,
-        right: 30,
-        left: 20,
-        bottom: 5,
-      }}
-    >
-      <CartesianGrid strokeDasharray="3 3" />
-      <XAxis dataKey="hour" />
-      <YAxis />
-      <Tooltip />
-      <Legend />
-      <Line type="monotone" dataKey="Kandy-Digana" stroke="#1A5D1A" />
-      <Line type="monotone" dataKey="Digana-Kandy" stroke="#FF52A2" />
-    </LineChart>
+    <>
+      <AreaChart
+        width={800}
+        height={400}
+        data={chartData}
+        margin={{
+          top: 25,
+          right: 30,
+          left: 20,
+          bottom: 10,
+        }}
+      >
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="hour">
+          <Label position="insideBottom" offset={-20} />
+        </XAxis>
+        <YAxis>
+          <Label
+            value="Travel Time (minutes)"
+            position="insideLeft"
+            angle={-90}
+            offset={10}
+          />
+        </YAxis>
+
+        <Tooltip />
+        <Legend />
+        <Area
+          type="monotone"
+          dataKey={selectedDirection}
+          stroke="#8884d8"
+          fill="#8884d8"
+        />
+      </AreaChart>
+      <div className="select">
+        <select
+          onChange={(e) => {
+            setSelectedDirection(e.target.value);
+          }}
+          value={selectedDirection}
+        >
+          <option value="Kandy-Digana">Kandy-Digana</option>
+          <option value="Digana-Kandy">Digana-Kandy</option>
+        </select>
+      </div>
+      <div>Selected Direction: {selectedDirection}</div>
+    </>
   );
 };
 

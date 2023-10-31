@@ -1,5 +1,5 @@
+import React from "react";
 import { Icons } from "../../utils";
-import { Images } from "../../utils";
 
 const UserInfo = () => {
   return (
