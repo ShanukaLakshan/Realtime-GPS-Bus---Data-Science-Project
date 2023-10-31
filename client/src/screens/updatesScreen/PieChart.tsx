@@ -3,6 +3,10 @@ import { Chart } from "react-google-charts";
 
 interface Trip {
   behaviour: string;
+  start_terminal: string;
+  end_terminal: string;
+  travel_time: number;
+  SITR: number;
 }
 
 function countBehaviors(trips: Trip[]): { [key: string]: number } {
@@ -71,6 +75,31 @@ function PieChart() {
 
   const options = {
     title: `Bus Id ${busID}`,
+    slices: [
+      {
+        color: "#2BB673",
+      },
+      {
+        color: "#d91e48",
+      },
+    ],
+    legend: {
+      position: "bottom",
+      alignment: "center",
+      textStyle: {
+        color: "233238",
+        fontSize: 14,
+      },
+    },
+    tooltip: {
+      showColorCode: true,
+    },
+    chartArea: {
+      left: 0,
+      top: 0,
+      width: "100%",
+      height: "80%",
+    },
   };
 
   return (
@@ -79,9 +108,81 @@ function PieChart() {
         display: "flex",
         flexDirection: "row",
         alignItems: "center",
-        justifyContent: "center",
+        justifyContent: "flex-start",
       }}
     >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          justifyContent: "flex-start",
+        }}
+      >
+        <div>
+          <h3>Select Bus ID</h3>
+          <select
+            style={{
+              width: "200px",
+              height: "40px",
+              fontSize: "20px",
+              color: "black",
+              backgroundColor: "white",
+              border: "1px solid black",
+              borderRadius: "5px",
+            }}
+            name="busID"
+            id="busID"
+            value={busID || ""}
+            onChange={(e) => setBusID(parseInt(e.target.value))}
+          >
+            {uniqueDeviceIds.map((device_id) => (
+              <option key={device_id} value={device_id}>
+                {device_id}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div
+          style={{
+            display: "flex",
+            marginTop: "10px",
+          }}
+        >
+          <h5>
+            Route{" "}
+            <span>
+              {getselectedBusIdData.length > 0
+                ? getselectedBusIdData[0].start_terminal + " "
+                : ""}
+            </span>
+            to {""}
+            <span>
+              {" "}
+              {getselectedBusIdData.length > 0
+                ? getselectedBusIdData[0].end_terminal
+                : ""}
+            </span>
+          </h5>
+        </div>
+
+        <div
+          style={{
+            display: "flex",
+            marginTop: "10px",
+          }}
+        >
+          <h5>
+            SITR{" "}
+            <span>
+              {getselectedBusIdData.length > 0
+                ? Math.round(getselectedBusIdData[0].SITR * 100) / 100
+                : ""}
+            </span>
+          </h5>
+        </div>
+      </div>
+
       {getselectedBusIdData.length > 0 ? (
         <Chart
           chartType="PieChart"
@@ -93,28 +194,6 @@ function PieChart() {
       ) : (
         <p>No data available for the selected bus.</p>
       )}
-      <select
-        style={{
-          width: "200px",
-          height: "40px",
-          fontSize: "20px",
-          color: "black",
-          backgroundColor: "white",
-          border: "1px solid black",
-          borderRadius: "5px",
-          margin: "10px",
-        }}
-        name="busID"
-        id="busID"
-        value={busID || ""}
-        onChange={(e) => setBusID(parseInt(e.target.value))}
-      >
-        {uniqueDeviceIds.map((device_id) => (
-          <option key={device_id} value={device_id}>
-            Bus {device_id}
-          </option>
-        ))}
-      </select>
     </div>
   );
 }
