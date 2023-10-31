@@ -297,7 +297,8 @@ app.get("/get-all-device-ids", async (req, res) => {
 
 app.get("/get-all-device-ids/:start_terminal", async (req, res) => {
   const start_terminal = req.params.start_terminal;
-  const query = "SELECT DISTINCT deviceid FROM bus_data WHERE start_terminal = ?";
+  const query =
+    "SELECT DISTINCT deviceid FROM bus_data WHERE start_terminal = ?";
 
   try {
     const connection = await pool.getConnection();
@@ -312,6 +313,37 @@ app.get("/get-all-device-ids/:start_terminal", async (req, res) => {
   }
 });
 
+app.get("/get-all-device-ids-performance", async (req, res) => {
+  const query = "SELECT DISTINCT device_id FROM performance";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query);
+    connection.release();
+
+    const deviceIds = rows.map((row) => row.device_id);
+    res.status(200).json(deviceIds);
+  } catch (err) {
+    console.error("Error fetching device IDs:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+app.get("/get-pie-chart-data/:device_id", async (req, res) => {
+  const device_id = req.params.device_id;
+  const query = "SELECT behaviour FROM performance WHERE device_id = ?";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query, [device_id]);
+    connection.release();
+
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("Error fetching pie chart data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // Start the Express server
 app.listen(PORT, () => {

@@ -21,7 +21,7 @@ const Update = () => {
 
         const trips: Trip[] = data.map((row: any) => ({
           trip_id: row.trip_id,
-          device_id:row.device_id,
+          device_id: row.device_id,
           date: row.date,
           start_time: row.start_time,
           end_time: row.end_time,
@@ -35,8 +35,7 @@ const Update = () => {
           hour_of_day: row.hour_of_day,
           weekend: row.weekend,
           rush_hour: row.rush_hour,
-          behavior: row.behaviour
-
+          behavior: row.behaviour,
         }));
         setTrips(trips);
       } catch (error) {
@@ -45,14 +44,9 @@ const Update = () => {
     };
     fetchData();
   }, []);
-  const trips1 = trips;
 
   return (
     <div className="lawyer-dashboard-main-container">
-      <div className="lawyer-dashboard-card">
-        <h3>Behaviour of Bus</h3>
-        <PieChart trips={trips1} />
-      </div>
       <div className="lawyer-dashboard-card">
         <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
         <TripChart trips={trips} />
@@ -64,6 +58,10 @@ const Update = () => {
       <div className="lawyer-dashboard-card">
         <h3>Dwell Time by Hour of the Day (Weekdays vs. Weekends) :</h3>
         <TripChart2 trips={trips} type="dwell_time" />
+      </div>
+      <div className="lawyer-dashboard-card">
+        <h3>Behaviour of Bus</h3>
+        <PieChart />
       </div>
       <div className="lawyer-dashboard-card">
         <h3>Travel Time by Hour of the Day (Directions)</h3>

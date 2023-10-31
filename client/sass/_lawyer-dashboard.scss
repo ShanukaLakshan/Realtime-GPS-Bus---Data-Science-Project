@@ -3,7 +3,6 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 20px;
-
     gap: 20px;
     padding: 20px;
     background-color: #f7f7f7;
@@ -18,9 +17,7 @@
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
-    &-header {
-      width: 100%;
-    }
+
     width: 100%;
   }
 }

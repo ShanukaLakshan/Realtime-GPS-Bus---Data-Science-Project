@@ -2,60 +2,111 @@ import React, { useEffect, useState } from "react";
 import { Chart } from "react-google-charts";
 
 interface Trip {
-  behavior: string;
-  device_id: number;
+  behaviour: string;
 }
 
 function countBehaviors(trips: Trip[]): { [key: string]: number } {
   return trips.reduce((acc, trip) => {
-    acc[trip.behavior] = (acc[trip.behavior] || 0) + 1;
+    acc[trip.behaviour] = (acc[trip.behaviour] || 0) + 1;
     return acc;
   }, {});
 }
 
-function filterBus(trips: Trip[], busID: number): Trip[] {
-  return trips.filter((trip) => trip.device_id === busID);
-}
-
-function getUniqueDeviceIds(trips: Trip[]): number[] {
-  const uniqueDeviceIds = Array.from(new Set(trips.map((trip) => trip.device_id)));
-  return uniqueDeviceIds;
-}
-
-
-function PieChart({ trips }) {
+function PieChart() {
   const [uniqueDeviceIds, setUniqueDeviceIds] = useState<number[]>([]);
-  const [busID, setBusID] = useState(123);
-  const [data1, setData1] = useState([["Behaviour", "Count"]]);
-  const [loading, setLoading] = useState(true);
+  const [busID, setBusID] = useState<number | null>(null);
+  const [getselectedBusIdData, setGetselectedBusIdData] = useState<Trip[]>([]);
 
   useEffect(() => {
-    setUniqueDeviceIds(getUniqueDeviceIds(trips));
-  }, [trips]);
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/get-all-device-ids-performance"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setUniqueDeviceIds(data);
+
+        if (data.length > 0) {
+          setBusID(data[0]);
+        }
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
-    const filteredTrips = filterBus(trips, busID);
-    const behaviors = countBehaviors(filteredTrips);
-    const newData = [["Behaviour", "Count"]];
-    
-    for (const [key, value] of Object.entries(behaviors)) {
-      newData.push([key, value]);
+    if (busID !== null) {
+      const fetchData = async () => {
+        try {
+          const response = await fetch(
+            `http://localhost:5000/get-pie-chart-data/${busID}`
+          );
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          const data = await response.json();
+          setGetselectedBusIdData(data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+        }
+      };
+      fetchData();
     }
-    
-    setData1(newData);
-    setLoading(false);
-  }, [busID, trips]);
+  }, [busID]);
+
+  const behaviors = countBehaviors(getselectedBusIdData);
+  const normalCount = behaviors["normal"] || 0;
+  const anomalyCount = behaviors["anomaly"] || 0;
+
+  const chartData = [
+    ["Behavior", "Count"],
+    ["Normal", normalCount],
+    ["Anomaly", anomalyCount],
+  ];
 
   const options = {
-    title: `Bus Id ${busID}`
+    title: `Bus Id ${busID}`,
   };
-  
+
   return (
-    <div>
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
+    >
+      {getselectedBusIdData.length > 0 ? (
+        <Chart
+          chartType="PieChart"
+          data={chartData}
+          options={options}
+          width={"100%"}
+          height={"400px"}
+        />
+      ) : (
+        <p>No data available for the selected bus.</p>
+      )}
       <select
+        style={{
+          width: "200px",
+          height: "40px",
+          fontSize: "20px",
+          color: "black",
+          backgroundColor: "white",
+          border: "1px solid black",
+          borderRadius: "5px",
+          margin: "10px",
+        }}
         name="busID"
         id="busID"
-        value={busID}
+        value={busID || ""}
         onChange={(e) => setBusID(parseInt(e.target.value))}
       >
         {uniqueDeviceIds.map((device_id) => (
@@ -64,17 +115,6 @@ function PieChart({ trips }) {
           </option>
         ))}
       </select>
-      {loading ? (
-        <div>Loading...</div>
-      ) : (
-        <Chart
-          chartType="PieChart"
-          data={data1}
-          options={options}
-          width={"100%"}
-          height={"400px"}
-        />
-      )}
     </div>
   );
 }
