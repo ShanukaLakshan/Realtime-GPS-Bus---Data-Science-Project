@@ -13,8 +13,8 @@ CREATE TABLE performance(
   ,day_of_week        INTEGER  NOT NULL
   ,day_name           VARCHAR(9) NOT NULL
   ,hour_of_day        NUMERIC(5,2) NOT NULL
-  ,weekend            BIT  NOT NULL
-  ,rush_hour          BIT  NOT NULL
+  ,weekend            INT  NOT NULL
+  ,rush_hour          INT  NOT NULL
   ,excess_travel_time NUMERIC(19,3) NOT NULL
   ,Direction          VARCHAR(12) NOT NULL
   ,anomaly_score      INTEGER  NOT NULL
