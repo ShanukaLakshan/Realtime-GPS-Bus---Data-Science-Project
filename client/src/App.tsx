@@ -17,11 +17,11 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/dashboard" element={<MainLayout />}>
-          <Route index element={<Student_Dashboard />} />
+          <Route index element={<Staff />} />
           <Route path="analytics" element={<Lawyer_Dashboard />} />
           <Route path="lawyers" element={<BasicMap />} />
           <Route path="students" element={<Students />} />
-          <Route path="staff" element={<Staff />} />
+          <Route path="staff" element={<Student_Dashboard />} />
           <Route path="updates" element={<Update />} />
           <Route path="settings" element={<Settings />} />
         </Route>

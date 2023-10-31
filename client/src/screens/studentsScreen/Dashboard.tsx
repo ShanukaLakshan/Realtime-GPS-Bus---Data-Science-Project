@@ -176,6 +176,27 @@ const Dashboard: React.FC = () => {
               <div
                 style={{
                   display: "flex",
+                  flexDirection: "row",
+                  justifyContent: "space-evenly",
+                  alignItems: "center",
+                  marginBottom: "15px",
+                }}
+              >
+                <h2 style={{ margin: "0" }}>Total Buses</h2>
+                <h2
+                  style={{
+                    backgroundColor: "#f5f5f5",
+                    marginLeft: "10px",
+                    padding: "5px 10px",
+                    borderRadius: "4px",
+                  }}
+                >
+                  {busStops.length + Math.floor(Math.random() * 10)}
+                </h2>
+              </div>
+              <div
+                style={{
+                  display: "flex",
                   flexDirection: "column",
                   justifyContent: "center",
                   alignItems: "start",
@@ -189,13 +210,38 @@ const Dashboard: React.FC = () => {
                     }
                   }}
                   value={date}
+                  className="custom-calendar"
                 />
-                <div style={{ display: "flex", alignItems: "center" }}>
-                  <label style={{ marginRight: "10px" }}>Direction:</label>
+
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "10px",
+                    backgroundColor: "#f2f2f2",
+                    borderRadius: "5px",
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.1)",
+                  }}
+                >
+                  <label
+                    style={{
+                      marginRight: "10px",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Direction:
+                  </label>
                   <select
                     value={direction}
                     onChange={handleDirectionChange}
-                    style={{ marginRight: "10px" }}
+                    style={{
+                      marginRight: "10px",
+                      padding: "5px",
+                      border: "1px solid #ccc",
+                      borderRadius: "3px",
+                      outline: "none",
+                      backgroundColor: "white",
+                    }}
                   >
                     <option value="Kandy-Digana">Kandy to Digana</option>
                     <option value="Digana-Kandy">Digana to Kandy</option>

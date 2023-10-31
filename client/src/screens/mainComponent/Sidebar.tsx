@@ -19,7 +19,7 @@ const sidebarNav: SidebarNavItem[] = [
         alt="Dashboard"
       />
     ),
-    text: "Bus Halts",
+    text: "Live",
   },
   {
     link: "/dashboard/updates",
@@ -37,7 +37,7 @@ const sidebarNav: SidebarNavItem[] = [
     link: "/dashboard/staff",
     section: "staff",
     icon: <img src={Icons.Students} alt="Staff" />,
-    text: "Tracking New",
+    text: "Bus Halts",
   },
 ];
 
