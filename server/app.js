@@ -23,6 +23,7 @@ const pool = mysql.createPool({
   database: process.env.DATABASE,
 });
 
+
 app.use(bodyParser.json());
 
 // Save data to the database
@@ -61,7 +62,7 @@ app.post("/save-data", async (req, res) => {
 
 // Get all data from the database
 app.get("/get-data", async (req, res) => {
-  const query = "SELECT * FROM trip_data";
+  const query = "SELECT * FROM performance";
   try {
     const [results] = await pool.execute(query);
     res.status(200).json(results);

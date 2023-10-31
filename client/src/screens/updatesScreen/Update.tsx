@@ -34,8 +34,10 @@ const Update = () => {
           weekend: row.weekend,
           rush_hour: row.rush_hour,
           behavior: row.behaviour,
+          excess_travel_time: row.excess_travel_time,
         }));
         setTrips(trips);
+        console.log(trips[0]);
       } catch (error) {
         console.error("Error fetching data:", error);
       }
