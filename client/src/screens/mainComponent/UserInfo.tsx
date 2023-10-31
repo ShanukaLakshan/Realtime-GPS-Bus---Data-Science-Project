@@ -24,9 +24,9 @@ const UserInfo = () => {
           <img
             style={{
               borderRadius: "100%",
-              width: "40px",
+              width: "55px",
             }}
-            src={Images.User}
+            src={Icons.Admin}
             alt="user"
           />
         </div>

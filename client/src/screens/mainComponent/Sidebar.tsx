@@ -14,7 +14,7 @@ const sidebarNav: SidebarNavItem[] = [
     section: "Dashboard",
     icon: (
       <img
-        src={Icons.MapIcon}
+        src={Icons.Live}
         style={{ width: "30px", height: "30px" }}
         alt="Dashboard"
       />
@@ -24,25 +24,49 @@ const sidebarNav: SidebarNavItem[] = [
   {
     link: "/dashboard/updates",
     section: "updates",
-    icon: <img src={Icons.Analytics} alt="Analytics" />,
+    icon: (
+      <img
+        src={Icons.Growth}
+        style={{ width: "30px", height: "30px" }}
+        alt="Updates"
+      />
+    ),
     text: "Performance",
   },
   {
     link: "/dashboard/analytics",
     section: "analytics",
-    icon: <img src={Icons.Analytics} alt="Analytics" />,
+    icon: (
+      <img
+        src={Icons.Growth1}
+        style={{ width: "30px", height: "30px" }}
+        alt="Analytics"
+      />
+    ),
     text: "Metrices",
   },
   {
     link: "/dashboard/students",
     section: "students",
-    icon: <img src={Icons.Students} alt="Students" />,
+    icon: (
+      <img
+        src={Icons.Tracking}
+        style={{ width: "30px", height: "30px" }}
+        alt="Students"
+      />
+    ),
     text: "Tracking",
   },
   {
     link: "/dashboard/staff",
     section: "staff",
-    icon: <img src={Icons.Students} alt="Staff" />,
+    icon: (
+      <img
+        src={Icons.Travel}
+        style={{ width: "30px", height: "30px" }}
+        alt="Staff"
+      />
+    ),
     text: "Bus Halts",
   },
 ];
