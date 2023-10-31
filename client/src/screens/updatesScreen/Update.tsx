@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import Trip from "./Trip";
 import TripChart from "./TripChart";
 import TripChart2 from "./TripChart2";
-import TripChart3 from "./TripChart3";
-import TripChart4 from "./TripChart4";
 import TripChart5 from "./TripChart5";
 import PieChart from "./PieChart";
 
@@ -48,14 +46,6 @@ const Update = () => {
   return (
     <div className="lawyer-dashboard-main-container">
       <div className="lawyer-dashboard-card">
-        <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
-        <TripChart trips={trips} />
-      </div>
-      <div className="lawyer-dashboard-card">
-        <h3>Excess Travel Time by Day of the Week</h3>
-        <TripChart5 trips={trips} />
-      </div>
-      <div className="lawyer-dashboard-card">
         <h3>Dwell Time by Hour of the Day (Weekdays vs. Weekends) :</h3>
         <TripChart2 trips={trips} type="dwell_time" />
       </div>
@@ -64,12 +54,12 @@ const Update = () => {
         <PieChart />
       </div>
       <div className="lawyer-dashboard-card">
-        <h3>Travel Time by Hour of the Day (Directions)</h3>
-        <TripChart3 trips={trips} />
+        <h3>Excess Travel Time by Day of the Week</h3>
+        <TripChart5 trips={trips} />
       </div>
       <div className="lawyer-dashboard-card">
-        <h3>Average SITR by Hour of the Day (Direction)</h3>
-        <TripChart4 trips={trips} />
+        <h3>Travel Time by Hour of the Day (Weekdays vs. Weekends)</h3>
+        <TripChart trips={trips} />
       </div>
     </div>
   );

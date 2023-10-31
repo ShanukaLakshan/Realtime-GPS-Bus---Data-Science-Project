@@ -28,6 +28,12 @@ const sidebarNav: SidebarNavItem[] = [
     text: "Performance",
   },
   {
+    link: "/dashboard/analytics",
+    section: "analytics",
+    icon: <img src={Icons.Analytics} alt="Analytics" />,
+    text: "Metrices",
+  },
+  {
     link: "/dashboard/students",
     section: "students",
     icon: <img src={Icons.Students} alt="Students" />,

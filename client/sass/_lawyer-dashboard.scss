@@ -2,12 +2,10 @@
   &-main-container {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    grid-column-gap: 10px;
+    grid-column-gap: 20px;
     gap: 20px;
-    padding: 10px;
+    padding: 20px;
     background-color: #f7f7f7;
-    width: 100%;
   }
   &-card-header {
     display: flex;
@@ -19,6 +17,51 @@
     border-radius: 10px;
     background-color: #fff;
     box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1);
+
     width: 100%;
   }
+}
+
+.width-auto {
+  width: auto;
+}
+
+.icon-background {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 0px 7px;
+}
+
+th {
+  background-color: $primary-color;
+  color: #fff;
+  padding: 5px 0;
+  // font-weight: inherit;
+}
+
+td {
+  padding: 10px 0;
+  text-align: center;
+}
+
+tr:nth-child(odd) {
+  background-color: #1f578a1a;
+  color: $primary-color;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: $primary-color;
+}
+
+.lawyer-dashboard-card-graph {
+  height: 250px;
 }
