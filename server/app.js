@@ -331,7 +331,7 @@ app.get("/get-all-device-ids-performance", async (req, res) => {
 
 app.get("/get-pie-chart-data/:device_id", async (req, res) => {
   const device_id = req.params.device_id;
-  const query = "SELECT behaviour FROM performance WHERE device_id = ?";
+  const query = "SELECT * FROM performance WHERE device_id = ?";
 
   try {
     const connection = await pool.getConnection();

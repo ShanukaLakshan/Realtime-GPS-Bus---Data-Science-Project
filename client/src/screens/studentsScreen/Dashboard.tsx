@@ -87,7 +87,7 @@ const Dashboard: React.FC = () => {
       <div style={{ display: "flex", flexDirection: "row" }}>
         <div className="lawyer-dashboard-card appointments">
           <MapContainer
-            style={{ width: "100%", height: "80vh" }}
+            style={{ width: "100%", height: "70vh" }}
             center={[LAT, LNG]}
             zoom={14}
             scrollWheelZoom={true}
@@ -106,7 +106,9 @@ const Dashboard: React.FC = () => {
                       : redIcon
                   }
                 >
-                  <Popup>{stop.address}</Popup>
+                  {selectedStop && selectedStop.stop_id === stop.stop_id && (
+                    <Popup>{stop.address}</Popup>
+                  )}
                 </Marker>
                 <Circle
                   center={[stop.latitude, stop.longitude]}
@@ -155,44 +157,28 @@ const Dashboard: React.FC = () => {
               <div
                 style={{
                   display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  marginBottom: "15px",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "start",
+                  marginBottom: "20px",
                 }}
               >
-                <h2 style={{ margin: "0" }}>Bus Halts</h2>
-                <h2
+                <div
                   style={{
-                    backgroundColor: "#f5f5f5",
-                    marginLeft: "10px",
-                    padding: "5px 10px",
-                    borderRadius: "4px",
+                    display: "flex",
                   }}
                 >
-                  {busStops.length}
-                </h2>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-evenly",
-                  alignItems: "center",
-                  marginBottom: "15px",
-                }}
-              >
-                <h2 style={{ margin: "0" }}>Total Buses</h2>
-                <h2
+                  <h4 style={{ margin: "0" }}>Bus Halts</h4>
+                  <h4>{busStops.length}</h4>
+                </div>
+                <div
                   style={{
-                    backgroundColor: "#f5f5f5",
-                    marginLeft: "10px",
-                    padding: "5px 10px",
-                    borderRadius: "4px",
+                    display: "flex",
                   }}
                 >
-                  {busStops.length + Math.floor(Math.random() * 10)}
-                </h2>
+                  <h4 style={{ margin: "0" }}>Total Buses</h4>
+                  <h4>{busStops.length + Math.floor(Math.random() * 10)}</h4>
+                </div>
               </div>
               <div
                 style={{
@@ -264,14 +250,13 @@ const Dashboard: React.FC = () => {
           </thead>
           <tbody>
             {busStops.map((stop) => (
-              <tr key={stop.stop_id}>
+              <tr
+                key={stop.stop_id}
+                onClick={() => setSelectedStop(stop)}
+                style={{ cursor: "pointer", textDecoration: "underline" }}
+              >
                 <td>{stop.stop_id}</td>
-                <td
-                  onClick={() => setSelectedStop(stop)}
-                  style={{ cursor: "pointer", textDecoration: "underline" }}
-                >
-                  {stop.address}
-                </td>
+                <td>{stop.address}</td>
                 <td>{stop.latitude}</td>
                 <td>{stop.longitude}</td>
               </tr>
