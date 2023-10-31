@@ -12,25 +12,24 @@ import Trip from "./Trip";
 
 interface TripChartProps {
   trips: Trip[];
-  type: "travel_time" | "dwell_time"; // Add a type prop
 }
 
-const TripChart2: React.FC<TripChartProps> = ({ trips, type }) => {
+const TripChart2: React.FC<TripChartProps> = ({ trips }) => {
   const weekendData: { [key: string]: number[] } = {};
   const weekdayData: { [key: string]: number[] } = {};
 
   trips.forEach((trip) => {
     const hour = trip.hour_of_day;
-    const time = parseFloat(trip[type]); // Use the type prop here
+    const dwellTime = parseFloat(trip.dwell_time);
 
     if (trip.weekend) {
       weekendData[hour] = weekendData[hour]
-        ? [...weekendData[hour], time]
-        : [time];
+        ? [...weekendData[hour], dwellTime]
+        : [dwellTime];
     } else {
       weekdayData[hour] = weekdayData[hour]
-        ? [...weekdayData[hour], time]
-        : [time];
+        ? [...weekdayData[hour], dwellTime]
+        : [dwellTime];
     }
   });
 
@@ -78,8 +77,8 @@ const TripChart2: React.FC<TripChartProps> = ({ trips, type }) => {
       <YAxis />
       <Tooltip />
       <Legend />
-      <Line type="monotone" dataKey="weekend" stroke="#EC53B0" />
-      <Line type="monotone" dataKey="weekday" stroke="#793FDF" />
+      <Line type="monotone" dataKey="weekend" stroke="#EC53B0" name="Weekend" />
+      <Line type="monotone" dataKey="weekday" stroke="#793FDF" name="Weekday" />
     </LineChart>
   );
 };
