@@ -345,7 +345,6 @@ app.get("/get-pie-chart-data/:device_id", async (req, res) => {
   }
 });
 
-// Get all data from the database
 app.get("/get-performance-data", async (req, res) => {
   const query = "SELECT * FROM performance";
   try {
@@ -357,68 +356,25 @@ app.get("/get-performance-data", async (req, res) => {
   }
 });
 
+// Get average dwell_time , travell_time
+app.get("/get-pie-chart-dwell-data/:device_id", async (req, res) => {
+  const device_id = req.params.device_id;
+  const query =
+    "SELECT AVG(dwell_time) AS avg_dwell_time, AVG(travel_time) AS avg_travel_time FROM bus_data WHERE deviceid = ?";
+
+  try {
+    const connection = await pool.getConnection();
+    const [rows] = await connection.execute(query, [device_id]);
+    connection.release();
+
+    res.status(200).json(rows);
+  } catch (err) {
+    console.error("Error fetching pie chart data:", err);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 // Start the Express server
 app.listen(PORT, () => {
   console.log(`Server is running on port http://localhost:${PORT}`);
 });
-
-// Drop Database IF EXISTS gps;
-// CREATE DATABASE gps;
-// USE gps;
-// CREATE TABLE trip_data (
-//     trip_id INT PRIMARY KEY,
-//     date DATE,
-//     start_time TIME,
-//     end_time TIME,
-//     start_terminal VARCHAR(5),
-//     end_terminal VARCHAR(5),
-//     travel_time DECIMAL(10, 2),
-//     dwell_time DECIMAL(10, 2),
-//     ratio DECIMAL(10, 8),
-//     day_of_week INT,
-//     day_name VARCHAR(20),
-//     hour_of_day INT,
-//     weekend INT,
-//     rush_hour INT
-// );
-
-// CREATE TABLE df_123 (
-//   id INTEGER PRIMARY KEY,
-//   deviceid INTEGER,
-//   devicetime VARCHAR(25),
-//   latitude REAL,
-//   longitude REAL,
-//   speed REAL
-// );
-
-// CREATE TABLE bus_terminals (
-//    id INT AUTO_INCREMENT PRIMARY KEY,
-//   stop_id VARCHAR(10),
-//   route_id INT,
-//   direction VARCHAR(50),
-//   address VARCHAR(255),
-//   latitude DECIMAL(10, 8),
-//   longitude DECIMAL(11, 8)
-// );
-
-// DROP TABLE bus_data;
-// CREATE TABLE bus_data (
-//   id INT AUTO_INCREMENT PRIMARY KEY,
-//   deviceid INT,
-//   latitude DECIMAL(9, 7),
-//   longitude DECIMAL(9, 7),
-//   speed DECIMAL(10, 4),
-//   date DATE,
-//   time TIME,
-//   start_time TIME,
-//   start_terminal VARCHAR(5),
-//   travel_time DECIMAL(5, 2),
-//   dwell_time DECIMAL(5, 2),
-//   SITR DECIMAL(5, 3),
-//   hour_of_the_day DECIMAL(5, 3),
-//   rush_hour DECIMAL(5, 3),
-//   wind_speed DECIMAL(10, 4),
-//   weather VARCHAR(50),
-//   weekday DECIMAL(3, 0),
-//   weather_encoded INT
-// );

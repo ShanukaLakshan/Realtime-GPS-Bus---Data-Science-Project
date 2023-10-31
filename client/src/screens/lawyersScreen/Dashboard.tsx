@@ -2,9 +2,11 @@ import React, { useEffect, useState } from "react";
 import Trip from "../updatesScreen/Trip";
 import TripChart4 from "../updatesScreen/TripChart4";
 import TripChart3 from "../updatesScreen/TripChart3";
+import PieChartModel from "./PieChartModel";
 
 const Dashboard = () => {
   const [trips, setTrips] = useState<Trip[]>([]);
+  const [uniqueDeviceIds, setUniqueDeviceIds] = useState<number[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -43,17 +45,72 @@ const Dashboard = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:5000/get-all-device-ids-performance"
+        );
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setUniqueDeviceIds(data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  const index = uniqueDeviceIds.indexOf(128);
+  if (index > -1) {
+    uniqueDeviceIds.splice(index, 1);
+  }
+  const index2 = uniqueDeviceIds.indexOf(284);
+  if (index2 > -1) {
+    uniqueDeviceIds.splice(index2, 1);
+  }
+
   return (
-    <div className="lawyer-dashboard-main-container">
-      <div className="lawyer-dashboard-card">
-        <h3>Travel Time by Hour of the Day (Directions)</h3>
-        <TripChart3 trips={trips} />
+    <>
+      <div
+        style={{
+          display: "grid",
+          justifyContent: "space-evenly",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+        }}
+      >
+        {uniqueDeviceIds
+          .sort(() => Math.random() - Math.random())
+          .slice(0, 6)
+          .map((device_id) => (
+            <div className="lawyer-dashboard-card">
+              <p
+                style={{
+                  textAlign: "center",
+                  fontSize: "1.5rem",
+                  fontWeight: "bold",
+                  color: "#000000",
+                }}
+              >
+                Bus ID {device_id}
+              </p>
+              <PieChartModel device_id={device_id} />
+            </div>
+          ))}
       </div>
-      <div className="lawyer-dashboard-card">
-        <h3>Average SITR by Hour of the Day (Direction)</h3>
-        <TripChart4 trips={trips} />
+      <div className="lawyer-dashboard-main-container">
+        <div className="lawyer-dashboard-card">
+          <h3>Travel Time by Hour of the Day (Directions)</h3>
+          <TripChart3 trips={trips} />
+        </div>
+        <div className="lawyer-dashboard-card">
+          <h3>Average SITR by Hour of the Day (Direction)</h3>
+          <TripChart4 trips={trips} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
