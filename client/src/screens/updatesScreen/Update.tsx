@@ -11,7 +11,9 @@ const Update = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:5000/get-data");
+        const response = await fetch(
+          "http://localhost:5000/get-performance-data"
+        );
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
@@ -30,6 +32,7 @@ const Update = () => {
           SITR: row.SITR,
           day_of_week: row.day_of_week,
           day_name: row.day_name,
+          excess_travel_time: row.excess_travel_time,
           hour_of_day: row.hour_of_day,
           weekend: row.weekend,
           rush_hour: row.rush_hour,
