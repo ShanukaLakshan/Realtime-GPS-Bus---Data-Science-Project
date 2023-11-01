@@ -75,10 +75,6 @@ const Staff = () => {
       });
   }, []);
 
-  const handleBusIdChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedBusId(event.target.value);
-  };
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -438,17 +434,6 @@ const Staff = () => {
             </h4>
           </div>
 
-          <div style={infoContainerStyle}>
-            <p style={labelStyle}>Current travel time</p>
-            <h4 style={valueStyle}>
-              {totalTravelTime > 0 && (
-                <>
-                  {Math.floor((totalTravelTime % 3600) / 60)}m{" "}
-                  {Math.floor((totalTravelTime % 3600) % 60)}s
-                </>
-              )}
-            </h4>
-          </div>
           <div style={infoContainerStyle}>
             <p style={labelStyle}>Bus Speed</p>
             <h4 style={valueStyle}>
